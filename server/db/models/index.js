@@ -1,32 +1,32 @@
-const db = require('../db')
-const Users = require('./Users')
-const Products = require('./Products')
-const Orders = require('./Orders')
-const OrderProducts = require('./OrderProducts')
+// const db = require("./db");
+// const Users = require("./models/Users");
+// const Listings = require("./models/Listings");
+// const Orders = require("./models/Orders");
+// const OrderProducts = require("./models/OrderProducts");
 
-Users.hasMany(Orders)
-Orders.belongsTo(Users, { foreignKey: 'userId' });
+// Users.hasMany(Orders);
+// Orders.belongsTo(Users, { foreignKey: "userId" });
 
-Orders.hasMany(OrderProducts)
-OrderProducts.belongsTo(Products, { foreignKey: 'productId' });
+// Orders.hasMany(OrderProducts);
+// OrderProducts.belongsTo(Listings, { foreignKey: "listingId" });
 
-Products.hasMany(OrderProducts)
-OrderProducts.belongsTo(Orders, { foreignKey: 'orderId' });
+// Listings.hasMany(OrderProducts);
+// OrderProducts.belongsTo(Orders, { foreignKey: "orderId" });
 
-Users.addHook('afterCreate', async (user) => {
-  try {
-    await Orders.create({
-      userId: user.id,
-    });
-  } catch (err) {
-    console.error('Error creating order for user..', err);
-  }
-});
+// Users.addHook('afterCreate', async (user) => {
+//   try {
+//     await Orders.create({
+//       userId: user.id,
+//     });
+//   } catch (err) {
+//     console.error('Error creating order for user..', err);
+//   }
+// });
 
-module.exports = {
-  db,
-  Users,
-  Products,
-  Orders,
-  OrderProducts
-}
+// module.exports = {
+//   db,
+//   Users,
+//   Listings,
+//   Orders,
+//   OrderProducts
+// }

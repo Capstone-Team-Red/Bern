@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Orders, Users, OrderProducts, Products} = require('../db/models')
+const {Orders, Users, OrderProducts, Listings} = require('../db')
 module.exports = router
 
 router.post("/", async (req, res, next) => {
@@ -13,10 +13,10 @@ router.post("/", async (req, res, next) => {
 
 router.put('/:id/increase', async (req, res, next) => {
     try {  
-      const product = await OrderProducts.findByPk(req.params.id);
-      product.quantity += 1;
-      await product.save();
-      res.send(product);
+      const listing = await OrderProducts.findByPk(req.params.id);
+      listing.quantity += 1;
+      await listing.save();
+      res.send(listing);
     } catch (error) {
       next(error);
     }
@@ -24,10 +24,10 @@ router.put('/:id/increase', async (req, res, next) => {
   
   router.put('/:id/decrease', async (req, res, next) => {
     try {
-      const product = await OrderProducts.findByPk(req.params.id);
-      product.quantity -= 1;
-      await product.save();
-      res.send(product);
+      const listing = await OrderProducts.findByPk(req.params.id);
+      listing.quantity -= 1;
+      await listing.save();
+      res.send(listing);
     } catch (error) {
       next(error);
     }
@@ -35,25 +35,25 @@ router.put('/:id/increase', async (req, res, next) => {
 
   router.delete("/:id", async (req, res, next) => {
     try {
-      const product = await OrderProducts.findByPk(req.params.id);
-      await product.destroy();
-      res.send(product);
+      const listing = await OrderProducts.findByPk(req.params.id);
+      await listing.destroy();
+      res.send(listing);
     } catch (error) {
       next(error);
     }
   });
 
-  //deletes all entries in orderProducts when user checks out
+  //deletes all entries in orderlistings when user checks out
   router.delete('/:id/destroy', async (req, res, next) => {
     try {
-      const products = await OrderProducts.findAll({
+      const listings = await OrderProducts.findAll({
         where: { orderId: req.params.id },
-        include: [Products, Orders], 
+        include: [Listings, Orders], 
       });
-      for (let i = 0; i < products.length; i++) {
-        await products[i].destroy();
+      for (let i = 0; i < listings.length; i++) {
+        await listings[i].destroy();
       }
-      res.send(products);
+      res.send(listings);
     } catch (error) {
       next(error);
     }
