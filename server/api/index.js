@@ -7,7 +7,7 @@ router.use("/listings", require("./listings"));
 
 router.use("/orders", require("./orders"));
 
-router.use("/orderProducts", require("./orderProducts"));
+router.use("/orderListings", require("./orderListings"));
 
 //Error Logging
 router.use((req, res, next) => {

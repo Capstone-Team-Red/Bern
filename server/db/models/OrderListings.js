@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 //this table tells us which products are in which orders
-const OrderProducts = db.define('orderProducts', {
+const OrderListings = db.define('orderlistings', {
   price: {
     type: Sequelize.DECIMAL,
     validate: {
@@ -19,4 +19,4 @@ const OrderProducts = db.define('orderProducts', {
   }
 })
 
-module.exports = OrderProducts
+module.exports = OrderListings;

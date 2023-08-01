@@ -5,7 +5,7 @@ const {
   Users,
   Listings,
   Orders,
-  OrderProducts,
+  OrderListings,
 } = require("../server/db");
 const { faker } = require("@faker-js/faker");
 
@@ -79,16 +79,16 @@ async function seed() {
     // Declare a variable and set it equal to an array
     // The keys in this user object are set equal to the fake information
 
-    const allProducts = await Listings.findAll();
+    const allListings = await Listings.findAll();
 
-    for (const listing of allProducts) {
-      const orderProductData = {
+    for (const listing of allListings) {
+      const orderListingData = {
         orderId: faker.number.int({ min: 1, max: 20 }),
         listingId: faker.number.int({ min: 1, max: 20 }),
         quantity: faker.number.int({ min: 1, max: 5 }),
       };
 
-      await OrderProducts.create(orderProductData);
+      await OrderListings.create(orderListingData);
     }
   } catch (err) {
     console.log(err);
