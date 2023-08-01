@@ -1,7 +1,7 @@
 {
-  "name": "graceshopper",
+  "name": "bern",
   "version": "2.0.0",
-  "description": "An e-commerce app for Fullstack Academy",
+  "description": "capstone app for Fullstack Academy",
   "main": "index.js",
   "scripts": {
     "build": "webpack",

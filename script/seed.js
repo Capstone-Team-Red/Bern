@@ -3,10 +3,10 @@
 const {
   db,
   Users,
-  Products,
+  Listings,
   Orders,
   OrderProducts,
-} = require("../server/db/models");
+} = require("../server/db");
 const { faker } = require("@faker-js/faker");
 
 async function seed() {
@@ -52,7 +52,7 @@ async function seed() {
     await Promise.all(users.map((user) => Users.create(user)));
 
     // Declare a variable and set it equal to an array.
-    let products = [];
+    let listings = [];
     // let prices = [] // Array to store the randomly generated prices
 
     // This for loop decides how many datapoints you will create.
@@ -60,7 +60,7 @@ async function seed() {
     for (let i = 0; i < 50; i++) {
       // The keys in this user object are set equal to the fake information
 
-      let newProducts = {
+      let newListings = {
         name: faker.commerce.productName(),
         image: faker.image.urlLoremFlickr({ category: "business" }),
         description: faker.commerce.productAdjective(),
@@ -70,21 +70,21 @@ async function seed() {
       };
 
       // For each fake user you create, you're going to push them into the user array you declare above
-      products.push(newProducts);
+      listings.push(newListings);
     }
 
     // For each user in the array, you are going to create a new user instance in the database
-    await Promise.all(products.map((product) => Products.create(product)));
+    await Promise.all(listings.map((listing) => Listings.create(listing)));
 
     // Declare a variable and set it equal to an array
     // The keys in this user object are set equal to the fake information
 
-    const allProducts = await Products.findAll();
+    const allProducts = await Listings.findAll();
 
-    for (const product of allProducts) {
+    for (const listing of allProducts) {
       const orderProductData = {
         orderId: faker.number.int({ min: 1, max: 20 }),
-        productId: faker.number.int({ min: 1, max: 20 }),
+        listingId: faker.number.int({ min: 1, max: 20 }),
         quantity: faker.number.int({ min: 1, max: 5 }),
       };
 
