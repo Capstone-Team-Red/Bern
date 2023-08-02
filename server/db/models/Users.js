@@ -15,6 +15,10 @@ const Users = db.define("users", {
       notEmpty: true,
     },
   },
+  role: {
+    type: Sequelize.ENUM('User'),
+    allowNull: false
+  },
   username: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -22,25 +26,6 @@ const Users = db.define("users", {
     validate: {
       notEmpty: true,
     },
-  },
-  address: {
-    type: Sequelize.TEXT,
-    allowNull: false,
-  },
-  phone: {
-    type: Sequelize.STRING,
-    validate: {
-      isPhoneNumber(value) {
-        const phoneRegex = /^\+1\s[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-        if (!phoneRegex.test(value)) {
-          throw new Error("Invalid phone number");
-        }
-      },
-    },
-  },
-  admin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
   },
   password: {
     type: Sequelize.STRING,
@@ -57,6 +42,18 @@ const Users = db.define("users", {
     get() {
       return this.getDataValue("salt");
     },
+  },
+  zipcode: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  firstname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastname: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
 });
 

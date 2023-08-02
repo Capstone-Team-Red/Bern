@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 5;
 
-const Users = db.define("users", {
+const Renter = db.define("renter", {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -15,6 +15,10 @@ const Users = db.define("users", {
       notEmpty: true,
     },
   },
+  role: {
+    type: Sequelize.ENUM('Renter'),
+    allowNull: false
+  },
   username: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -22,25 +26,6 @@ const Users = db.define("users", {
     validate: {
       notEmpty: true,
     },
-  },
-  address: {
-    type: Sequelize.TEXT,
-    allowNull: false,
-  },
-  phone: {
-    type: Sequelize.STRING,
-    validate: {
-      isPhoneNumber(value) {
-        const phoneRegex = /^\+1\s[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
-        if (!phoneRegex.test(value)) {
-          throw new Error("Invalid phone number");
-        }
-      },
-    },
-  },
-  admin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
   },
   password: {
     type: Sequelize.STRING,
@@ -58,46 +43,58 @@ const Users = db.define("users", {
       return this.getDataValue("salt");
     },
   },
+  zipcode: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  firstname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  lastname: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 });
 
-module.exports = Users;
+module.exports = Renter;
 
 /**
  * instanceMethods
  */
-Users.prototype.correctPassword = function (candidatePwd) {
+Renter.prototype.correctPassword = function (candidatePwd) {
   return bcrypt.compare(candidatePwd, this.password);
 };
 
-Users.prototype.generateToken = function () {
+Renter.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
 /**
  * classMethods
  */
-Users.authenticate = async function ({ username, password }) {
-  const user = await this.findOne({ where: { username } });
-  if (!user || !(await user.correctPassword(password))) {
+Renter.authenticate = async function ({ username, password }) {
+  const renter = await this.findOne({ where: { username } });
+  if (!renter || !(await renter.correctPassword(password))) {
     const error = Error("Incorrect username/password");
     error.status = 401;
     throw error;
   }
-  return user.generateToken();
+  return renter.generateToken();
 };
 
-Users.findByToken = async function (token) {
+Renter.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-    const user = await Users.findByPk(id, {
+    const renter = await Renter.findByPk(id, {
       attributes: { include: ["password", "salt"] },
     });
 
-    if (!user) {
+    if (!renter) {
       throw "nooo";
     }
 
-    return user;
+    return renter;
   } catch (ex) {
     const error = Error("bad token");
     error.status = 401;
@@ -108,14 +105,14 @@ Users.findByToken = async function (token) {
 /**
  * hooks
  */
-const hashPassword = async (user) => {
-  if (user.changed("password")) {
+const hashPassword = async (renter) => {
+  if (renter.changed("password")) {
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
-    user.password = await bcrypt.hash(user.password, salt);
-    user.salt = salt;
+    renter.password = await bcrypt.hash(renter.password, salt);
+    renter.salt = salt;
   }
 };
 
-Users.beforeCreate(hashPassword);
-Users.beforeUpdate(hashPassword);
-Users.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+Renter.beforeCreate(hashPassword);
+Renter.beforeUpdate(hashPassword);
+Renter.beforeBulkCreate((renters) => Promise.all(renters.map(hashPassword)));
