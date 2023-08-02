@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllProducts, selectProducts } from "../store/allProductsSlice";
+import { getAllListings, selectListings } from "../store/allListingsSlice";
 import Navbar from "../features/navbar/Navbar";
 import AppRoutes from "./AppRoutes";
 
@@ -8,10 +8,10 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllListings());
   }, [dispatch]);
 
-  const products = useSelector(selectProducts);
+  const listings = useSelector(selectListings);
 
   return (
     <div>

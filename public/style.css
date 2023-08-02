@@ -57,13 +57,13 @@ button:hover {
   background-color: #0056b3;
 }
 
-.product-details {
+.listing-details {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.product-img {
+.listing-img {
   max-width: 100%;
   height: auto;
   margin: 10px 0;
@@ -95,31 +95,31 @@ button:hover {
   padding: 20px;
 }
 
-.product-item {
+.listing-item {
   border: 1px solid #cecece;
   padding: 10px;
   margin: 10px 0;
   margin-bottom: 100px;
 }
 
-.product-item p {
+.listing-item p {
   margin: 5px 0;
 }
 
-.product-name {
+.listing-name {
   font-weight: bold;
 }
 
-.product-price {
+.listing-price {
   font-size: 18px;
 }
 
-.product-quantity {
+.listing-quantity {
   display: flex;
   align-items: center;
 }
 
-.product-quantity button {
+.listing-quantity button {
   padding: 5px 10px;
   margin: 1px;
   font-size: 14px;
@@ -130,7 +130,7 @@ button:hover {
   cursor: pointer;
 }
 
-.product-quantity button:hover {
+.listing-quantity button:hover {
   background-color: #0056b3;
 }
 
@@ -167,31 +167,31 @@ button:hover {
   padding: 20px;
 }
 
-.cart-item {
+.listing-item {
   border: 1px solid #cecece;
   padding: 10px;
   margin: 10px 0;
   margin-bottom: 100px;
 }
 
-.cart-item p {
+.listing-item p {
   margin: 5px 0;
 }
 
-.product-name {
+.listing-name {
   font-weight: bold;
 }
 
-.product-price {
+.listing-price {
   font-size: 18px;
 }
 
-.product-quantity {
+.listing-quantity {
   display: flex;
   align-items: center;
 }
 
-.product-quantity button {
+.listing-quantity button {
   padding: 5px 10px;
   margin: 1px;
   font-size: 14px;
@@ -202,7 +202,7 @@ button:hover {
   cursor: pointer;
 }
 
-.product-quantity button:hover {
+.listing-quantity button:hover {
   background-color: #0056b3;
 }
 
@@ -238,14 +238,14 @@ button:hover {
   font-weight: bold;
 }
 
-.all-products-container {
+.all-listings-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 20px 0;
 }
 
-.product-container {
+.listing-container {
   border: 1px solid #cfcfcf;
   border-radius: 5px;
   padding: 10px;
@@ -254,27 +254,27 @@ button:hover {
   text-align: center;
 }
 
-.product-container img {
+.listing-container img {
   max-width: 100%;
   height: auto;
   border-radius: 5px;
   margin-bottom: 10px;
 }
 
-.product-container a {
+.listing-container a {
   text-decoration: none;
   color: #262626;
 }
 
-.product-container a:hover {
+.listing-container a:hover {
   color: #007bfff3;
 }
 
-.product-name {
+.listing-name {
   font-weight: bold;
 }
 
-.product-price {
+.listing-price {
   margin-top: 5px;
   font-size: 18px;
 }

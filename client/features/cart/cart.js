@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncompleteOrders } from '../../store/ordersSlice';
 import { me } from '../auth/authSlice';
-import { getOrderProducts } from '../../store/orderProductsSlice';
-import { incrementProduct, decrementProduct, removeFromCart } from '../../store/orderProductsSlice';
+import { getOrderListings } from '../../store/orderListingsSlice';
+import { incrementListing, decrementListing, removeFromCart } from '../../store/orderListingsSlice';
 import { Link } from 'react-router-dom';
 
 export const Cart = () => {
@@ -12,16 +12,16 @@ export const Cart = () => {
   const userId = useSelector((state) => state.auth.me.id);
   const username = useSelector((state) => state.auth.me.username);
   const orders = useSelector((state) => state.orders.orders);
-  const orderProducts = useSelector((state) => state.orderProducts.orderProducts || []);
+  const orderListings = useSelector((state) => state.orderListings.orderListings || []);
 
-  // Initialize the storedProducts state with the products from local storage or an empty array
-  const [storedProducts, setStoredProducts] = useState(
-    JSON.parse(localStorage.getItem('products')) || []
+  // Initialize the storedListings state with the listings from local storage or an empty array
+  const [storedListings, setstoredListings] = useState(
+    JSON.parse(localStorage.getItem('listings')) || []
   );
 
   useEffect(() => {
-    localStorage.setItem('products', JSON.stringify(storedProducts));
-  }, [storedProducts]);
+    localStorage.setItem('listings', JSON.stringify(storedListings));
+  }, [storedListings]);
 
   useEffect(() => {
     dispatch(me());
@@ -30,50 +30,50 @@ export const Cart = () => {
   useEffect(() => {
     if (userId) {
       dispatch(getIncompleteOrders(userId));
-      // If the user is authorized, initialize storedProducts state with orderProducts from redux store
-      setStoredProducts(orderProducts);
+      // If the user is authorized, initialize storedListings state with orderListings from redux store
+      setstoredListings(orderListings);
     }
-  }, [dispatch, userId, orderProducts]);
+  }, [dispatch, userId, orderListings]);
 
   useEffect(() => {
     if (orders?.length > 0) {
       const currentCart = orders[0];
-      dispatch(getOrderProducts(currentCart.id));
+      dispatch(getOrderListings(currentCart.id));
     }
   }, [dispatch]);
 
-  const handleIncrement = (orderProductId) => {
-    dispatch(incrementProduct(orderProductId));
+  const handleIncrement = (orderListingId) => {
+    dispatch(incrementListing(orderListingId));
 
-    // Update the storedProducts state after incrementing the product quantity
-    setStoredProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === orderProductId
-          ? { ...product, quantity: product.quantity + 1 }
-          : product
+    // Update the storedListings state after incrementing the listing quantity
+    setstoredListings((prevListings) =>
+    prevListings.map((listing) =>
+    listing.id === orderListingId
+          ? { ...listing, quantity: listing.quantity + 1 }
+          : listing
       )
     );
   };
 
-  const handleDecrement = (orderProductId) => {
-    dispatch(decrementProduct(orderProductId));
+  const handleDecrement = (orderListingId) => {
+    dispatch(decrementListing(orderListingId));
 
-    // Update the storedProducts state after decrementing the product quantity
-    setStoredProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === orderProductId
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
+    // Update the storedListings state after decrementing the listing quantity
+    setstoredListings((prevListings) =>
+    prevListings.map((listing) =>
+    listing.id === orderListingId
+          ? { ...listing, quantity: listing.quantity - 1 }
+          : listing
       )
     );
   };
 
-  const handleRemove = (orderProductId) => {
-    dispatch(removeFromCart(orderProductId));
+  const handleRemove = (orderListingId) => {
+    dispatch(removeFromCart(orderListingId));
 
-    // Update the storedProducts state after removing the product
-    setStoredProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== orderProductId)
+    // Update the storedListings state after removing the listing
+    setstoredListings((prevListings) =>
+    prevListings.filter((listing) => listing.id !== orderListingId)
     );
   };
 
@@ -82,24 +82,24 @@ export const Cart = () => {
     return (
       <div className="cart-container">
         <h1>Your Cart</h1>
-        {storedProducts && storedProducts.length > 0 ? (
+        {storedListings && storedListings.length > 0 ? (
           <>
-            {storedProducts.map((storedProduct) => (
-              <div className="product-item" key={storedProduct.id}>
-                {/* Display product details for unauthorized users */}
-                <p className="product-name">Product: {storedProduct.name}</p>
-                <p className="product-price">Price: {storedProduct.price}</p>
-                <div className="product-quantity">
-                  Quantity: {storedProduct.quantity}
-                  <button onClick={() => handleIncrement(storedProduct.id)}>
+            {storedListings.map((storedListings) => (
+              <div className="listing-item" key={storedListings.id}>
+                {/* Display listing details for unauthorized users */}
+                <p className="listing-name">Listing: {storedListings.name}</p>
+                <p className="listing-price">Price: {storedListings.price}</p>
+                <div className="listing-quantity">
+                  Quantity: {storedListings.quantity}
+                  <button onClick={() => handleIncrement(storedListings.id)}>
                     +
                   </button>
-                  <button onClick={() => handleDecrement(storedProduct.id)}>
+                  <button onClick={() => handleDecrement(storedListings.id)}>
                     -
                   </button>
                 </div>
                 <p>
-                  <button onClick={() => handleRemove(storedProduct.id)}>
+                  <button onClick={() => handleRemove(storedListings.id)}>
                     Remove Item
                   </button>
                 </p>
@@ -109,7 +109,7 @@ export const Cart = () => {
         ) : (
           <p className="empty-cart">Your cart is empty!</p>
         )}
-        {storedProducts.length > 0 ? (
+        {storedListings.length > 0 ? (
           <>
           <p>Please log in or sign up in order to check out!</p>
           </>
@@ -126,39 +126,39 @@ return (
     {
       <>
         {orders.map((order) => (
-          <div className="product-item" key={order.id}>
-            {orderProducts.length > 0 ? (
-              orderProducts.map((orderProduct) => (
-                <div key={orderProduct.id}>
-                  {orderProduct.product ? (
+          <div className="listing-item" key={order.id}>
+            {orderListings.length > 0 ? (
+              orderListings.map((orderListing) => (
+                <div key={orderListing.id}>
+                  {orderListing.listing ? (
                     <>
-                      <p className="product-name">Product: {orderProduct.product.name}</p>
-                      <p className="product-price">
-                        Price: {orderProduct.product.price}(
-                        {orderProduct.quantity}) = $
-                        {orderProduct.product.price * orderProduct.quantity}
+                      <p className="listing-name">Listing: {orderListing.listing.name}</p>
+                      <p className="listing-price">
+                        Price: {orderListing.listing.price}(
+                        {orderListing.quantity}) = $
+                        {orderListing.listing.price * orderListing.quantity}
                       </p>
-                      <div className="product-quantity">
-                        Quantity: {orderProduct.quantity}{" "}
+                      <div className="listing-quantity">
+                        Quantity: {orderListing.quantity}{" "}
                         <button
-                          onClick={() => handleIncrement(orderProduct.id)}
+                          onClick={() => handleIncrement(orderListing.id)}
                         >
                           +
                         </button>
                         <button
-                          onClick={() => handleDecrement(orderProduct.id)}
+                          onClick={() => handleDecrement(orderListing.id)}
                         >
                           -
                         </button>
                       </div>
                       <p>
-                        <button onClick={() => handleRemove(orderProduct.id)}>
+                        <button onClick={() => handleRemove(orderListing.id)}>
                           Remove Item
                         </button>
                       </p>
                     </>
                   ) : (
-                    <p>Product data not available...</p>
+                    <p>Listing data not available...</p>
                   )}
                 </div>
               ))
@@ -167,9 +167,9 @@ return (
             )}
             <h2>
               Your total is $
-              {orderProducts.reduce(
-                (total, orderProduct) =>
-                  total + orderProduct.product.price * orderProduct.quantity,
+              {orderListings.reduce(
+                (total, orderListing) =>
+                  total + orderListing.listing.price * orderListing.quantity,
                 0
               )}
             </h2>
@@ -177,7 +177,7 @@ return (
         ))}
       </>
     }
-    {orderProducts.length > 0 ? (
+    {orderListings.length > 0 ? (
   <>
     <Link to="/checkout"><button className="checkout-button" type="button">Checkout</button></Link>
   </>

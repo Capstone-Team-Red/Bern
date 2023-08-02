@@ -1,32 +1,32 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectProducts } from "../../store/allProductsSlice";
+import { selectListings } from "../../store/allListingsSlice";
 import { NavLink } from "react-router-dom";
 
 /**
  * COMPONENT
  */
 const Landing = (props) => {
-  const products = useSelector(selectProducts);
+  const listings = useSelector(selectListings);
   const username = useSelector((state) => state.auth.me.username);
   return (
     <div>
       <h3 className="welcome">Welcome, {username}!</h3>
       <h3>Recommended for you</h3>
-      <div className="all-products-container">
-        {products ? (
-          products.slice(12, 15).map((product) => (
-            <div className="product-container" key={product.id}>
-              <NavLink to={`/products/${product.id}`}>
-                <p id="product-name">{product.name}</p>
+      <div className="all-listings-container">
+        {listings ? (
+          listings.slice(12, 15).map((listing) => (
+            <div className="listing-container" key={listing.id}>
+              <NavLink to={`/listings/${listing.id}`}>
+                <p id="listing-name">{listing.name}</p>
               </NavLink>
-              <div className="all-product-details">
-                <img src={product.image} alt={product.name} />
+              <div className="all-listing-details">
+                <img src={listing.image} alt={listing.name} />
               </div>
             </div>
           ))
         ) : (
-          <p>No products found.</p>
+          <p>No listings found.</p>
         )}
       </div>
     </div>

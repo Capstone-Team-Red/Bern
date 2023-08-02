@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 import { getIncompleteOrders } from "../../store/ordersSlice";
 import { me } from "../auth/authSlice";
 import {
-  getOrderProducts,
-  incrementProduct,
-  decrementProduct,
+  getOrderListings,
+  incrementListing,
+  decrementListing,
   removeFromCart,
   deleteAllCart,
-} from "../../store/orderProductsSlice";
+} from "../../store/orderListingsSlice";
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.me.id);
   const orders = useSelector((state) => state.orders.orders);
-  const orderProducts = useSelector(
-    (state) => state.orderProducts.orderProducts
+  const orderListings = useSelector(
+    (state) => state.orderListings.orderListings
   );
 
   useEffect(() => {
@@ -32,27 +32,27 @@ const Checkout = () => {
   useEffect(() => {
     if (orders.length > 0) {
       const currentCart = orders[0];
-      dispatch(getOrderProducts(currentCart.id));
+      dispatch(getOrderListings(currentCart.id));
     }
   }, [dispatch, orders]);
 
-  const handleIncrement = (orderProductId) => {
-    dispatch(incrementProduct(orderProductId));
+  const handleIncrement = (orderListingId) => {
+    dispatch(incrementListing(orderListingId));
   };
 
-  const handleDecrement = (orderProductId) => {
-    dispatch(decrementProduct(orderProductId));
+  const handleDecrement = (orderListingId) => {
+    dispatch(decrementListing(orderListingId));
   };
 
-  const handleRemove = (orderProductId) => {
-    dispatch(removeFromCart(orderProductId));
+  const handleRemove = (orderListingId) => {
+    dispatch(removeFromCart(orderListingId));
   };
 
   const handleCompleteCheckout = () => {
     dispatch(deleteAllCart(orders[0].id));
   };
 
-  if (!userId || orders.length === 0 || !orderProducts) {
+  if (!userId || orders.length === 0 || !orderListings) {
     return null;
   }
 
@@ -62,40 +62,40 @@ const Checkout = () => {
         <h1>Order Details</h1>
         {orders.map((order) => (
           <div className="cart-item" key={order.id}>
-            {orderProducts.length > 0 ? (
-              orderProducts.map((orderProduct) => (
-                <div key={orderProduct.id}>
-                  {orderProduct.product ? (
+            {orderListings.length > 0 ? (
+              orderListings.map((orderListing) => (
+                <div key={orderListing.id}>
+                  {orderListing.listing ? (
                     <>
-                      <p className="product-name">
-                        Product: {orderProduct.product.name}
+                      <p className="listing-name">
+                        Listing: {orderListing.listing.name}
                       </p>
                       <p>
-                        Price: {orderProduct.product.price}(
-                        {orderProduct.quantity}) = $
-                        {orderProduct.product.price * orderProduct.quantity}
+                        Price: {orderListing.listing.price}(
+                        {orderListing.quantity}) = $
+                        {orderListing.listing.price * orderListing.quantity}
                       </p>
-                      <p className="product-quantity">
-                        Quantity: {orderProduct.quantity}{" "}
+                      <p className="listing-quantity">
+                        Quantity: {orderListing.quantity}{" "}
                         <button
-                          onClick={() => handleIncrement(orderProduct.id)}
+                          onClick={() => handleIncrement(orderListing.id)}
                         >
                           +
                         </button>
                         <button
-                          onClick={() => handleDecrement(orderProduct.id)}
+                          onClick={() => handleDecrement(orderListing.id)}
                         >
                           -
                         </button>
                       </p>
                       <p>
-                        <button onClick={() => handleRemove(orderProduct.id)}>
+                        <button onClick={() => handleRemove(orderListing.id)}>
                           Remove Item
                         </button>
                       </p>
                     </>
                   ) : (
-                    <p>Product data not available...</p>
+                    <p>Listing data not available...</p>
                   )}
                 </div>
               ))
@@ -104,9 +104,9 @@ const Checkout = () => {
             )}
             <h2 className="cart-total">
               Your total is $
-              {orderProducts.reduce(
-                (total, orderProduct) =>
-                  total + orderProduct.product.price * orderProduct.quantity,
+              {orderListings.reduce(
+                (total, orderListing) =>
+                  total + orderListing.listing.price * orderListing.quantity,
                 0
               )}
             </h2>

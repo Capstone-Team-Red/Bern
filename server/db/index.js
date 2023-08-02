@@ -2,16 +2,16 @@ const db = require("./db");
 const Users = require("./models/Users");
 const Listings = require("./models/Listings");
 const Orders = require("./models/Orders");
-const OrderProducts = require("./models/OrderProducts");
+const OrderListings = require("./models/OrderListings");
 
 Users.hasMany(Orders);
 Orders.belongsTo(Users, { foreignKey: "userId" });
 
-Orders.hasMany(OrderProducts);
-OrderProducts.belongsTo(Listings, { foreignKey: "listingId" });
+Orders.hasMany(OrderListings);
+OrderListings.belongsTo(Listings, { foreignKey: "listingId" });
 
-Listings.hasMany(OrderProducts);
-OrderProducts.belongsTo(Orders, { foreignKey: "orderId" });
+Listings.hasMany(OrderListings);
+OrderListings.belongsTo(Orders, { foreignKey: "orderId" });
 
 Users.addHook('afterCreate', async (user) => {
   try {
@@ -28,5 +28,5 @@ module.exports = {
   Users,
   Listings,
   Orders,
-  OrderProducts
+  OrderListings
 }

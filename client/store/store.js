@@ -1,19 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import authReducer from "../features/auth/authSlice";
-import allProductsSlice from "./allProductsSlice";
-import singleProductSlice from "./singleProductSlice";
+import allListingsSlice from "./allListingsSlice";
+import singleListingSlice from "./singleListingSlice";
 import ordersSlice from "./ordersSlice";
-import orderProductsSlice from "./orderProductsSlice";
+import orderListingsSlice from "./orderListingsSlice";
 import allUsersSlice from "./allUsersSlice";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    products: allProductsSlice,
-    singleProduct: singleProductSlice,
+    listings: allListingsSlice,
+    singleListing: singleListingSlice,
     orders: ordersSlice,
-    orderProducts: orderProductsSlice,
+    orderListings: orderListingsSlice,
     users: allUsersSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
