@@ -1,7 +1,7 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../store/store';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../store/store";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -9,19 +9,32 @@ const Navbar = () => {
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
     dispatch(logout());
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
     <div>
-      <h1>Grace Shopper</h1>
+      <h1>Bern</h1>
       <nav>
         {isLoggedIn ? (
           <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <Link to="/listings">Listings</Link>
-            <Link to="/cart">Cart</Link>
+            {/* The navbar will show these links after you log in as a User or Renter */}{" "}
+            {role === "User" ? (
+              <React.Fragment>
+                <Link to="/home">Home</Link>
+                <Link to="/renters">Renters</Link>
+                <Link to="/listings">Listings</Link>
+                <Link to="/cart">Cart</Link>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Link to="/home">Home</Link>
+                <Link to="/mylistings">My Listings</Link>
+                <Link to="/users">Rentees</Link>
+                <Link to="/cart">Cart</Link>
+              </React.Fragment>
+            )}
+            ;
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
