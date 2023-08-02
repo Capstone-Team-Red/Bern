@@ -161,9 +161,29 @@ async function seed() {
     }),
   ]);
 
+  // Creating OrderListings
+  const orderListings = await Promise.all([
+    OrderListings.create({
+      orderId: 2,
+      listingId:3,
+      quantity: 1
+    }),
+    OrderListings.create({
+      orderId: 4,
+      listingId: 4,
+      quantity: 1
+    }),
+    OrderListings.create({
+      orderId: 1,
+      listingId: 2,
+      quantity: 1
+    }),
+  ]);
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${renters.length} employers`)
   console.log(`seeded ${listings.length} listings`)
+  console.log(`seeded ${orderListings.length} orderListings`)
   console.log(`seeded successfully`)
 
   return {
@@ -187,6 +207,11 @@ async function seed() {
       listing3: listings[2],
       listing4: listings[3],
       listing5: listings[4]
+    },
+    orderListings: {
+      orderListings1: orderListings[0],
+      orderListings2: orderListings[1],
+      orderListings3: orderListings[2],
     }
   }
 }

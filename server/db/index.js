@@ -6,19 +6,19 @@ const Orders = require("./models/Orders");
 const OrderListings = require("./models/OrderListings");
 
 Users.hasMany(Orders);
-Orders.belongsTo(Users, { foreignKey: "userId" });
+Orders.belongsTo(Users);
 
 Renter.hasMany(Listings);
-Listings.belongsTo(Renter, { foreignKey: "renterId" });
+Listings.belongsTo(Renter);
 
-Users.hasMany(Listings, { foreignKey: "userListingId" });
-Listings.hasMany(Users, { foreignKey: "userListingId" });
+Users.hasMany(Listings);
+Listings.hasMany(Users);
 
 Orders.hasMany(OrderListings);
-OrderListings.belongsTo(Listings, { foreignKey: "listingId" });
+OrderListings.belongsTo(Listings);
 
 Listings.hasMany(OrderListings);
-OrderListings.belongsTo(Orders, { foreignKey: "orderId" });
+OrderListings.belongsTo(Orders);
 
 Users.addHook('afterCreate', async (user) => {
   try {
