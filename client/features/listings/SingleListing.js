@@ -17,7 +17,7 @@ const SingleListing = () => {
     }
   }, [dispatch, id]);
 
-  const listing = useSelector((state) => state.singleListing);
+  const listing = useSelector((state) => state.singleListing.singleListing);
 
   const handleAddToCart = (listingId, listingPrice) => {
     if (userId && orders.length > 0) {
