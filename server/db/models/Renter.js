@@ -16,8 +16,8 @@ const Renter = db.define("renter", {
     },
   },
   role: {
-    type: Sequelize.ENUM('Renter'),
-    allowNull: false
+    type: Sequelize.ENUM("Renter"),
+    allowNull: false,
   },
   username: {
     type: Sequelize.STRING,
@@ -49,11 +49,11 @@ const Renter = db.define("renter", {
   },
   firstname: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   lastname: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
 });
 
