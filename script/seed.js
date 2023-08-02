@@ -121,7 +121,7 @@ async function seed() {
       city: 'Washington',
       state: 'DC',
       zipcode: '20001',
-      date: '2023-09-2',
+      date: '2023-09-02',
       time: '11:00 AM',
       price: 10,
       stock: 5,
@@ -132,7 +132,7 @@ async function seed() {
       city: 'Atlanta',
       state: 'GA',
       zipcode: '30301',
-      date: '2023-10-1',
+      date: '2023-10-01',
       time: '3:00 PM',
       price: 15,
       stock: 7,
@@ -143,7 +143,7 @@ async function seed() {
       city: 'Louisville',
       state: 'KY',
       zipcode: '40003',
-      date: '2023-12-1',
+      date: '2023-12-01',
       time: '2:30 PM',
       price: 30,
       stock: 8,
@@ -180,6 +180,13 @@ async function seed() {
       ryo: renters[2],
       paige: renters[3],
       beth: renters[4]
+    },
+    listings: {
+      listing1: listings[0],
+      listing2: listings[1],
+      listing3: listings[2],
+      listing4: listings[3],
+      listing5: listings[4]
     }
   }
 }
