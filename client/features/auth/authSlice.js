@@ -32,25 +32,35 @@ export const me = createAsyncThunk("auth/me", async () => {
 });
 
 export const authenticate = createAsyncThunk(
-  "auth/authenticate",
-  async (
-    { username, password, firstname, lastname, email, role, zipcode, method },
-    { rejectWithValue, dispatch }
-  ) => {
+  'auth/authenticate',
+  async ({ username, password, firstname, lastname, email, role, zipcode, method }, thunkAPI) => {
     try {
-      const res = await axios.post(`/auth/${method}`, {
-        username,
-        password,
-        firstname,
-        lastname,
-        email,
-        role,
-        zipcode,
-      });
+      const res = await axios.post(`/auth/${method}`, { username, password, firstname, lastname, email, role, zipcode });
       window.localStorage.setItem(TOKEN, res.data.token);
-      dispatch(me());
+      thunkAPI.dispatch(me(role));
     } catch (err) {
-      return err.response ? rejectWithValue(err.response.data) : "There was an issue with your request.";
+      if (err.response.data) {
+        return thunkAPI.rejectWithValue(err.response.data);
+      } else {
+        return 'There was an issue with your request.';
+      }
+    }
+  }
+);
+
+export const authenticateRenter = createAsyncThunk(
+  'auth/authenticateRenter',
+  async ({ username, password, firstname, lastname, email, role, zipcode, method }, thunkAPI) => {
+    try {
+      const res = await axios.post(`/auth/${method}`, { username, password, firstname, lastname, email, role, zipcode });
+      window.localStorage.setItem(TOKEN, res.data.token);
+      thunkAPI.dispatch(me(role));
+    } catch (err) {
+      if (err.response.data) {
+        return thunkAPI.rejectWithValue(err.response.data);
+      } else {
+        return 'There was an issue with your request.';
+      }
     }
   }
 );
@@ -80,6 +90,9 @@ export const authSlice = createSlice({
       state.error = action.error;
     });
     builder.addCase(authenticate.rejected, (state, action) => {
+      state.error = action.payload;
+    });
+    builder.addCase(authenticateRenter.rejected, (state, action) => {
       state.error = action.payload;
     });
   },

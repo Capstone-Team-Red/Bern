@@ -37,12 +37,6 @@ const Users = db.define("users", {
       return this.getDataValue("password");
     },
   },
-  salt: {
-    type: Sequelize.STRING,
-    get() {
-      return this.getDataValue("salt");
-    },
-  },
   zipcode: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -74,26 +68,23 @@ Users.prototype.generateToken = function () {
  * classMethods
  */
 Users.authenticate = async function ({ username, password }) {
-  const user = await this.findOne({ where: { username } });
+  console.log('Authenticating user: ', username);
+  const user = await Users.findOne({ where: { username } });
   if (!user || !(await user.correctPassword(password))) {
     const error = Error("Incorrect username/password");
     error.status = 401;
     throw error;
   }
-  return user.generateToken();
+  return user;
 };
 
 Users.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-    const user = await Users.findByPk(id, {
-      attributes: { include: ["password", "salt"] },
-    });
-
+    const user = await Users.findByPk(id);
     if (!user) {
-      throw "nooo";
+      throw new Error('User not found');
     }
-
     return user;
   } catch (ex) {
     const error = Error("bad token");
@@ -107,9 +98,7 @@ Users.findByToken = async function (token) {
  */
 const hashPassword = async (user) => {
   if (user.changed("password")) {
-    const salt = await bcrypt.genSalt(SALT_ROUNDS);
-    user.password = await bcrypt.hash(user.password, salt);
-    user.salt = salt;
+    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 };
 

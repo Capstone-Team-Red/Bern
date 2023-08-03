@@ -1,41 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authenticate, me } from "../../store/store"; 
+import { authenticate, authenticateRenter } from "../../store/store"; 
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const [selectedRole, setSelectedRole] = useState("User"); // New state for selected role
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    const role = selectedRole; // Use selectedRole from state
+    const role = evt.target.role.value;
 
     if (formName === "login") {
-      dispatch(authenticate({ username, password, method: formName }));
+      if (role === 'User') {
+        dispatch(authenticate({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+      } else if (role === 'Renter') {
+        dispatch(authenticateRenter({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+      } else {
+        console.error('Invalid role selected: ', role);
+      }
     } else if (formName === "signup") {
       const email = evt.target.email.value;
       const firstname = evt.target.firstname.value;
       const lastname = evt.target.lastname.value;
       const zipcode = evt.target.zipcode.value;
 
-      dispatch(
-        authenticate({
-          username,
-          password,
-          firstname,
-          lastname,
-          email,
-          role: selectedRole, // Pass the selected role to the authenticate thunk
-          zipcode,
-          method: formName,
-        })
-      );
-      // Dispatch me() after a successful sign-up
-      await dispatch(me());
+      if (role === 'User') {
+        dispatch( authenticate({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+      } else if (role === 'Renter') {
+        dispatch(authenticateRenter({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+      } else {
+        console.error('Invalid role selected: ', role)
+      }
     }
   };
 
@@ -47,7 +45,7 @@ const AuthForm = ({ name, displayName }) => {
             <label htmlFor="role">
               <small>Role</small>
             </label>
-            <select name="role" value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
+            <select name="role">
               <option value="User">User</option>
               <option value="Renter">Renter</option>
             </select>
@@ -70,13 +68,13 @@ const AuthForm = ({ name, displayName }) => {
           {error && <div> {error} </div>}
         </form>
       )}
-{name === "signup" && (
+      {name === "signup" && (
         <form onSubmit={handleSubmit} name={name}>
           <div>
             <label htmlFor="role">
               <small>Role</small>
             </label>
-            <select name="role" value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
+            <select name="role">
               <option value="User">User</option>
               <option value="Renter">Renter</option>
             </select>
@@ -85,7 +83,7 @@ const AuthForm = ({ name, displayName }) => {
             <label htmlFor="email">
               <small>Email</small>
             </label>
-            <input name="email" type="text" />
+            <input name="email" type="email" />
           </div>
           <div>
             <label htmlFor="firstname">
@@ -115,7 +113,7 @@ const AuthForm = ({ name, displayName }) => {
             <label htmlFor="zipcode">
               <small>zipcode</small>
             </label>
-            <input name="zipcode" />
+            <input name="zipcode" type="text"/>
           </div>
           <div>
             <button type="submit">{displayName}</button>
