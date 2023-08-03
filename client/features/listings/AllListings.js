@@ -15,6 +15,15 @@ export function AllListings() {
 
   const listings = useSelector(selectListings);
 
+  const formatDate = (date) => {
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+    return formattedDate;
+  };
+
   return (
     <>
       <div className="all-listings-container">
@@ -22,12 +31,13 @@ export function AllListings() {
           listings.map((listing) => (
             <div className="listing-container" key={listing.id}>
               <NavLink to={`/listings/${listing.id}`}>
-                <p id="listing-name">{listing.name}</p>
-
-                <div className="all-listing-details">
-                  <img src={listing.image} alt={listing.name} />
-                  <p>Price: {listing.price}</p>
-                </div>
+                <h3>{listing.name}</h3>
+                <img src={listing.image} alt={listing.name} />
+                <p><span className="listing-details">Class Type: </span>{listing.classtype}</p>
+                <p><span className="listing-details">Address: </span>{listing.address}, {listing.city}, {listing.state}, {listing.zipcode}</p>
+                <p><span className="listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
+                <p><span className="listing-details">Spots Available: </span>{listing.stock}</p>
+                <p><span className="listing-details">Price: </span>${listing.price}</p>
               </NavLink>
             </div>
           ))
