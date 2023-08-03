@@ -9,6 +9,7 @@ import SingleListing from '../features/listings/SingleListing';
 import {Cart} from '../features/cart/cart';
 import Checkout from '../features/checkout/checkout';
 import Landing from '../features/home/Landing';
+import EditRenter from '../features/renter/EditRenter';
 
 /**
  * COMPONENT
@@ -32,6 +33,7 @@ const AppRoutes = () => {
           <Route path="/listings/:id" element={<SingleListing />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout/>} />
+          <Route path="/renters/:id/edit" element={<EditRenter/>} />
         </Routes>
       ) : (
         <Routes>
