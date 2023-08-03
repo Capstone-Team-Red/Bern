@@ -112,6 +112,7 @@ async function seed() {
   // Creating Listings
   const listings = await Promise.all([
     Listings.create({
+      name: 'Boxing in NY',
       classtype: 'Boxing',
       address: '123 Main Street',
       city: 'New York City',
@@ -123,6 +124,7 @@ async function seed() {
       stock: 10,
     }),
     Listings.create({
+      name: 'Yoga in Washington',
       classtype: 'Yoga',
       address: '132 Main Street',
       city: 'Washington',
@@ -134,6 +136,7 @@ async function seed() {
       stock: 5,
     }),
     Listings.create({
+      name: 'Open gym in Atlanta',
       classtype: 'Open Gym',
       address: '456 Maple Avenue',
       city: 'Atlanta',
@@ -145,6 +148,7 @@ async function seed() {
       stock: 7,
     }),
     Listings.create({
+      name: 'Yoga in Louisville',
       classtype: 'Yoga',
       address: '789 Oak Street',
       city: 'Louisville',
@@ -156,6 +160,7 @@ async function seed() {
       stock: 8,
     }),
     Listings.create({
+      name: 'Boxing in Indiana',
       classtype: 'Boxing',
       address: '101 Elm Avenue',
       city: 'Des Moines',
