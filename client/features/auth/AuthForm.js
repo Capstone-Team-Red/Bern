@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authenticate, authenticateRenter } from "../../store/store"; 
+import { authenticateRenterLogin, authenticateLogin, authenticateRenterSignUp, authenticateSignUp } from "../../store/store"; 
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
@@ -15,9 +15,9 @@ const AuthForm = ({ name, displayName }) => {
 
     if (formName === "login") {
       if (role === 'User') {
-        dispatch(authenticate({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+        dispatch(authenticateLogin({ username, password, role, method: formName }));
       } else if (role === 'Renter') {
-        dispatch(authenticateRenter({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+        dispatch(authenticateRenterLogin({ username, password, role, method: formName }));
       } else {
         console.error('Invalid role selected: ', role);
       }
@@ -28,9 +28,9 @@ const AuthForm = ({ name, displayName }) => {
       const zipcode = evt.target.zipcode.value;
 
       if (role === 'User') {
-        dispatch( authenticate({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+        dispatch( authenticateSignUp({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
       } else if (role === 'Renter') {
-        dispatch(authenticateRenter({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+        dispatch(authenticateRenterSignUp({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
       } else {
         console.error('Invalid role selected: ', role)
       }
