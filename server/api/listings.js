@@ -25,3 +25,15 @@ router.get("/:id", async (req, res, next) => {
     next(err);
   }
 });
+
+router.post("/:id", async (req, res, next) => {
+  try {
+    const listing = await Listings.findByPk(listingId);
+    if (!listing) {
+      return res.status(404).json({ error: "Listing not found" });
+    }
+    res.json(listing);
+  } catch (err) {
+    next(err);
+  }
+});

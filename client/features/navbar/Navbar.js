@@ -6,6 +6,7 @@ import { logout } from "../../store/store";
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const role = useSelector((state) => state.auth.me.role);
+  const id = useSelector((state) => state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
@@ -32,6 +33,7 @@ const Navbar = () => {
                 <Link to="/home">Home</Link>
                 <Link to="/mylistings">My Listings</Link>
                 <Link to="/cart">Cart</Link>
+                <Link to={`/renters/${id}/edit`}>Edit Profile</Link>
               </React.Fragment>
             ): null}
             <button type="button" onClick={logoutAndRedirectHome}>

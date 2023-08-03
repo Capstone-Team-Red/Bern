@@ -10,7 +10,24 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-})
+});
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const renter = await Renter.findByPk(id, {
+      attributes: ['id', 'username', 'email', 'role', 'firstname', 'lastname']
+    });
+    
+    if(renter) {
+      res.json(renter);
+    } else {
+      res.status(404).json({ error: 'Renter not found' })
+    }
+  } catch (err) {
+    next(err)
+  }
+});
 
 router.post("/", async (req, res, next) => {
   try {
@@ -21,15 +38,20 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// Route to get a single renter by ID
-router.get("/:id", async (req, res, next) => {
-  const renterId = req.params.id;
+router.put("/:id/edit", async (req, res, next) => {
   try {
-    const renter = await Renter.findByPk(renterId);
+    const { id } = req.params;
+    const { email, firstname, lastname, zipcode } = req.body;
+
+    const renter = await Renter.findByPk(id);
     if (!renter) {
-      return res.status(404).json({ error: "Renter not found" });
+      return res.status(404).json({ error: 'Renter not found' });
     }
-    res.json(renter);
+
+    await renter.update({ email, firstname, lastname, zipcode });
+
+    res.json({ message: 'Renter data updated successfully' })
+
   } catch (err) {
     next(err);
   }

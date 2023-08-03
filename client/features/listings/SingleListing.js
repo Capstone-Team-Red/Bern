@@ -50,17 +50,27 @@ const SingleListing = () => {
     }
   };
 
+  const formatDate = (date) => {
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+    return formattedDate;
+  };
+
   return (
-    <div className="listing-details">
+    <div className="listing-details-container">
       {listing ? (
         <>
           <div>
-            <h2>Listing Details</h2>
-            <p>Name: {listing.name}</p>
-            <img src={`${listing.image}`} className="listing-img" />
-            <p>Description: {listing.description}</p>
-            <p>Price: ${listing.price}</p>
-
+                <h3>{listing.name}</h3>
+                <img src={listing.image} alt={listing.name} />
+                <p><span className="single-listing-details">Class Type: </span>{listing.classtype}</p>
+                <p><span className="single-listing-details">Address: </span>{listing.address}, {listing.city}, {listing.state}, {listing.zipcode}</p>
+                <p><span className="single-listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
+                <p><span className="single-listing-details">Spots Available: </span>{listing.stock}</p>
+                <p><span className="single-listing-details">Price: </span>${listing.price}</p>
             <p>
               <button
                 className="add-to-cart-button"

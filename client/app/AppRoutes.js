@@ -11,6 +11,7 @@ import SingleRenter from '../features/renters/SingleRenter';
 import {Cart} from '../features/cart/cart';
 import Checkout from '../features/checkout/checkout';
 import Landing from '../features/home/Landing';
+import EditRenter from '../features/renter/EditRenter';
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ const AppRoutes = () => {
           <Route path="/renters/:id" element={<SingleRenter />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout/>} />
+          <Route path="/renters/:id/edit" element={<EditRenter/>} />
         </Routes>
       ) : (
         <Routes>
