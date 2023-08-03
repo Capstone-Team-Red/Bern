@@ -22,6 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.2",
     "bcrypt": "^5.1.0",
     "compression": "^1.7.4",
     "dotenv": "^16.3.1",
@@ -30,7 +32,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
     "prop-types": "^15.8.1",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.3",
+    "stripe": "^12.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
