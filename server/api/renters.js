@@ -2,6 +2,7 @@ const router = require('express').Router()
 const Renter = require('../db/models/Renter');
 module.exports = router
 
+// Route to get all renters
 router.get('/', async (req, res, next) => {
   try {
     const renters = await Renter.findAll()
@@ -37,20 +38,15 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id/edit", async (req, res, next) => {
+// Route to get a single renter by ID
+router.get("/:id", async (req, res, next) => {
+  const renterId = req.params.id;
   try {
-    const { id } = req.params;
-    const { email, firstname, lastname, zipcode } = req.body;
-
-    const renter = await Renter.findByPk(id);
+    const renter = await Renter.findByPk(renterId);
     if (!renter) {
-      return res.status(404).json({ error: 'Renter not found' });
+      return res.status(404).json({ error: "Renter not found" });
     }
-
-    await renter.update({ email, firstname, lastname, zipcode });
-
-    res.json({ message: 'Renter data updated successfully' })
-
+    res.json(renter);
   } catch (err) {
     next(err);
   }

@@ -7,8 +7,9 @@ import ordersReducer from "./ordersSlice";
 import orderListingsReducer from "./orderListingsSlice";
 import allUsersReducer from "./allUsersSlice";
 import allRentersReducer from "./allRentersSlice";
-import singleUserReducer from "./userSlice";
-import singleRenterReducer from "./renterSlice"
+import singleUserReducer from "./userSlice"
+import singleRenterReducer from "./singleRenterSlice"
+
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     allRenters: allRentersReducer,
     singleUser: singleUserReducer,
     singleRenter: singleRenterReducer
+
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

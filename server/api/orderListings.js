@@ -2,6 +2,8 @@ const router = require('express').Router()
 const Listings = require('../db/models/Listings');
 const OrderListings = require('../db/models/OrderListings');
 const Orders = require('../db/models/Orders');
+const stripe = require('stripe')('sk_test_51Nb4nULGhuSP9aYSsR8YCQU92pVYdc8FmGzSFctmavVBr73QX42oXNDLgAdDR0qu1ZIDl1JKOil2xV974XXcq3Y500AneSsRKN'); 
+
 module.exports = router
 
 router.post("/", async (req, res, next) => {
@@ -60,3 +62,23 @@ router.put('/:id/increase', async (req, res, next) => {
       next(error);
     }
   })
+
+  router.post('/process-payment', async (req, res, next) => {
+    try {
+      const { paymentMethodId, cartTotal } = req.body;
+  
+      // Create a payment intent with Stripe using the cart total amount
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: cartTotal, // Use the provided cart total amount
+        currency: 'usd',
+        payment_method: paymentMethodId,
+        confirm: true,
+      });
+  
+      // Handle successful payment
+      res.json({ success: true });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Payment failed' });
+    }
+  });
