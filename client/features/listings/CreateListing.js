@@ -28,28 +28,31 @@ const CreateListing = () => {
   };
 
   return (
-    <>
-        <div>
-          <h1>Edit Renter Profile Details</h1>
-          <div key={renter.id}>
-              <div className='edit-renter-container'>
-                <p className='edit-renter-text'>Firstname: 
-                  <input type="text" name="firstname" value={updatedRenter.firstname} onChange={handleInputChange} style={{ width: "200px" }} />
-                </p>
-                <p className='edit-renter-text'>Lastname: 
-                  <input type="text" name="lastname" value={updatedRenter.lastname} onChange={handleInputChange} style={{ width: "200px" }} />
-                </p>
-                <p className='edit-renter-text'>Email: 
-                  <input type="email" name="email" value={updatedRenter.email} onChange={handleInputChange} style={{ width: "200px" }} />
-                </p>
-                <p className='edit-renter-text'>Zipcode: 
-                  <input type="text" name="zipcode" value={updatedRenter.zipcode} onChange={handleInputChange} style={{ width: "200px" }} />       
-                </p>
-                <button onClick={handleEditRenter}>Save</button>
-              </div>
+    <div className="listing-details-container">
+      {listing ? (
+        <>
+          <div>
+                <h3>{listing.name}</h3>
+                <img src={listing.image} alt={listing.name} />
+                <p><span className="single-listing-details">Class Type: </span>{listing.classtype}</p>
+                <p><span className="single-listing-details">Address: </span>{listing.address}, {listing.city}, {listing.state}, {listing.zipcode}</p>
+                <p><span className="single-listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
+                <p><span className="single-listing-details">Spots Available: </span>{listing.stock}</p>
+                <p><span className="single-listing-details">Price: </span>${listing.price}</p>
+            <p>
+              <button
+                className="add-to-cart-button"
+                onClick={() => handleAddToCart(listing.id, listing.price)}
+              >
+                Add to Cart
+              </button>
+            </p>
           </div>
-        </div>
-    </>
+        </>
+      ) : (
+        <p className="loading-text">Loading listing...</p>
+      )}
+    </div>
   );
 };
 
