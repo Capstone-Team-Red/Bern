@@ -1,100 +1,226 @@
-"use strict";
-
-const {
-  db,
-  Users,
-  Listings,
-  Orders,
-  OrderListings,
-} = require("../server/db");
-const { faker } = require("@faker-js/faker");
+const router = require('express').Router();
+const db = require('../server/db/db')
+const Users = require('../server/db/models/Users');
+const Listings = require('../server/db/models/Listings');
+const OrderListings = require('../server/db/models/OrderListings');
+const Orders = require('../server/db/models/Orders');
+const Renter = require('../server/db/models/Renter');
+module.exports = router;
 
 async function seed() {
-  try {
-    //reset tables and creates the tables from scratch when seeding
-    await db.sync({ force: true });
-    console.log("db synced!");
+  await db.sync({ force: true }) // clears db and matches models to tables
+  console.log('db synced!')
 
-    // Declare a variable and set it equal to an array.
-    let users = [];
+  // Creating Users
+  const users = await Promise.all([
+    Users.create({
+      username: 'cody',
+      password: '123',
+      email: 'cody@example.com',
+      role: 'User',
+      firstname: 'Cody',
+      lastname: 'Zucker',
+      zipcode: '10001'
+    }),
+    Users.create({
+      username: 'murphy',
+      password: '123',
+      email: 'murphy@example.com',
+      role: 'User',
+      firstname: 'Murphy',
+      lastname: 'Love',
+      zipcode: '20001'
+    }),    
+    Users.create({
+      username: 'john',
+      password: '123',
+      email: 'john@example.com',
+      role: 'User',
+      firstname: 'John',
+      lastname: 'Doe',
+      zipcode: '30301'
+    }),    
+    Users.create({
+      username: 'jane',
+      password: '123',
+      email: 'jane@example.com',
+      role: 'User',
+      firstname: 'Jane',
+      lastname: 'Smith',
+      zipcode: '40003'
+    }),    
+    Users.create({
+      username: 'kevin',
+      password: '123',
+      email: 'kevin@example.com',
+      role: 'User',
+      firstname: 'Kevin',
+      lastname: 'Kutcher',
+      zipcode: '50005'
+    }),
+  ]);
 
-    // This for loop decides how many datapoints you will create.
-    // If you want to change the amount, just change the number in the for loop!
-    for (let i = 0; i < 100; i++) {
-      // The keys in this user object are set equal to the fake information
+  // Creating Renters
+  const renters = await Promise.all([
+    Renter.create({
+      username: 'zach',
+      password: '123',
+      role: 'Renter',
+      email: 'zach@constructionkings.com',
+      firstname: 'Zach',
+      lastname: 'Warner',
+      zipcode: '10001'
+    }),
+    Renter.create({
+      username: 'helen',
+      password: '123',
+      role: 'Renter',
+      email: 'helen@dc.com',
+      firstname: 'Helen',
+      lastname: 'Shell',
+      zipcode: '20001'
+    }),
+    Renter.create({
+      username: 'ryo',
+      password: '123',
+      role: 'Renter',
+      email: 'ryo@crunchyroll.com',
+      firstname: 'Ryo',
+      lastname: 'Kazaki',
+      zipcode: '30301'
+    }),
+    Renter.create({
+      username: 'paige',
+      password: '123',
+      role: 'Renter',
+      email: 'paige@clothing.com',
+      firstname: 'Paige',
+      lastname: 'Hester',
+      zipcode: '40003'
+    }),
+    Renter.create({
+      username: 'beth',
+      password: '123',
+      role: 'Renter',
+      email: 'beth@shoretravel.com',
+      firstname: 'Beth',
+      lastname: 'Shore',
+      zipcode: '50005'
+    }),
+  ]);
 
-      let newUser = {
-        email: faker.internet.email(),
-        username: faker.internet.userName(),
-        address:
-          faker.location.streetAddress() +
-          ", " +
-          faker.location.city() +
-          ", " +
-          faker.location.state({ abbreviated: true }) +
-          " " +
-          faker.location.zipCode("#####"),
-        phone: faker.phone.number("+1 ###-###-####"),
-        password: "hi",
-      };
-      console.log(
-        `Username|Password for user ${i + 1} is:`,
-        newUser.username,
-        `|`,
-        newUser.password
-      );
+  // Creating Listings
+  const listings = await Promise.all([
+    Listings.create({
+      classtype: 'Boxing',
+      address: '123 Main Street',
+      city: 'New York City',
+      state: 'NY',
+      zipcode: '10001',
+      date: '2023-08-31',
+      time: '10:00 AM',
+      price: 25,
+      stock: 10,
+    }),
+    Listings.create({
+      classtype: 'Yoga',
+      address: '132 Main Street',
+      city: 'Washington',
+      state: 'DC',
+      zipcode: '20001',
+      date: '2023-09-02',
+      time: '11:00 AM',
+      price: 10,
+      stock: 5,
+    }),
+    Listings.create({
+      classtype: 'Open Gym',
+      address: '456 Maple Avenue',
+      city: 'Atlanta',
+      state: 'GA',
+      zipcode: '30301',
+      date: '2023-10-01',
+      time: '3:00 PM',
+      price: 15,
+      stock: 7,
+    }),
+    Listings.create({
+      classtype: 'Yoga',
+      address: '789 Oak Street',
+      city: 'Louisville',
+      state: 'KY',
+      zipcode: '40003',
+      date: '2023-12-01',
+      time: '2:30 PM',
+      price: 30,
+      stock: 8,
+    }),
+    Listings.create({
+      classtype: 'Boxing',
+      address: '101 Elm Avenue',
+      city: 'Des Moines',
+      state: 'IA',
+      zipcode: '50005',
+      date: '2023-08-25',
+      time: '8:00 AM',
+      price: 50,
+      stock: 5,
+    }),
+  ]);
 
-      // For each fake user you create, you're going to push them into the user array you declare above
-      users.push(newUser);
+  // Creating OrderListings
+  const orderListings = await Promise.all([
+    OrderListings.create({
+      orderId: 2,
+      listingId:3,
+      quantity: 1
+    }),
+    OrderListings.create({
+      orderId: 4,
+      listingId: 4,
+      quantity: 1
+    }),
+    OrderListings.create({
+      orderId: 1,
+      listingId: 2,
+      quantity: 1
+    }),
+  ]);
+
+  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${renters.length} employers`)
+  console.log(`seeded ${listings.length} listings`)
+  console.log(`seeded ${orderListings.length} orderListings`)
+  console.log(`seeded successfully`)
+
+  return {
+    users: {
+      cody: users[0],
+      murphy: users[1],
+      john: users[2],
+      jane: users[3],
+      kevin: users[4]
+    },
+    renters: {
+      zach: renters[0],
+      helen: renters[1],
+      ryo: renters[2],
+      paige: renters[3],
+      beth: renters[4]
+    },
+    listings: {
+      listing1: listings[0],
+      listing2: listings[1],
+      listing3: listings[2],
+      listing4: listings[3],
+      listing5: listings[4]
+    },
+    orderListings: {
+      orderListings1: orderListings[0],
+      orderListings2: orderListings[1],
+      orderListings3: orderListings[2],
     }
-
-    // For each user in the array, you are going to create a new user instance in the database
-    await Promise.all(users.map((user) => Users.create(user)));
-
-    // Declare a variable and set it equal to an array.
-    let listings = [];
-    // let prices = [] // Array to store the randomly generated prices
-
-    // This for loop decides how many datapoints you will create.
-    // If you want to change the amount, just change the number in the for loop!
-    for (let i = 0; i < 50; i++) {
-      // The keys in this user object are set equal to the fake information
-
-      let newListings = {
-        name: faker.commerce.productName(),
-        image: faker.image.urlLoremFlickr({ category: "business" }),
-        description: faker.commerce.productAdjective(),
-        category: faker.commerce.product(),
-        price: faker.commerce.price({ min: 1, max: 200 }),
-        stock: faker.number.int({ min: 10, max: 50 }),
-      };
-
-      // For each fake user you create, you're going to push them into the user array you declare above
-      listings.push(newListings);
-    }
-
-    // For each user in the array, you are going to create a new user instance in the database
-    await Promise.all(listings.map((listing) => Listings.create(listing)));
-
-    // Declare a variable and set it equal to an array
-    // The keys in this user object are set equal to the fake information
-
-    const allListings = await Listings.findAll();
-
-    for (const listing of allListings) {
-      const orderListingData = {
-        orderId: faker.number.int({ min: 1, max: 20 }),
-        listingId: faker.number.int({ min: 1, max: 20 }),
-        quantity: faker.number.int({ min: 1, max: 5 }),
-      };
-
-      await OrderListings.create(orderListingData);
-    }
-  } catch (err) {
-    console.log(err);
   }
-
-  console.log(`seeded successfully`);
 }
 
 /*
@@ -103,16 +229,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log("seeding...");
+  console.log('seeding...')
   try {
-    await seed();
+    await seed()
   } catch (err) {
-    console.error(err);
-    process.exitCode = 1;
+    console.error(err)
+    process.exitCode = 1
   } finally {
-    console.log("closing db connection");
-    await db.close();
-    console.log("db connection closed");
+    console.log('closing db connection')
+    await db.close()
+    console.log('db connection closed')
   }
 }
 
@@ -122,8 +248,8 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed();
+  runSeed()
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed;
+module.exports = seed

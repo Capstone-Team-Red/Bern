@@ -1,70 +1,101 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { authenticate } from '../../store/store';
-
-/**
-  The AuthForm component can be used for Login or Sign Up.
-  Props for Login: name="login", displayName="Login"
-  Props for Sign up: name="signup", displayName="Sign Up"
-**/
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authenticateRenterLogin, authenticateLogin, authenticateRenterSignUp, authenticateSignUp } from "../../store/store"; 
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
+    const role = evt.target.role.value;
 
     if (formName === "login") {
-      dispatch(authenticate({ username, password, method: formName }));
-
+      if (role === 'User') {
+        dispatch(authenticateLogin({ username, password, role, method: formName }));
+      } else if (role === 'Renter') {
+        dispatch(authenticateRenterLogin({ username, password, role, method: formName }));
+      } else {
+        console.error('Invalid role selected: ', role);
+      }
     } else if (formName === "signup") {
       const email = evt.target.email.value;
-      const fullName = evt.target.fullName.value;
-      const address = evt.target.address.value;
+      const firstname = evt.target.firstname.value;
+      const lastname = evt.target.lastname.value;
+      const zipcode = evt.target.zipcode.value;
 
-      dispatch(authenticate({ username, password, fullName, email, address, method: formName }));
+      if (role === 'User') {
+        dispatch( authenticateSignUp({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+      } else if (role === 'Renter') {
+        dispatch(authenticateRenterSignUp({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
+      } else {
+        console.error('Invalid role selected: ', role)
+      }
     }
-  }
+  };
 
   return (
     <div>
-      {name === 'login' && (
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="username">
-            <small>Username</small>
-          </label>
-          <input name="username" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && <div> {error} </div>}
-      </form>
-    )}
-  {name === 'signup' && ( 
+      {name === "login" && (
         <form onSubmit={handleSubmit} name={name}>
+          <div>
+            <label htmlFor="role">
+              <small>Role</small>
+            </label>
+            <select name="role">
+              <option value="User">User</option>
+              <option value="Renter">Renter</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="username">
+              <small>Username</small>
+            </label>
+            <input name="username" type="text" />
+          </div>
+          <div>
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <input name="password" type="password" />
+          </div>
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+          {error && <div> {error} </div>}
+        </form>
+      )}
+      {name === "signup" && (
+        <form onSubmit={handleSubmit} name={name}>
+          <div>
+            <label htmlFor="role">
+              <small>Role</small>
+            </label>
+            <select name="role">
+              <option value="User">User</option>
+              <option value="Renter">Renter</option>
+            </select>
+          </div>
           <div>
             <label htmlFor="email">
               <small>Email</small>
             </label>
-            <input name="email" type="text" />
+            <input name="email" type="email" />
           </div>
           <div>
-            <label htmlFor="fullName">
-              <small>Full Name</small>
+            <label htmlFor="firstname">
+              <small>First Name</small>
             </label>
-            <input name="fullName" type="text" />
+            <input name="firstname" type="text" />
+          </div>
+          <div>
+            <label htmlFor="lastname">
+              <small>Last Name</small>
+            </label>
+            <input name="lastname" type="text" />
           </div>
           <div>
             <label htmlFor="name">
@@ -79,17 +110,17 @@ const AuthForm = ({ name, displayName }) => {
             <input name="password" type="password" />
           </div>
           <div>
-            <label htmlFor="address">
-              <small>Mailing Address</small>
+            <label htmlFor="zipcode">
+              <small>zipcode</small>
             </label>
-            <textarea
-            name="address"
-          />
+            <input name="zipcode" type="text"/>
           </div>
           <div>
             <button type="submit">{displayName}</button>
           </div>
-          {error ? <div>Error with signup. Please double check your information.</div> : null }
+          {error ? (
+            <div>Error with signup. Please double check your information.</div>
+          ) : null}
         </form>
       )}
     </div>

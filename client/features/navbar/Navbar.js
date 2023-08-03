@@ -5,6 +5,7 @@ import { logout } from "../../store/store";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const role = useSelector((state) => state.auth.me.role);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
@@ -26,14 +27,13 @@ const Navbar = () => {
                 <Link to="/listings">Listings</Link>
                 <Link to="/cart">Cart</Link>
               </React.Fragment>
-            ) : (
+            ) : role === "Renter" ? (
               <React.Fragment>
                 <Link to="/home">Home</Link>
                 <Link to="/mylistings">My Listings</Link>
                 <Link to="/cart">Cart</Link>
               </React.Fragment>
-            )}
-            ;
+            ): null}
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>

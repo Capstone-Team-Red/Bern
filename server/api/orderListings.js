@@ -1,5 +1,7 @@
 const router = require('express').Router()
-const {Orders, Users, OrderListings, Listings} = require('../db')
+const Listings = require('../db/models/Listings');
+const OrderListings = require('../db/models/OrderListings');
+const Orders = require('../db/models/Orders');
 const stripe = require('stripe')('sk_test_51Nb4nULGhuSP9aYSsR8YCQU92pVYdc8FmGzSFctmavVBr73QX42oXNDLgAdDR0qu1ZIDl1JKOil2xV974XXcq3Y500AneSsRKN'); 
 
 module.exports = router

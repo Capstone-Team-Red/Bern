@@ -2,24 +2,37 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Listings = db.define('listings', {
-  name: {
+  classtype: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    allowNull: false
   },
   image: {
     type: Sequelize.TEXT,
-    defaultValue: 'defaultProduct.png'
+    defaultValue: '/images/lifting-default.jpg'
   },
-  description: Sequelize.TEXT,
-  category: {
+  address: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  city: {
     type: Sequelize.STRING,
+    allowNull: false
+  },
+  state: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  zipcode: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  date: {
+    type: Sequelize.DATEONLY,
     allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+  },
+  time: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   price: {
     type: Sequelize.DECIMAL,
