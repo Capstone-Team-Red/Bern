@@ -10,21 +10,6 @@ export const getAllRenters = createAsyncThunk("getAllRenters", async () => {
   }
 });
 
-export const addRenter = createAsyncThunk(
-  "addRenter",
-  async ({ username, email, name, password, address, phone }) => {
-    const { data } = await axios.post("/api/renters", {
-      username,
-      email,
-      name,
-      password,
-      address,
-      phone,
-    });
-    return data;
-  }
-);
-
 const allRentersSlice = createSlice({
   name: "allRenters",
   initialState: {
@@ -36,14 +21,11 @@ const allRentersSlice = createSlice({
       .addCase(getAllRenters.fulfilled, (state, { payload }) => {
         state.renters = payload;
       })
-      .addCase(addRenter.fulfilled, (state, { payload }) => {
-        state.renters.push(payload);
-      });
   },
 });
 
 export const selectAllRenters = (state) => {
-  return state.renters;
+  return state.allRenters.renters;
 };
 
 export default allRentersSlice.reducer;

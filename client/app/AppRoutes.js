@@ -6,6 +6,8 @@ import Home from '../features/home/Home';
 import { me } from '../store/store';
 import {AllListings} from "../features/listings/AllListings"
 import SingleListing from '../features/listings/SingleListing';
+import {AllRenters} from "../features/renters/AllRenters"
+import SingleRenter from '../features/renters/SingleRenter';
 import {Cart} from '../features/cart/cart';
 import Checkout from '../features/checkout/checkout';
 import Landing from '../features/home/Landing';
@@ -30,6 +32,8 @@ const AppRoutes = () => {
           <Route path="/home" element={<Landing />} />
           <Route path="/listings" element={<AllListings />} />
           <Route path="/listings/:id" element={<SingleListing />} />
+          <Route path="/renters" element={<AllRenters />} />
+          <Route path="/renters/:id" element={<SingleRenter />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout/>} />
         </Routes>
