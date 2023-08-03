@@ -30,7 +30,6 @@ const Navbar = () => {
               <React.Fragment>
                 <Link to="/home">Home</Link>
                 <Link to="/mylistings">My Listings</Link>
-                <Link to="/users">Rentees</Link>
                 <Link to="/cart">Cart</Link>
               </React.Fragment>
             )}

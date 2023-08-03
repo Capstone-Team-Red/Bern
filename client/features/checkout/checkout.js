@@ -10,9 +10,13 @@ import {
   removeFromCart,
   deleteAllCart,
 } from "../../store/orderListingsSlice";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Checkout = () => {
   const dispatch = useDispatch();
+  const stripe = useStripe();
+  const elements = useElements();
+
   const userId = useSelector((state) => state.auth.me.id);
   const orders = useSelector((state) => state.orders.orders);
   const orderListings = useSelector(
@@ -48,8 +52,49 @@ const Checkout = () => {
     dispatch(removeFromCart(orderListingId));
   };
 
-  const handleCompleteCheckout = () => {
-    dispatch(deleteAllCart(orders[0].id));
+  const handleCompleteCheckout = async () => {
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet
+      return;
+    }
+
+    const { paymentMethod, error } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+    });
+
+    if (error) {
+      console.error(error);
+      // Handle payment error
+    } else {
+      // Calculate the total amount from orderListings
+      const cartTotal = orderListings.reduce(
+        (total, orderListing) =>
+          total + orderListing.listing.price * orderListing.quantity,
+        0
+      );
+
+      // Send paymentMethod.id and cartTotal to your server for payment processing
+      const response = await fetch('/process-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          paymentMethodId: paymentMethod.id,
+          cartTotal, // Pass the calculated cart total
+        }),
+      });
+
+      const paymentResult = await response.json();
+
+      if (paymentResult.success) {
+        // Payment successful, handle success scenario
+        dispatch(deleteAllCart(orders[0].id));
+      } else {
+        console.error('Payment failed');
+      }
+    }
   };
 
   if (!userId || orders.length === 0 || !orderListings) {
