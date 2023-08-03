@@ -34,30 +34,27 @@ export const me = createAsyncThunk("auth/me", async () => {
 export const authenticate = createAsyncThunk(
   "auth/authenticate",
   async (
-    { username, password, firstName, lastName, email, role, zipcode, method },
-    thunkAPI
+    { username, password, firstname, lastname, email, role, zipcode, method },
+    { rejectWithValue, dispatch }
   ) => {
     try {
       const res = await axios.post(`/auth/${method}`, {
         username,
         password,
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         email,
         role,
         zipcode,
       });
       window.localStorage.setItem(TOKEN, res.data.token);
-      thunkAPI.dispatch(me());
+      dispatch(me());
     } catch (err) {
-      if (err.response.data) {
-        return thunkAPI.rejectWithValue(err.response.data);
-      } else {
-        return "There was an issue with your request.";
-      }
+      return err.response ? rejectWithValue(err.response.data) : "There was an issue with your request.";
     }
   }
 );
+
 
 /*
   SLICE

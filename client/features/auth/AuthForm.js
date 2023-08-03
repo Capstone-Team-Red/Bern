@@ -1,44 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authenticate } from "../../store/store";
-
-/**
-  The AuthForm component can be used for Login or Sign Up.
-  Props for Login: name="login", displayName="Login"
-  Props for Sign up: name="signup", displayName="Sign Up"
-**/
+import { authenticate, me } from "../../store/store"; 
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const [selectedRole, setSelectedRole] = useState("User"); // New state for selected role
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
-    const role = evt.target.role.value;
+    const role = selectedRole; // Use selectedRole from state
 
     if (formName === "login") {
-      dispatch(authenticate({ username, password, role, method: formName }));
+      dispatch(authenticate({ username, password, method: formName }));
     } else if (formName === "signup") {
       const email = evt.target.email.value;
-      const firstName = evt.target.firstname.value;
-      const lastName = evt.target.lastname.value;
+      const firstname = evt.target.firstname.value;
+      const lastname = evt.target.lastname.value;
       const zipcode = evt.target.zipcode.value;
 
       dispatch(
         authenticate({
           username,
           password,
-          firstName,
-          lastName,
+          firstname,
+          lastname,
           email,
-          role,
+          role: selectedRole, // Pass the selected role to the authenticate thunk
           zipcode,
           method: formName,
         })
       );
+      // Dispatch me() after a successful sign-up
+      await dispatch(me());
     }
   };
 
@@ -50,7 +47,10 @@ const AuthForm = ({ name, displayName }) => {
             <label htmlFor="role">
               <small>Role</small>
             </label>
-            <input name="role" type="text" />
+            <select name="role" value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
+              <option value="User">User</option>
+              <option value="Renter">Renter</option>
+            </select>
           </div>
           <div>
             <label htmlFor="username">
@@ -70,13 +70,16 @@ const AuthForm = ({ name, displayName }) => {
           {error && <div> {error} </div>}
         </form>
       )}
-      {name === "signup" && (
+{name === "signup" && (
         <form onSubmit={handleSubmit} name={name}>
           <div>
             <label htmlFor="role">
               <small>Role</small>
             </label>
-            <input name="role" type="text" />
+            <select name="role" value={selectedRole} onChange={(e) => setSelectedRole(e.target.value)}>
+              <option value="User">User</option>
+              <option value="Renter">Renter</option>
+            </select>
           </div>
           <div>
             <label htmlFor="email">
@@ -85,16 +88,16 @@ const AuthForm = ({ name, displayName }) => {
             <input name="email" type="text" />
           </div>
           <div>
-            <label htmlFor="firstName">
+            <label htmlFor="firstname">
               <small>First Name</small>
             </label>
-            <input name="firstName" type="text" />
+            <input name="firstname" type="text" />
           </div>
           <div>
-            <label htmlFor="lastName">
+            <label htmlFor="lastname">
               <small>Last Name</small>
             </label>
-            <input name="lastName" type="text" />
+            <input name="lastname" type="text" />
           </div>
           <div>
             <label htmlFor="name">
