@@ -37,12 +37,6 @@ const Renter = db.define("renter", {
       return this.getDataValue("password");
     },
   },
-  salt: {
-    type: Sequelize.STRING,
-    get() {
-      return this.getDataValue("salt");
-    },
-  },
   zipcode: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -73,27 +67,24 @@ Renter.prototype.generateToken = function () {
 /**
  * classMethods
  */
-Renter.authenticate = async function ({ username, password }) {
-  const renter = await this.findOne({ where: { username } });
+Renter.authenticateRenter = async function ({ username, password }) {
+  console.log('Authenticating renter: ', username);
+  const renter = await Renter.findOne({ where: { username } });
   if (!renter || !(await renter.correctPassword(password))) {
     const error = Error("Incorrect username/password");
     error.status = 401;
     throw error;
   }
-  return renter.generateToken();
+  return renter;
 };
 
 Renter.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-    const renter = await Renter.findByPk(id, {
-      attributes: { include: ["password", "salt"] },
-    });
-
+    const renter = await Renter.findByPk(id);
     if (!renter) {
-      throw "nooo";
+      throw new Error('Renter not found');
     }
-
     return renter;
   } catch (ex) {
     const error = Error("bad token");
@@ -107,9 +98,7 @@ Renter.findByToken = async function (token) {
  */
 const hashPassword = async (renter) => {
   if (renter.changed("password")) {
-    const salt = await bcrypt.genSalt(SALT_ROUNDS);
-    renter.password = await bcrypt.hash(renter.password, salt);
-    renter.salt = salt;
+    renter.password = await bcrypt.hash(renter.password, SALT_ROUNDS);
   }
 };
 

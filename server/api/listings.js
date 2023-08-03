@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Listings } = require("../db");
+const Listings = require('../db/models/Listings');
 module.exports = router;
 
 // Route to get all listings

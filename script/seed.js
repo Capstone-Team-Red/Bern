@@ -1,4 +1,11 @@
-const { db, Users, Renter, Listings, Orders, OrderListings} = require("../server/db");
+const router = require('express').Router();
+const db = require('../server/db/db')
+const Users = require('../server/db/models/Users');
+const Listings = require('../server/db/models/Listings');
+const OrderListings = require('../server/db/models/OrderListings');
+const Orders = require('../server/db/models/Orders');
+const Renter = require('../server/db/models/Renter');
+module.exports = router;
 
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
