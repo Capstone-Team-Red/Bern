@@ -6,6 +6,7 @@ import singleListingSlice from "./singleListingSlice";
 import ordersSlice from "./ordersSlice";
 import orderListingsSlice from "./orderListingsSlice";
 import allUsersSlice from "./allUsersSlice";
+import allRentersSlice from "./allRentersSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     orders: ordersSlice,
     orderListings: orderListingsSlice,
     users: allUsersSlice,
+    renters: allRentersSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
