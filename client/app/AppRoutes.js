@@ -15,6 +15,8 @@ import EditRenter from "../features/renter/EditRenter";
 import CreateListing from "../features/listings/CreateListing";
 import RenterListings from "../features/listings/RenterListings";
 import EditListing from "../features/listings/EditListing";
+import SingleRentee from "../features/rentee/SingleRentee";
+import EditRentee from "../features/rentee/EditRentee";
 
 /**
  * COMPONENT
@@ -48,6 +50,7 @@ const AppRoutes = () => {
             element={<RenterListings />}
           />
           <Route path="/listings/:id/edit" element={<EditListing />} />
+          <Route path="/users/:id/edit" element={<EditRentee />} />
         </Routes>
       ) : (
         <Routes>
