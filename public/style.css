@@ -252,6 +252,13 @@ button:hover {
   margin: 20px 0;
 }
 
+.renter-listings-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
 .listing-container {
   border: 1px solid #cfcfcf;
   border-radius: 5px;
