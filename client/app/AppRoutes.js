@@ -1,19 +1,21 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import AuthForm from '../features/auth/AuthForm';
-import Home from '../features/home/Home';
-import { me } from '../store/store';
-import {AllListings} from "../features/listings/AllListings"
-import SingleListing from '../features/listings/SingleListing';
-import {AllRenters} from "../features/renters/AllRenters"
-import SingleRenter from '../features/renters/SingleRenter';
-import {Cart} from '../features/cart/cart';
-import Checkout from '../features/checkout/checkout';
-import Landing from '../features/home/Landing';
-import EditRenter from '../features/renter/EditRenter';
-import CreateListing from '../features/listings/CreateListing';
-import RenterListings from '../features/listings/RenterListings';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import AuthForm from "../features/auth/AuthForm";
+import Home from "../features/home/Home";
+import { me } from "../store/store";
+import { AllListings } from "../features/listings/AllListings";
+import SingleListing from "../features/listings/SingleListing";
+import { AllRenters } from "../features/renters/AllRenters";
+import SingleRenter from "../features/renters/SingleRenter";
+import { Cart } from "../features/cart/cart";
+import Checkout from "../features/checkout/checkout";
+import Landing from "../features/home/Landing";
+import EditRenter from "../features/renter/EditRenter";
+import CreateListing from "../features/listings/CreateListing";
+import RenterListings from "../features/listings/RenterListings";
+import EditRentee from "../features/rentee/EditRentee";
+import SingleRentee from "../features/rentee/SingleRentee";
 
 /**
  * COMPONENT
@@ -37,11 +39,16 @@ const AppRoutes = () => {
           <Route path="/listings/:id" element={<SingleListing />} />
           <Route path="/renters" element={<AllRenters />} />
           <Route path="/renters/:id" element={<SingleRenter />} />
+          <Route path="/users/:id" element={<SingleRentee />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout/>} />
-          <Route path="/renters/:id/edit" element={<EditRenter/>} />
-          <Route path="/listings/:id/add" element={<CreateListing/>} />
-          <Route path="/listings/:id/renterListings" element={<RenterListings />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/renters/:id/edit" element={<EditRenter />} />
+          <Route path="/users/:id/edit" element={<EditRentee />} />
+          <Route path="/listings/:id/add" element={<CreateListing />} />
+          <Route
+            path="/listings/:id/renterListings"
+            element={<RenterListings />}
+          />
         </Routes>
       ) : (
         <Routes>
@@ -67,4 +74,3 @@ const AppRoutes = () => {
 };
 
 export default AppRoutes;
-

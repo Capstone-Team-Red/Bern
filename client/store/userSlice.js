@@ -10,7 +10,7 @@ export const getSingleUser = createAsyncThunk("users/userId", async (id) => {
   }
 });
 
-export const updateRentee = createAsyncThunk(
+export const updateUser = createAsyncThunk(
   "users/updateUser",
   async ({ token, id, userData }) => {
     try {

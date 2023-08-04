@@ -1,79 +1,79 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleRentee, updateRentee } from "../../store/userSlice";
+import { getSingleUser, updateUser } from "../../store/userSlice";
 
 const EditRentee = () => {
   const dispatch = useDispatch();
-  const rentee = useSelector((state) => state.auth.me);
-  const id = rentee.id;
-  const [updatedRentee, setUpdatedRentee] = useState({ ...rentee });
+  const user = useSelector((state) => state.auth.me);
+  const id = user.id;
+  const [updatedUser, setUpdatedUser] = useState({ ...user });
 
   useEffect(() => {
-    dispatch(getSingleRentee(id));
+    dispatch(getSingleUser(id));
   }, [dispatch, id]);
 
-  const handleEditRentee = async () => {
+  const handleEditUser = async () => {
     try {
       const token = localStorage.getItem("token");
-      await dispatch(updateRentee({ token, id, renteeData: updatedRentee }));
+      await dispatch(updateUser({ token, id, userData: updatedUser }));
       window.location.reload();
     } catch (error) {
-      console.error("Failed to update rentee:", error);
+      console.error("Failed to update user:", error);
     }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdatedRentee((prevRentee) => ({ ...prevRentee, [name]: value }));
+    setUpdatedUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
 
   return (
     <>
       <div>
-        <h1>Edit Rentee Profile Details</h1>
-        <div key={rentee.id}>
-          <div className="edit-rentee-container">
-            <p className="edit-rentee-text">
+        <h1>Edit User Profile Details</h1>
+        <div key={user.id}>
+          <div className="edit-user-container">
+            <p className="edit-user-text">
               Firstname:
               <input
                 type="text"
                 name="firstname"
-                value={updatedRentee.firstname}
+                value={updatedUser.firstname}
                 onChange={handleInputChange}
                 style={{ width: "200px" }}
               />
             </p>
-            <p className="edit-rentee-text">
+            <p className="edit-user-text">
               Lastname:
               <input
                 type="text"
                 name="lastname"
-                value={updatedRentee.lastname}
+                value={updatedUser.lastname}
                 onChange={handleInputChange}
                 style={{ width: "200px" }}
               />
             </p>
-            <p className="edit-rentee-text">
+            <p className="edit-user-text">
               Email:
               <input
                 type="email"
                 name="email"
-                value={updatedRentee.email}
+                value={updatedUser.email}
                 onChange={handleInputChange}
                 style={{ width: "200px" }}
               />
             </p>
-            <p className="edit-rentee-text">
+            <p className="edit-user-text">
               Zipcode:
               <input
                 type="text"
                 name="zipcode"
-                value={updatedRentee.zipcode}
+                value={updatedUser.zipcode}
                 onChange={handleInputChange}
                 style={{ width: "200px" }}
               />
             </p>
-            <button onClick={handleEditRentee}>Save</button>
+            <button onClick={handleEditUser}>Save</button>
           </div>
         </div>
       </div>
