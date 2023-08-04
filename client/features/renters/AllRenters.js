@@ -17,16 +17,14 @@ export function AllRenters() {
 
   return (
     <>
+      <h1>Renters Contact Info</h1>
       <div className="all-listings-container">
         {renters ? (
           renters.map((renter) => (
             <div className="listing-container" key={renter.id}>
               <NavLink to={`/renters/${renter.id}`}>
-                <p id="listing-name">{renter.firstname} {renter.lastname}</p>
-                <p id="listing-name">Username: {renter.username}</p>
-                <div className="all-listing-details">
-                  <p>Email: {renter.email}</p>
-                </div>
+                <p><span className="single-listing-details">Name:</span> {renter.firstname} {renter.lastname}</p>
+                <p><span className="single-listing-details">Email:</span> {renter.email}</p>
               </NavLink>
             </div>
           ))

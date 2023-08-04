@@ -46,7 +46,7 @@ const singleRenterSlice = createSlice({
 })
 
 export const selectSingleRenter = state => {
-  return state.singleRenterSlice
+  return state.singleRenter
 }
 
 export default singleRenterSlice.reducer
