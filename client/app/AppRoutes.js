@@ -14,6 +14,7 @@ import Landing from '../features/home/Landing';
 import EditRenter from '../features/renter/EditRenter';
 import CreateListing from '../features/listings/CreateListing';
 import RenterListings from '../features/listings/RenterListings';
+import EditListing from '../features/listings/EditListing';
 
 /**
  * COMPONENT
@@ -42,6 +43,7 @@ const AppRoutes = () => {
           <Route path="/renters/:id/edit" element={<EditRenter/>} />
           <Route path="/listings/:id/add" element={<CreateListing/>} />
           <Route path="/listings/:id/renterListings" element={<RenterListings />} />
+          <Route path="/listings/:id/edit" element={<EditListing />}/>
         </Routes>
       ) : (
         <Routes>
