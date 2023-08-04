@@ -12,6 +12,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// Route to get all of logged-in Renter's listings
 router.get("/:id/renterListings", async (req, res, next) => {
   const renterId = req.params.id;
   try {
@@ -31,6 +32,25 @@ router.get("/:id", async (req, res, next) => {
       return res.status(404).json({ error: "Listing not found" });
     }
     res.json(listing);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:id/edit", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name, classtype, address, city, state, zipcode, date, time, price, stock } = req.body;
+
+    const listing = await Listings.findByPk(id);
+    if (!listing) {
+      return res.status(404).json({ error: 'Listing not found' });
+    }
+
+    await listing.update({ name, classtype, address, city, state, zipcode, date, time, price, stock });
+
+    res.json({ message: 'Listing data updated successfully' })
+
   } catch (err) {
     next(err);
   }
