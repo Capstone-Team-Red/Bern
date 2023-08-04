@@ -16,7 +16,6 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>Bern</h1>
       <nav>
         {isLoggedIn ? (
           <div>

@@ -14,8 +14,7 @@ import Landing from "../features/home/Landing";
 import EditRenter from "../features/renter/EditRenter";
 import CreateListing from "../features/listings/CreateListing";
 import RenterListings from "../features/listings/RenterListings";
-import EditRentee from "../features/rentee/EditRentee";
-import SingleRentee from "../features/rentee/SingleRentee";
+import EditListing from "../features/listings/EditListing";
 
 /**
  * COMPONENT
@@ -43,12 +42,12 @@ const AppRoutes = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/renters/:id/edit" element={<EditRenter />} />
-          <Route path="/users/:id/edit" element={<EditRentee />} />
           <Route path="/listings/:id/add" element={<CreateListing />} />
           <Route
             path="/listings/:id/renterListings"
             element={<RenterListings />}
           />
+          <Route path="/listings/:id/edit" element={<EditListing />} />
         </Routes>
       ) : (
         <Routes>

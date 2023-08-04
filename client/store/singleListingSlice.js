@@ -13,17 +13,18 @@ export const getSingleListing = createAsyncThunk(
   }
 );
 
-export const updateListing = createAsyncThunk(
-  "updateListing",
-  async ({ id, stock }, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.put(`/api/listings/${id}`, { stock });
-      return data;
-    } catch (err) {
-      return rejectWithValue(err.response.data); 
-    }
+export const updateListing = createAsyncThunk('listings/updateListing', async ({ token, id, listingData }) => {
+  try {
+    const {data} = await axios.put(`/api/listings/${id}/edit`, listingData, {
+      headers: {
+          Authorization: `Bearer ${token}`,
+      }
+    })
+    return data
+  } catch (err) {
+    console.log(err)
   }
-);
+});
 
 const initialState = {};
 
