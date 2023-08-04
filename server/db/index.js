@@ -8,7 +8,7 @@ const OrderListings = require("./models/OrderListings");
 Users.hasMany(Orders);
 Orders.belongsTo(Users);
 
-Renter.hasMany(Listings);
+Renter.hasMany(Listings)
 Listings.belongsTo(Renter);
 
 Users.hasMany(Listings);

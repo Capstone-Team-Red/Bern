@@ -12,6 +12,8 @@ import {Cart} from '../features/cart/cart';
 import Checkout from '../features/checkout/checkout';
 import Landing from '../features/home/Landing';
 import EditRenter from '../features/renter/EditRenter';
+import CreateListing from '../features/listings/CreateListing';
+import RenterListings from '../features/listings/RenterListings';
 
 /**
  * COMPONENT
@@ -38,6 +40,8 @@ const AppRoutes = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/renters/:id/edit" element={<EditRenter/>} />
+          <Route path="/listings/:id/add" element={<CreateListing/>} />
+          <Route path="/listings/:id/renterListings" element={<RenterListings />} />
         </Routes>
       ) : (
         <Routes>
