@@ -23,6 +23,7 @@ const Navbar = () => {
             {role === "User" ? (
               <React.Fragment>
                 <Link to="/home">Home</Link>
+                <Link to={`/users/${id}/edit`}>Edit Profile</Link>
                 <Link to="/renters">Renters</Link>
                 <Link to="/listings">Listings</Link>
                 <Link to="/cart">Cart</Link>
@@ -35,7 +36,7 @@ const Navbar = () => {
                 <Link to={`/renters/${id}/edit`}>Edit Profile</Link>
                 <Link to={`/listings/${id}/add`}>Add Listing</Link>
               </React.Fragment>
-            ): null}
+            ) : null}
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
