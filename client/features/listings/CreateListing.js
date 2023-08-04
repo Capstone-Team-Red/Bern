@@ -1,58 +1,119 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleRenter, updateRenter } from '../../store/renterSlice';
+import { Link } from "react-router-dom";
+import { addListing } from '../../store/allListingsSlice';
 
 const CreateListing = () => {
-  const dispatch = useDispatch();
-  const renter = useSelector((state) => state.auth.me);
-  const id = renter.id
-  const [updatedRenter, setUpdatedRenter] = useState({ ...renter });
+    const dispatch = useDispatch();
+    const renterId = useSelector((state) => state.auth.me.id);
 
-  useEffect(() => {
-    dispatch(getSingleRenter(id));
-  }, [dispatch, id]);
+    const [name, setName] = useState('');
+    const [classtype, setClasstype] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipcode, setZipcode] = useState('');
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
+    const [price, setPrice] = useState('');
+    const [stock, setStock] = useState('');
 
-  const handleEditRenter = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      await dispatch(updateRenter({ token, id, renterData: updatedRenter }));
-      window.location.reload();
-    } catch (error) {
-      console.error('Failed to update renter:', error);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedRenter((prevRenter) => ({ ...prevRenter, [name]: value }));
-  };
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        dispatch(addListing({ renterId: renterId, name, classtype, address, city, state, zipcode, date, time, price, stock }));
+        setName('');
+        setClasstype('');
+        setAddress('');
+        setCity('');
+        setState('');
+        setZipcode('');
+        setDate('');
+        setTime('');
+        setPrice('');
+        setStock('');
+    };
 
   return (
-    <div className="listing-details-container">
-      {listing ? (
-        <>
-          <div>
-                <h3>{listing.name}</h3>
-                <img src={listing.image} alt={listing.name} />
-                <p><span className="single-listing-details">Class Type: </span>{listing.classtype}</p>
-                <p><span className="single-listing-details">Address: </span>{listing.address}, {listing.city}, {listing.state}, {listing.zipcode}</p>
-                <p><span className="single-listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
-                <p><span className="single-listing-details">Spots Available: </span>{listing.stock}</p>
-                <p><span className="single-listing-details">Price: </span>${listing.price}</p>
-            <p>
-              <button
-                className="add-to-cart-button"
-                onClick={() => handleAddToCart(listing.id, listing.price)}
-              >
-                Add to Cart
-              </button>
-            </p>
-          </div>
-        </>
-      ) : (
-        <p className="loading-text">Loading listing...</p>
-      )}
-    </div>
+    <>
+        <h1>Add a New Listing</h1>
+        <form id='add-listing-form' onSubmit={handleSubmit}>
+            <label htmlFor='name'>Title: </label>
+                <input 
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+            <br></br>
+            <label htmlFor='classtype'>Class Type: </label>
+                <input 
+                        name="classtype"
+                        value={classtype}
+                        onChange={(e) => setClasstype(e.target.value)}
+                    />
+            <br></br>
+            <label htmlFor='address'>Address: </label>
+                <input 
+                        name="address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                    />
+            <br></br>
+            <label htmlFor='city'>City: </label>
+                <input 
+                        name="city"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                    />
+            <br></br>
+            <label htmlFor='state'>State: </label>
+                <input 
+                        name="state"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                    />
+            <br></br>
+            <label htmlFor='zipcode'>Zipcode: </label>
+                <input 
+                    name="zipcode"
+                    value={zipcode}
+                    onChange={(e) => setZipcode(e.target.value)}
+                />
+            <br></br>
+            <label htmlFor='date'>Date: </label>
+                <input 
+                        name="date"
+                        value={date}
+                        placeholder="Format: ex) 2023-12-31 "
+                        onChange={(e) => setDate(e.target.value)}
+                    />
+            <br></br>
+            <label htmlFor='time'>Time: </label>
+                <input 
+                        name="time"
+                        value={time}
+                        placeholder="Format: ex) 11:00 AM"
+                        onChange={(e) => setTime(e.target.value)}
+                    />
+            <br></br>
+            <label htmlFor='price'>Price: </label>
+                <input 
+                        name="price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
+            <br></br>
+            <label htmlFor='stock'>Spots Available: </label>
+                <input 
+                    name="stock"
+                    value={stock}
+                    onChange={(e) => setStock(e.target.value)}
+                />
+            <br></br>
+            <button type="submit">Submit new listing</button>
+            <br></br>
+            <Link to='/*'>Cancel</Link>
+        </form>
+    </>
   );
 };
 

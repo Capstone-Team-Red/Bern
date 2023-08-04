@@ -12,6 +12,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:id/renterListings", async (req, res, next) => {
+  const renterId = req.params.id;
+  try {
+    const listings = await Listings.findAll({ where: { renterId } });
+    res.json(listings);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Route to get a single listing by ID
 router.get("/:id", async (req, res, next) => {
   const listingId = req.params.id;
@@ -26,13 +36,15 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.post("/:id", async (req, res, next) => {
+router.post("/:id/add", async (req, res, next) => {
   try {
-    const listing = await Listings.findByPk(listingId);
-    if (!listing) {
-      return res.status(404).json({ error: "Listing not found" });
-    }
-    res.json(listing);
+    const { name, classtype, address, city, state, zipcode, date, time, price, stock } = req.body;
+    const renterId = req.params.id
+
+    const newListing = await Listings.create({
+      name, classtype, address, city, state, zipcode, date, time, price, stock, renterId
+    });
+    res.json(newListing);
   } catch (err) {
     next(err);
   }
