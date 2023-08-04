@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getIncompleteOrders } from "../../store/ordersSlice";
 import { me } from "../auth/authSlice";
 import {
   getOrderListings,
-  incrementListing,
-  decrementListing,
-  removeFromCart,
   deleteAllCart,
 } from "../../store/orderListingsSlice";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
@@ -40,59 +37,60 @@ const Checkout = () => {
     }
   }, [dispatch, orders]);
 
-  const handleIncrement = (orderListingId) => {
-    dispatch(incrementListing(orderListingId));
-  };
 
-  const handleDecrement = (orderListingId) => {
-    dispatch(decrementListing(orderListingId));
-  };
 
-  const handleRemove = (orderListingId) => {
-    dispatch(removeFromCart(orderListingId));
-  };
+  const [showPaymentForm, setShowPaymentForm] = useState(false); // State to manage payment form visibility
 
   const handleCompleteCheckout = async () => {
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet
       return;
     }
-
+  
+    const cardElement = elements.getElement(CardElement);
+  
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement),
+      card: cardElement,
+      billing_details: {
+        address: {
+          line1: "123 Main St", 
+          city: "City", 
+          state: "State", 
+          postal_code: "12345", 
+          country: "US", 
+        },
+      },
     });
-
+  
     if (error) {
       console.error(error);
       // Handle payment error
     } else {
-      // Calculate the total amount from orderListings
       const cartTotal = orderListings.reduce(
         (total, orderListing) =>
           total + orderListing.listing.price * orderListing.quantity,
         0
       );
-
-      // Send paymentMethod.id and cartTotal to your server for payment processing
-      const response = await fetch('/process-payment', {
-        method: 'POST',
+  
+      const response = await fetch("/process-payment", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           paymentMethodId: paymentMethod.id,
-          cartTotal, // Pass the calculated cart total
+          cartTotal,
         }),
       });
-
+  
       const paymentResult = await response.json();
-
+  
       if (paymentResult.success) {
-        // Payment successful, handle success scenario
         dispatch(deleteAllCart(orders[0].id));
+        setShowPaymentForm(false); // Hide the payment form after successful payment
       } else {
-        console.error('Payment failed');
+        console.error("Payment failed");
       }
     }
   };
@@ -122,21 +120,6 @@ const Checkout = () => {
                       </p>
                       <p className="listing-quantity">
                         Quantity: {orderListing.quantity}{" "}
-                        <button
-                          onClick={() => handleIncrement(orderListing.id)}
-                        >
-                          +
-                        </button>
-                        <button
-                          onClick={() => handleDecrement(orderListing.id)}
-                        >
-                          -
-                        </button>
-                      </p>
-                      <p>
-                        <button onClick={() => handleRemove(orderListing.id)}>
-                          Remove Item
-                        </button>
                       </p>
                     </>
                   ) : (
@@ -157,16 +140,19 @@ const Checkout = () => {
             </h2>
           </div>
         ))}
-        <div>
-          <Link to="/home">
-            {" "}
-            <button
-              className="complete-checkout-button"
-              onClick={() => handleCompleteCheckout()}
-            >
-              Confirm Order
-            </button>
-          </Link>
+        <div className="payment-form">
+          <h2>Enter Payment Information</h2>
+          <div className="input-group">
+            <label>Card Number</label>
+            <CardElement
+            />
+          </div>
+          <button
+            className="complete-checkout-button"
+            onClick={() => handleCompleteCheckout()}
+          >
+            Complete Payment
+          </button>
         </div>
       </div>
     </>
