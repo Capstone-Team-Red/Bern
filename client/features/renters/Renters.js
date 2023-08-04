@@ -5,8 +5,8 @@ const Renters = ({ renter, onDeleteProducts }) => {
   return (
     <section>
       <Link to={`/renters/${renter.id}`}>
-        <div className="listing-name">{renter.firstname}</div>
-        <div className="listing-price">${renter.email}</div>
+        <p><span className="single-listing-details">Name:</span> {renter.firstname} {renter.lastname}</p>
+        <p><span className="single-listing-details">Email:</span> {renter.email}</p>
       </Link>
     </section>
   );
