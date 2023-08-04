@@ -83,7 +83,7 @@ const CreateListing = () => {
                 <input 
                         name="date"
                         value={date}
-                        placeholder="Format: ex) 2023-12-31 "
+                        type="date"
                         onChange={(e) => setDate(e.target.value)}
                     />
             <br></br>
@@ -91,13 +91,14 @@ const CreateListing = () => {
                 <input 
                         name="time"
                         value={time}
-                        placeholder="Format: ex) 11:00 AM"
+                        type="time"
                         onChange={(e) => setTime(e.target.value)}
                     />
             <br></br>
             <label htmlFor='price'>Price: </label>
                 <input 
                         name="price"
+                        type="number"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
@@ -105,6 +106,7 @@ const CreateListing = () => {
             <label htmlFor='stock'>Spots Available: </label>
                 <input 
                     name="stock"
+                    type="number"
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}
                 />
