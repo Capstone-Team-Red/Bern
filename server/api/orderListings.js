@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Listings = require('../db/models/Listings');
 const OrderListings = require('../db/models/OrderListings');
 const Orders = require('../db/models/Orders');
-const stripe = require('stripe')('sk_test_51Nb4nULGhuSP9aYSsR8YCQU92pVYdc8FmGzSFctmavVBr73QX42oXNDLgAdDR0qu1ZIDl1JKOil2xV974XXcq3Y500AneSsRKN'); 
+const stripe = require('stripe')('sk_test_51Nb4nULGhuSP9aYSsR8YCQU92pVYdc8FmGzSFctmavVBr73QX42oXNDLgAdDR0qu1ZIDl1JKOil2xV974XXcq3Y500AneSsRKN');
 
 module.exports = router
 
@@ -16,7 +16,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.put('/:id/increase', async (req, res, next) => {
-    try {  
+    try {
       const listing = await OrderListings.findByPk(req.params.id);
       listing.quantity += 1;
       await listing.save();
@@ -25,7 +25,7 @@ router.put('/:id/increase', async (req, res, next) => {
       next(error);
     }
   });
-  
+
   router.put('/:id/decrease', async (req, res, next) => {
     try {
       const listing = await OrderListings.findByPk(req.params.id);
@@ -52,7 +52,7 @@ router.put('/:id/increase', async (req, res, next) => {
     try {
       const listings = await OrderListings.findAll({
         where: { orderId: req.params.id },
-        include: [Listings, Orders], 
+        include: [Listings, Orders],
       });
       for (let i = 0; i < listings.length; i++) {
         await listings[i].destroy();
@@ -66,7 +66,7 @@ router.put('/:id/increase', async (req, res, next) => {
   router.post('/process-payment', async (req, res, next) => {
     try {
       const { paymentMethodId, cartTotal } = req.body;
-  
+
       // Create a payment intent with Stripe using the cart total amount
       const paymentIntent = await stripe.paymentIntents.create({
         amount: cartTotal, // Use the provided cart total amount
@@ -74,7 +74,7 @@ router.put('/:id/increase', async (req, res, next) => {
         payment_method: paymentMethodId,
         confirm: true,
       });
-  
+
       // Handle successful payment
       res.json({ success: true });
     } catch (error) {

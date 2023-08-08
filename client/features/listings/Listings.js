@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// looks like there's an unused prop here you can probably remove?
 const Listings = ({ listing, onDeleteListings }) => {
   return (
     <section>

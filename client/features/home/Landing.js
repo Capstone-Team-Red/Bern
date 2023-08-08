@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 /**
  * COMPONENT
  */
+
+// looks like props isn't used -- I recommend removing it to avoid confusion and simplify your code
 const Landing = (props) => {
   const listings = useSelector(selectListings);
   const username = useSelector((state) => state.auth.me.username);
@@ -15,6 +17,7 @@ const Landing = (props) => {
       <h3>Recommended for you</h3>
       <div className="all-listings-container">
         {listings ? (
+          // what if listings exists, but isn't at least 15 items long? could that happen?
           listings.slice(12, 15).map((listing) => (
             <div className="listing-container" key={listing.id}>
               <NavLink to={`/listings/${listing.id}`}>

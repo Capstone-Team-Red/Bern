@@ -50,6 +50,7 @@ const SingleListing = () => {
     }
   };
 
+  // since this is just a pure, simple function that is used by this component but doesn't HAVE to be in this component... consider defining it in another file somewhere. Keeping these "helper functions" separate will clean up your code and help you stay organized. And that way, if you need to use it in another component, you can import it there.
   const formatDate = (date) => {
     const formattedDate = new Date(date).toLocaleDateString('en-US', {
       month: 'long',

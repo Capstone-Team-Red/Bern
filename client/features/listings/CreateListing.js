@@ -35,52 +35,53 @@ const CreateListing = () => {
 
   return (
     <>
+    {/* usability feedback: it might be helpful to have a placeholder attribute with examples for some of these -- like title and class type */}
         <h1>Add a New Listing</h1>
         <form id='add-listing-form' onSubmit={handleSubmit}>
             <label htmlFor='name'>Title: </label>
-                <input 
+                <input
                     name="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
             <br></br>
             <label htmlFor='classtype'>Class Type: </label>
-                <input 
+                <input
                         name="classtype"
                         value={classtype}
                         onChange={(e) => setClasstype(e.target.value)}
                     />
             <br></br>
             <label htmlFor='address'>Address: </label>
-                <input 
+                <input
                         name="address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                     />
             <br></br>
             <label htmlFor='city'>City: </label>
-                <input 
+                <input
                         name="city"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                     />
             <br></br>
             <label htmlFor='state'>State: </label>
-                <input 
+                <input
                         name="state"
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                     />
             <br></br>
             <label htmlFor='zipcode'>Zipcode: </label>
-                <input 
+                <input
                     name="zipcode"
                     value={zipcode}
                     onChange={(e) => setZipcode(e.target.value)}
                 />
             <br></br>
             <label htmlFor='date'>Date: </label>
-                <input 
+                <input
                         name="date"
                         value={date}
                         type="date"
@@ -88,7 +89,7 @@ const CreateListing = () => {
                     />
             <br></br>
             <label htmlFor='time'>Time: </label>
-                <input 
+                <input
                         name="time"
                         value={time}
                         type="time"
@@ -96,7 +97,7 @@ const CreateListing = () => {
                     />
             <br></br>
             <label htmlFor='price'>Price: </label>
-                <input 
+                <input
                         name="price"
                         type="number"
                         value={price}
@@ -104,7 +105,7 @@ const CreateListing = () => {
                     />
             <br></br>
             <label htmlFor='stock'>Spots Available: </label>
-                <input 
+                <input
                     name="stock"
                     type="number"
                     value={stock}

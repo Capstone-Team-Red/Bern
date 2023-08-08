@@ -21,6 +21,7 @@ export function AllRenters() {
       <div className="all-listings-container">
         {renters ? (
           renters.map((renter) => (
+            // consider making a card component that you can use in this map()
             <div className="listing-container" key={renter.id}>
               <NavLink to={`/renters/${renter.id}`}>
                 <p><span className="single-listing-details">Name:</span> {renter.firstname} {renter.lastname}</p>

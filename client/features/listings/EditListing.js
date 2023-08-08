@@ -26,6 +26,7 @@ const EditRenter = () => {
     }
   };
 
+  // nice work!
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUpdateListing((prevListing) => ({ ...prevListing, [name]: value }));
@@ -37,31 +38,31 @@ const EditRenter = () => {
           <h1>Edit Listing Details</h1>
           <div key={listing.id}>
               <div className='edit-listing-container'>
-                <p className='edit-listing-text'>Name: 
+                <p className='edit-listing-text'>Name:
                   <input type="text" name="name" value={updatedListing.name} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>Class Type: 
+                <p className='edit-listing-text'>Class Type:
                   <input type="text" name="classtype" value={updatedListing.classtype} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>Address: 
+                <p className='edit-listing-text'>Address:
                   <input type="text" name="address" value={updatedListing.address} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>City: 
+                <p className='edit-listing-text'>City:
                   <input type="text" name="city" value={updatedListing.city} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>State: 
+                <p className='edit-listing-text'>State:
                   <input type="text" name="state" value={updatedListing.state} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>Date: 
-                  <input type="date" name="date" value={updatedListing.date} onChange={handleInputChange} style={{ width: "200px" }} />       
+                <p className='edit-listing-text'>Date:
+                  <input type="date" name="date" value={updatedListing.date} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>Time: 
+                <p className='edit-listing-text'>Time:
                   <input type="time" name="time" value={updatedListing.time} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>Price: 
+                <p className='edit-listing-text'>Price:
                   <input type="number" name="price" value={updatedListing.price} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
-                <p className='edit-listing-text'>Spots Available: 
+                <p className='edit-listing-text'>Spots Available:
                   <input type="number" name="stock" value={updatedListing.stock} onChange={handleInputChange} style={{ width: "200px" }} />
                 </p>
                 <button onClick={handleEditListing}>Save</button>

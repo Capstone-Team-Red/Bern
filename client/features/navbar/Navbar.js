@@ -20,6 +20,7 @@ const Navbar = () => {
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in as a User or Renter */}{" "}
+            {/* The nested ternary logic here is a little hard to follow -- I recommend having two separate statements like {role === "Role" && <React.Fragment>...} */}
             {role === "User" ? (
               <React.Fragment>
                 <Link to="/home">Home</Link>

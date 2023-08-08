@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authenticateRenterLogin, authenticateLogin, authenticateRenterSignUp, authenticateSignUp } from "../../store/store"; 
+import { authenticateRenterLogin, authenticateLogin, authenticateRenterSignUp, authenticateSignUp } from "../../store/store";
 
 const AuthForm = ({ name, displayName }) => {
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  // for an even shorter event abbreviation, a lot of people just use `e` (e.target.etc)
+  // no need to change it, just FYI
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formName = evt.target.name;
@@ -13,6 +15,7 @@ const AuthForm = ({ name, displayName }) => {
     const password = evt.target.password.value;
     const role = evt.target.role.value;
 
+    // can someone use the same account to rent out a space AND rent someone else's space? Or does this mean you would need two accounts, one for each activity?
     if (formName === "login") {
       if (role === 'User') {
         dispatch(authenticateLogin({ username, password, role, method: formName }));
@@ -46,6 +49,7 @@ const AuthForm = ({ name, displayName }) => {
               <small>Role</small>
             </label>
             <select name="role">
+              {/* Maybe "I have a space" and "I want a space" would make the distinction clearer? */}
               <option value="User">User</option>
               <option value="Renter">Renter</option>
             </select>

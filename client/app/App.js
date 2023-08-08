@@ -11,6 +11,7 @@ const App = () => {
     dispatch(getAllListings());
   }, [dispatch]);
 
+  // I'm guessing you might be leaving this here because you'll come back to it -- but just in case, I wanted to leave a reminder to clean up any unused code :)
   const listings = useSelector(selectListings);
 
   return (

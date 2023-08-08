@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+// make sure you remove unused exports -- I'd recommend doing this as you go, whenever you notice them in a file you're working on.
 import { Link } from "react-router-dom";
 import { getIncompleteOrders } from "../../store/ordersSlice";
 import { me } from "../auth/authSlice";
@@ -46,23 +47,23 @@ const Checkout = () => {
       // Stripe.js has not loaded yet
       return;
     }
-  
+
     const cardElement = elements.getElement(CardElement);
-  
+
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
       billing_details: {
         address: {
-          line1: "123 Main St", 
-          city: "City", 
-          state: "State", 
-          postal_code: "12345", 
-          country: "US", 
+          line1: "123 Main St",
+          city: "City",
+          state: "State",
+          postal_code: "12345",
+          country: "US",
         },
       },
     });
-  
+
     if (error) {
       console.error(error);
       // Handle payment error
@@ -72,7 +73,7 @@ const Checkout = () => {
           total + orderListing.listing.price * orderListing.quantity,
         0
       );
-  
+
       const response = await fetch("/process-payment", {
         method: "POST",
         headers: {
@@ -83,9 +84,9 @@ const Checkout = () => {
           cartTotal,
         }),
       });
-  
+
       const paymentResult = await response.json();
-  
+
       if (paymentResult.success) {
         dispatch(deleteAllCart(orders[0].id));
         setShowPaymentForm(false); // Hide the payment form after successful payment

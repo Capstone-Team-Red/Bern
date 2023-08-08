@@ -108,6 +108,7 @@ export const Cart = () => {
         ) : (
           <p className="empty-cart">Your cart is empty!</p>
         )}
+        {/* You could also write the below as {storedListings.length && <p>...</p>} */}
         {storedListings.length > 0 ? (
           <>
           <p>Please log in or sign up in order to check out!</p>
@@ -176,6 +177,7 @@ return (
         ))}
       </>
     }
+    {/* same comment as above -- if you're using a ternary and the "else" part is null, just use `value && <element/>` */}
     {orderListings.length > 0 ? (
   <>
     <Link to="/checkout"><button className="checkout-button" type="button">Checkout</button></Link>

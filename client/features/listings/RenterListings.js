@@ -29,6 +29,7 @@ export function RenterListings() {
     <>
       <div className="renter-listings-container">
         {listings ? (
+          // consider making a component for one individual listing that you can use in this map
           listings.map((listing) => (
             <div className="listing-container" key={listing.id}>
                 <h3>{listing.name}</h3>

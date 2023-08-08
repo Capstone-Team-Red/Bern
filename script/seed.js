@@ -7,6 +7,7 @@ const Orders = require('../server/db/models/Orders');
 const Renter = require('../server/db/models/Renter');
 module.exports = router;
 
+// nice work here! Consider adding a little bit of info about this to your README -- especially if employers might want to login to a deployed version of the app to check it out!
 async function seed() {
   await db.sync({ force: true }) // clears db and matches models to tables
   console.log('db synced!')
@@ -30,7 +31,7 @@ async function seed() {
       firstname: 'Murphy',
       lastname: 'Love',
       zipcode: '20001'
-    }),    
+    }),
     Users.create({
       username: 'john',
       password: '123',
@@ -39,7 +40,7 @@ async function seed() {
       firstname: 'John',
       lastname: 'Doe',
       zipcode: '30301'
-    }),    
+    }),
     Users.create({
       username: 'jane',
       password: '123',
@@ -48,7 +49,7 @@ async function seed() {
       firstname: 'Jane',
       lastname: 'Smith',
       zipcode: '40003'
-    }),    
+    }),
     Users.create({
       username: 'kevin',
       password: '123',
