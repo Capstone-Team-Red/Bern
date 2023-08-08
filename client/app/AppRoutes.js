@@ -17,6 +17,7 @@ import RenterListings from "../features/listings/RenterListings";
 import EditListing from "../features/listings/EditListing";
 import SingleRentee from "../features/rentee/SingleRentee";
 import EditRentee from "../features/rentee/EditRentee";
+import Maps from "../features/maps/Maps";
 
 /**
  * COMPONENT
@@ -36,6 +37,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/home" element={<Landing />} />
+          <Route path="/maps" element={<Maps />} />
           <Route path="/listings" element={<AllListings />} />
           <Route path="/listings/:id" element={<SingleListing />} />
           <Route path="/renters" element={<AllRenters />} />

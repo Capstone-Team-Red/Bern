@@ -114,10 +114,10 @@ async function seed() {
     Listings.create({
       name: 'Boxing in NY',
       classtype: 'Boxing',
-      address: '123 Main Street',
-      city: 'New York City',
+      address: '100 5th Ave',
+      city: 'New York',
       state: 'NY',
-      zipcode: '10001',
+      zipcode: '10011',
       date: '2023-08-31',
       time: '10:00 AM',
       price: 25,
