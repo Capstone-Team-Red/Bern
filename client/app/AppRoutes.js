@@ -70,6 +70,7 @@ const AppRoutes = () => {
           />
           <Route path="/listings" element={<AllListings />} />
           <Route path="/listings/:id" element={<SingleListing />} />
+          <Route path="/maps" element={<Maps />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
       )}

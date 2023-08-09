@@ -46,8 +46,8 @@ const AuthForm = ({ name, displayName }) => {
               <small>Role</small>
             </label>
             <select name="role">
-              <option value="User">User</option>
-              <option value="Renter">Renter</option>
+              <option value="User">User 🏋️‍♂️</option>
+              <option value="Renter">Renter 👨‍💼👩‍💼</option>
             </select>
           </div>
           <div>
@@ -77,8 +77,8 @@ const AuthForm = ({ name, displayName }) => {
               <small>Role</small>
             </label>
             <select name="role">
-              <option value="User">User</option>
-              <option value="Renter">Renter</option>
+              <option value="User">User 🏋️‍♂️</option>
+              <option value="Renter">Renter 👨‍💼👩‍💼</option>
             </select>
           </div>
           <div>
