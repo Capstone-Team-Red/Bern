@@ -26,13 +26,13 @@ const Navbar = () => {
                 <Link to={`/users/${id}/edit`}>Edit Profile</Link>
                 <Link to="/renters">Renters</Link>
                 <Link to="/listings">Listings</Link>
+                <Link to="/maps">Find Your Fit 🗺️</Link>
                 <Link to="/cart">Cart</Link>
               </React.Fragment>
             ) : role === "Renter" ? (
               <React.Fragment>
                 <Link to="/home">Home</Link>
                 <Link to={`/listings/${id}/renterListings`}>My Listings</Link>
-                <Link to="/cart">Cart</Link>
                 <Link to={`/renters/${id}/edit`}>Edit Profile</Link>
                 <Link to={`/listings/${id}/add`}>Add Listing</Link>
               </React.Fragment>
@@ -48,6 +48,7 @@ const Navbar = () => {
             <Link to="/signup">Sign Up</Link>
             <Link to="/cart">Cart</Link>
             <Link to="/listings">Listings</Link>
+            <Link to="/maps">Find Your Fit 🗺️</Link>
           </div>
         )}
       </nav>

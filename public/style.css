@@ -374,9 +374,28 @@ table {
   font-family: sans-serif;
   font-size: 0.9rem;
 }
+
 tr {
   border: 1px solid rgb(190, 190, 190);
   padding: 5px 10px;
   text-align: center;
+}
+
+.searchBarContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 625px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.searchBarField {
+  width: 350px;
+  height: 27px; 
+  border: 0.5px solid grey;
+  padding: 8px;
+  font-size: large;
 }
 

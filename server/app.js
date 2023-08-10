@@ -3,6 +3,12 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 module.exports = app;
+require('dotenv').config();
+
+app.get("/get-maps-secret", async (req, res) => {
+  const mapsSecret = process.env.REACT_APP_API_KEY;
+  res.json({ mapsSecret });
+});
 
 // logging middleware
 app.use(morgan("dev"));
