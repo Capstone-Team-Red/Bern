@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { getIncompleteOrders } from "../../store/ordersSlice";
+import { useNavigate } from "react-router-dom";
 import { me } from "../auth/authSlice";
-import {
-  getOrderListings,
-  deleteAllCart,
-} from "../../store/orderListingsSlice";
+import { getOrderListings, deleteAllCart } from "../../store/orderListingsSlice";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Checkout = () => {
@@ -19,6 +16,7 @@ const Checkout = () => {
   const orderListings = useSelector(
     (state) => state.orderListings.orderListings
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(me());
@@ -52,15 +50,6 @@ const Checkout = () => {
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
-      billing_details: {
-        address: {
-          line1: "123 Main St", 
-          city: "City", 
-          state: "State", 
-          postal_code: "12345", 
-          country: "US", 
-        },
-      },
     });
   
     if (error) {
@@ -72,8 +61,8 @@ const Checkout = () => {
           total + orderListing.listing.price * orderListing.quantity,
         0
       );
-  
-      const response = await fetch("/process-payment", {
+
+      const response = await fetch("/api/orderListings/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,6 +78,7 @@ const Checkout = () => {
       if (paymentResult.success) {
         dispatch(deleteAllCart(orders[0].id));
         setShowPaymentForm(false); // Hide the payment form after successful payment
+        navigate("/confirmation");
       } else {
         console.error("Payment failed");
       }

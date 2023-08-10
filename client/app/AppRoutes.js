@@ -10,6 +10,7 @@ import { AllRenters } from "../features/renters/AllRenters";
 import SingleRenter from "../features/renters/SingleRenter";
 import { Cart } from "../features/cart/cart";
 import Checkout from "../features/checkout/checkout";
+import Confirmation from "../features/checkout/confirmation";
 import Landing from "../features/home/Landing";
 import EditRenter from "../features/renter/EditRenter";
 import CreateListing from "../features/listings/CreateListing";
@@ -45,6 +46,7 @@ const AppRoutes = () => {
           <Route path="/users/:id" element={<SingleRentee />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/confirmation" element={<Confirmation/> } />
           <Route path="/renters/:id/edit" element={<EditRenter />} />
           <Route path="/listings/:id/add" element={<CreateListing />} />
           <Route
