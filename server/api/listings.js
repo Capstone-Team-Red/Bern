@@ -58,11 +58,11 @@ router.put("/:id/edit", async (req, res, next) => {
 
 router.post("/:id/add", async (req, res, next) => {
   try {
-    const { name, classtype, address, city, state, zipcode, date, time, price, stock } = req.body;
+    const { name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng } = req.body;
     const renterId = req.params.id
 
     const newListing = await Listings.create({
-      name, classtype, address, city, state, zipcode, date, time, price, stock, renterId
+      name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng, renterId
     });
     res.json(newListing);
   } catch (err) {
