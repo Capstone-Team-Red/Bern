@@ -51,7 +51,21 @@ const Listings = db.define('listings', {
       notEmpty: true,
       min: 0
     }
-  }
+  },
+  lat: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  lng: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
 })
 
 module.exports = Listings

@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from "react-google-maps";
-import listingsData from "./data/listings.json";
 import mapStyles from "./mapStyles";
+import axios from "axios";
 
 function Map() {
   const [selectedListing, setSelectedListing] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredListings, setFilteredListings] = useState(listingsData.info);
+  const [filteredListings, setFilteredListings] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [userMarker, setUserMarker] = useState(null);
+  const [fetchedListings, setFetchedListings] = useState([]);
 
   useEffect(() => {
+    axios.get(`/api/listings`)
+      .then((response) => {
+        const fetchedListings = response.data;
+        setFilteredListings(fetchedListings);
+        setFetchedListings(fetchedListings);
+      })
+      .catch((error) => {
+        console.error("Error fetching listings:", error);
+      });
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -44,11 +55,14 @@ function Map() {
   // Function to filter listings based on the search query
   const handleSearch = (query) => {
     setSearchQuery(query);
-    const filteredListings = listingsData.info.filter(listing =>
-      listing.fulladdress.city.toLowerCase().includes(query.toLowerCase()) ||
-      listing.fulladdress.state.toLowerCase().includes(query.toLowerCase()) ||
-      listing.fulladdress.zipcode.toLowerCase().includes(query.toLowerCase())
+
+    // Filter listings based on the search query
+    const filteredListings = fetchedListings.filter((listing) =>
+      listing.city.toLowerCase().includes(query.toLowerCase()) ||
+      listing.state.toLowerCase().includes(query.toLowerCase()) ||
+      listing.zipcode.includes(query)
     );
+
     setFilteredListings(filteredListings);
   };
 
@@ -74,8 +88,6 @@ function Map() {
         <Marker
           position={{ lat: userMarker.lat, lng: userMarker.lng }}
           icon={{
-            //Optional: User's current location with personalized marker
-            // url: "/images/logo.png",
             scaledSize: new window.google.maps.Size(50, 50),
             origin: new window.google.maps.Point(0, 0),
             anchor: new window.google.maps.Point(15, 15)
@@ -86,10 +98,10 @@ function Map() {
       {/* Render filtered listings */}
       {filteredListings.map(listing => (
         <Marker
-          key={listing.key}
+          key={listing.id}
           position={{
-            lat: listing.latlng[0],
-            lng: listing.latlng[1]
+            lat: listing.lat,
+            lng: listing.lng
           }}
           onClick={() => {
             setSelectedListing(listing);
@@ -104,31 +116,22 @@ function Map() {
       {selectedListing && (
         <InfoWindow
           position={{
-            lat: selectedListing.latlng[0],
-            lng: selectedListing.latlng[1],
+            lat: selectedListing.lat,
+            lng: selectedListing.lng,
           }}
           onCloseClick={() => {
             setSelectedListing(null);
           }}
         >
           <div>
-            <h2>{selectedListing.name.name}</h2>
+            <h2>{selectedListing.name}</h2>
             <p>Class Type: {selectedListing.classtype}</p>
-            <p>Address: {Object.values(selectedListing.fulladdress).join(", ")}</p>
-            <p>Date & Time: {Object.values(selectedListing.datetime).join(" @ ")}</p>
+            Address: {selectedListing.address}, {selectedListing.city},{" "}
+            {selectedListing.state}, {selectedListing.zipcode}
+            <p>Date & Time: {selectedListing.date} @ {selectedListing.time}</p>
             <p>Spots Available: {selectedListing.stock}</p>
-            <p>Price: {selectedListing.price}</p>
-            <p>Interested in booking a class?</p>
-            <p>
-              {selectedListing.link.map((link, index) => (
-                <li key={index}>
-                  <a href={`//${link}`}>
-                    CLICK THIS LINK FOR NEXT STEPS!
-                  </a>
-                </li>
-              ))}
-            </p>
-
+            <p>Price: ${selectedListing.price}</p>
+            <p>Interested? <a href={`http://localhost:8080/listings/${selectedListing.id}`}>CLICK HERE TO BOOK A CLASS!</a></p>
           </div>
         </InfoWindow>
       )}
@@ -151,8 +154,9 @@ export default function Maps() {
   }, []);
 
   if (mapsSecret === null) { return null }
+
   return (
-    //map takes up the entire sreen with w/h settings
+    //map takes up the entire screen with w/h settings
     <div style={{ width: '100vw', height: '70vh' }}>
       {/* loads higher component "withScripts(withGoogleMap)" */}
       <WrappedMap
