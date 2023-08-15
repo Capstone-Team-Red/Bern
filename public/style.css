@@ -76,12 +76,25 @@ button:hover {
   font-weight: bold;
 }
 
+.listing-details img {
+  max-width: 200px;
+  max-height: 200px;
+  margin: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .single-listing-details {
   display: flex;
   flex-direction: column;
   font-weight: bold;
 }
 
+.single-listing-details img {
+  max-width: 200px;
+  max-height: 200px;
+  margin: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
 .listing-img {
   max-width: 100%;
   height: auto;

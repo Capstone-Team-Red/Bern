@@ -71,6 +71,10 @@ const SingleListing = () => {
                 <p><span className="single-listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
                 <p><span className="single-listing-details">Spots Available: </span>{listing.stock}</p>
                 <p><span className="single-listing-details">Price: </span>${listing.price}</p>
+                {listing.imageURLs && listing.imageURLs.length > 0 && (<p><span className="single-listing-details">Photo Gallery Of The Space:</span></p>)}
+                <p className="single-listing-details">{listing.imageURLs?.map((imageSrc, index) => (
+                <img key={index} src={imageSrc} alt={`Uploaded ${index}`} />))}
+                </p>
             <p>
               <button
                 className="add-to-cart-button"

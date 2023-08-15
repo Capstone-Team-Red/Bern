@@ -31,14 +31,19 @@ export function RenterListings() {
         {listings ? (
           listings.map((listing) => (
             <div className="listing-container" key={listing.id}>
-                <h3>{listing.name}</h3>
-                <img src={listing.image} alt={listing.name} />
-                <p><span className="listing-details">Class Type: </span>{listing.classtype}</p>
-                <p><span className="listing-details">Address: </span>{listing.address}, {listing.city}, {listing.state}, {listing.zipcode}</p>
-                <p><span className="listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
-                <p><span className="listing-details">Spots Available: </span>{listing.stock}</p>
-                <p><span className="listing-details">Price: </span>${listing.price}</p>
-                <NavLink to={`/listings/${listing.id}/edit`}>Edit Listing</NavLink>
+              <h3>{listing.name}</h3>
+              <img src={listing.image} alt={listing.name} />
+              <p><span className="listing-details">Class Type: </span>{listing.classtype}</p>
+              <p><span className="listing-details">Address: </span>{listing.address}, {listing.city}, {listing.state}, {listing.zipcode}</p>
+              <p><span className="listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
+              <p><span className="listing-details">Spots Available: </span>{listing.stock}</p>
+              <p><span className="listing-details">Price: </span>${listing.price}</p>
+              {listing.imageURLs && listing.imageURLs.length > 0 && (<p><span className="listing-details">Photo Gallery Of The Space:</span></p>)}
+              <p className="listing-details">{listing.imageURLs?.map((imageSrc, index) => (
+                <img key={index} src={imageSrc} alt={`Uploaded ${index}`} />
+              ))}
+              </p>
+              <NavLink to={`/listings/${listing.id}/edit`}> <button>Edit Listing</button></NavLink>
             </div>
           ))
         ) : (

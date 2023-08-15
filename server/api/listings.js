@@ -40,14 +40,14 @@ router.get("/:id", async (req, res, next) => {
 router.put("/:id/edit", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { name, classtype, address, city, state, zipcode, date, time, price, stock } = req.body;
+    const { name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng,imageURLs } = req.body;
 
     const listing = await Listings.findByPk(id);
     if (!listing) {
       return res.status(404).json({ error: 'Listing not found' });
     }
 
-    await listing.update({ name, classtype, address, city, state, zipcode, date, time, price, stock });
+    await listing.update({ name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng, imageURLs });
 
     res.json({ message: 'Listing data updated successfully' })
 
@@ -58,11 +58,11 @@ router.put("/:id/edit", async (req, res, next) => {
 
 router.post("/:id/add", async (req, res, next) => {
   try {
-    const { name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng } = req.body;
+    const { name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng, imageURLs } = req.body;
     const renterId = req.params.id
 
     const newListing = await Listings.create({
-      name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng, renterId
+      name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng, imageURLs, renterId
     });
     res.json(newListing);
   } catch (err) {

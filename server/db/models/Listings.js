@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const { DataTypes } = require("sequelize");
 
 const Listings = db.define('listings', {
   name: {
@@ -66,6 +67,21 @@ const Listings = db.define('listings', {
       notEmpty: true,
     },
   },
-})
+  imageURLs: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+    get() {
+      const imageURLs = this.getDataValue("imageURLs");
+      return imageURLs ? imageURLs.split(",") : [];
+    },
+    set(value) {
+      if (value && value.length > 0) {
+        this.setDataValue("imageURLs", value.join(","));
+      } else {
+        this.setDataValue("imageURLs", null);
+      }
+    },
+  },
+});
 
 module.exports = Listings
