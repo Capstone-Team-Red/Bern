@@ -77,6 +77,7 @@ export const Cart = () => {
   };
 
   // let's discuss the difference between these two versions of the form when we meet
+  // after discussion: consider making a separate component that can represent one or the other, and customize it for either scenario (logged-in or guest user) based on which props you pass into it from this component
 
   // Return form for users that are NOT signed in
   if (!userId) {
