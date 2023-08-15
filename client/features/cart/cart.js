@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 export const Cart = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.me.id);
-  const username = useSelector((state) => state.auth.me.username);
   const orders = useSelector((state) => state.orders.orders);
   const orderListings = useSelector((state) => state.orderListings.orderListings || []);
 
@@ -122,14 +121,13 @@ export const Cart = () => {
 return (
   <div className="cart-container">
     <h1>Your Cart</h1>
-    {
+    {orderListings.length > 0 ? (
       <>
         {orders.map((order) => (
           <div className="listing-item" key={order.id}>
-            {orderListings.length > 0 ? (
-              orderListings.map((orderListing) => (
-                <div key={orderListing.id}>
-                  {orderListing.listing ? (
+            {orderListings.map((orderListing) => (
+              <div key={orderListing.id}>
+                {orderListing.listing ? (
                     <>
                       <p className="listing-name">Listing: {orderListing.listing.name}</p>
                       <p className="listing-price">
@@ -159,11 +157,8 @@ return (
                   ) : (
                     <p>Listing data not available...</p>
                   )}
-                </div>
-              ))
-            ) : (
-              <p className="empty-cart">Your cart is empty!</p>
-            )}
+              </div>
+            ))}
             <h2>
               Your total is $
               {orderListings.reduce(
@@ -174,15 +169,17 @@ return (
             </h2>
           </div>
         ))}
+        <Link to={`/checkout/${userId}`}>
+          <button className="checkout-button" type="button">
+            Checkout
+          </button>
+        </Link>
       </>
-    }
-    {orderListings.length > 0 ? (
-  <>
-    <Link to="/checkout"><button className="checkout-button" type="button">Checkout</button></Link>
-  </>
-) : (
-  null
-)}
+    ) : (
+      <p className="empty-cart">Your cart is empty!</p>
+    )}
   </div>
 );
-}
+};
+
+export default Cart;
