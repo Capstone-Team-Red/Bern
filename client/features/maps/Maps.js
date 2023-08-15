@@ -160,7 +160,7 @@ export default function Maps() {
     <div className="googleMapBox" style={{ width: '100vw', height: '70vh' }}>
       {/* loads higher component "withScripts(withGoogleMap)" */}
       <WrappedMap
-        googleMapURL={`http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${mapsSecret}`}
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${mapsSecret}`}
         //  these three props are how we want the map to be displayed inside the div when the map renders
         loadingElement={<div style={{ height: "100%" }} />}
         containerElement={<div style={{ height: "100%" }} />}
