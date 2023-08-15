@@ -66,6 +66,7 @@ function Map() {
     setFilteredListings(filteredListings);
   };
 
+  // if there's time, consider adding more note-to-self comments about the google maps functionality in this file
   return (
     <GoogleMap
       defaultZoom={10}
@@ -131,6 +132,7 @@ function Map() {
             <p>Date & Time: {selectedListing.date} @ {selectedListing.time}</p>
             <p>Spots Available: {selectedListing.stock}</p>
             <p>Price: ${selectedListing.price}</p>
+            {/* I would recommend turning the `localhost:8080` part into an .env variable, that way you can have one value for local development and specify a different value when you deploy. */}
             <p>Interested? <a href={`http://localhost:8080/listings/${selectedListing.id}`}>CLICK HERE TO BOOK A CLASS!</a></p>
           </div>
         </InfoWindow>

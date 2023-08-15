@@ -6,6 +6,7 @@ const Confirmation = () => {
     (state) => state.orderListings.orderListings
   );
 
+  // do you plan to use this? If not, let's delete it
   const cartTotal = orderListings.reduce(
     (total, orderListing) =>
       total + orderListing.listing.price * orderListing.quantity,

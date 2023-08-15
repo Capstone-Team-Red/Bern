@@ -7,7 +7,8 @@ import store from './store/store';
 import App from './app/App';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const stripePromise = loadStripe('pk_test_51Nb4nULGhuSP9aYSAxdf6aQbhLrOH4mUrCUQjZClEcp3toVctTQ3wWlJXhaQTyo9o5GEzpW9KruAqIN3uuXln1qh00jWT6a5hC'); 
+// I think we discussed putting this in an .env variable - even if Stripe doesn't force you to do that, I think it's probably a good idea anyway
+const stripePromise = loadStripe('pk_test_51Nb4nULGhuSP9aYSAxdf6aQbhLrOH4mUrCUQjZClEcp3toVctTQ3wWlJXhaQTyo9o5GEzpW9KruAqIN3uuXln1qh00jWT6a5hC');
 
 const root = createRoot(document.getElementById('app'));
 

@@ -5,13 +5,15 @@ import Navbar from "../features/navbar/Navbar";
 import AppRoutes from "./AppRoutes";
 
 const App = () => {
-  const dispatch = useDispatch();
+  // it seems like the code I commented out here is unused, can we remove it?
 
-  useEffect(() => {
-    dispatch(getAllListings());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
 
-  const listings = useSelector(selectListings);
+  // useEffect(() => {
+  //   dispatch(getAllListings());
+  // }, [dispatch]);
+
+  // const listings = useSelector(selectListings);
 
   return (
     <div>

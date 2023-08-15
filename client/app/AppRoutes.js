@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import { me } from "../store/store";
+// one thing you might consider if you have some time at the end for refactoring/polishing your code is to make a /features/index.js file that imports everything in /features/... and then exports it. That way you can have one big import from ../features here
 import { AllListings } from "../features/listings/AllListings";
 import SingleListing from "../features/listings/SingleListing";
 import { AllRenters } from "../features/renters/AllRenters";

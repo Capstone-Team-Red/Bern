@@ -23,6 +23,7 @@ const SingleListing = () => {
     if (userId && orders.length > 0) {
       const orderId = orders[0].id;
       dispatch(
+        // I noticed while testing this locally that if you've already clicked "add to cart" once, and you click it again, it creates two entries in the cart (each with quantity 1). I think to fix it you'll need to check if the item is already in the cart before dispatching addToCart -- and if it is, then increase the quantity instead.
         addToCart({
           userId,
           listingId,

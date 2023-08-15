@@ -15,6 +15,7 @@ export function AllListings() {
 
   const listings = useSelector(selectListings);
 
+  // I see three different places where you use the same formatDate function -- I think extracting it into a "utilities.js" file and then importing it wherever you need to use it would be a great simple refactor
   const formatDate = (date) => {
     const formattedDate = new Date(date).toLocaleDateString('en-US', {
       month: 'long',

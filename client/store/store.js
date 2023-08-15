@@ -28,4 +28,5 @@ const store = configureStore({
 });
 
 export default store;
+// consider following this bulk-export pattern for other things you want to export
 export * from "../features/auth/authSlice";

@@ -41,14 +41,14 @@ const Checkout = () => {
       // Stripe.js has not loaded yet
       return;
     }
-  
+
     const cardElement = elements.getElement(CardElement);
-  
+
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
-  
+
     if (error) {
       console.error(error);
       // Handle payment error
@@ -71,9 +71,9 @@ const Checkout = () => {
           currentOrderId: orders[0].id
         }),
       });
-  
+
       const paymentResult = await response.json();
-  
+
       if (paymentResult.success) {
         dispatch(deleteAllCart(orders[0].id));
         dispatch(createNewOrder({ userId }));
@@ -88,6 +88,7 @@ const Checkout = () => {
     return null;
   }
 
+  // the nested ternaries, maps, etc in this return make this component difficult to understand and reason about. I recommend refactoring so that this larger checkout component is composed of smaller pieces (which could be separate components, variables defined within this component, or a combination of the two)
   return (
     <>
       <div className="cart-container">

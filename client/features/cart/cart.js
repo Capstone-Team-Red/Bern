@@ -6,6 +6,7 @@ import { getOrderListings } from '../../store/orderListingsSlice';
 import { incrementListing, decrementListing, removeFromCart } from '../../store/orderListingsSlice';
 import { Link } from 'react-router-dom';
 
+// great comments in this file!
 export const Cart = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.me.id);
@@ -74,6 +75,8 @@ export const Cart = () => {
     prevListings.filter((listing) => listing.id !== orderListingId)
     );
   };
+
+  // let's discuss the difference between these two versions of the form when we meet
 
   // Return form for users that are NOT signed in
   if (!userId) {
