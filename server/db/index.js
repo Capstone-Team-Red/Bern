@@ -6,7 +6,7 @@ const Orders = require("./models/Orders");
 const OrderListings = require("./models/OrderListings");
 
 Users.hasMany(Orders);
-Orders.belongsTo(Users);
+// Orders.hasMany(Users);
 
 Renter.hasMany(Listings)
 Listings.belongsTo(Renter);
@@ -15,10 +15,10 @@ Users.hasMany(Listings);
 Listings.hasMany(Users);
 
 Orders.hasMany(OrderListings);
-OrderListings.belongsTo(Listings);
+OrderListings.belongsTo(Orders);
 
 Listings.hasMany(OrderListings);
-OrderListings.belongsTo(Orders);
+OrderListings.belongsTo(Listings);
 
 Users.addHook('afterCreate', async (user) => {
   try {
