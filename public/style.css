@@ -385,7 +385,7 @@ tr {
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 625px;
+  bottom: 590px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -393,9 +393,8 @@ tr {
 
 .searchBarField {
   width: 350px;
-  height: 27px; 
+  height: 27px;
   border: 0.5px solid grey;
   padding: 8px;
   font-size: large;
 }
-
