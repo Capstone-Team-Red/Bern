@@ -63,8 +63,6 @@ export const incrementListing = createAsyncThunk(
     const {data} = await axios.delete(`/api/orderListings/${id}/destroy`);
     return data;
   });
-  
-  
 
 const orderListingsSlice = createSlice({
   name: 'orderListings',

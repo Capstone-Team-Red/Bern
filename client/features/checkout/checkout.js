@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getIncompleteOrders } from "../../store/ordersSlice";
+import { getIncompleteOrders, createNewOrder } from "../../store/ordersSlice";
 import { useNavigate } from "react-router-dom";
 import { me } from "../auth/authSlice";
 import { getOrderListings, deleteAllCart } from "../../store/orderListingsSlice";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -35,10 +36,6 @@ const Checkout = () => {
     }
   }, [dispatch, orders]);
 
-
-
-  const [showPaymentForm, setShowPaymentForm] = useState(false); // State to manage payment form visibility
-
   const handleCompleteCheckout = async () => {
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet
@@ -62,7 +59,7 @@ const Checkout = () => {
         0
       );
 
-      const response = await fetch("/api/orderListings/checkout", {
+      const response = await fetch(`/api/orderListings/checkout/${userId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,6 +67,8 @@ const Checkout = () => {
         body: JSON.stringify({
           paymentMethodId: paymentMethod.id,
           cartTotal,
+          userId,
+          currentOrderId: orders[0].id
         }),
       });
   
@@ -77,7 +76,7 @@ const Checkout = () => {
   
       if (paymentResult.success) {
         dispatch(deleteAllCart(orders[0].id));
-        setShowPaymentForm(false); // Hide the payment form after successful payment
+        dispatch(createNewOrder({ userId }));
         navigate("/confirmation");
       } else {
         console.error("Payment failed");
