@@ -11,6 +11,8 @@ router.use("/orders", require("./orders"));
 
 router.use("/orderListings", require("./orderListings"));
 
+router.use("/reviews", require("./reviews"));
+
 //Error Logging
 router.use((req, res, next) => {
   const error = new Error("Not Found");

@@ -7,7 +7,7 @@ import {
   getOrderListings,
   deleteAllCart,
 } from "../../store/orderListingsSlice";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -36,64 +36,32 @@ const Checkout = () => {
       dispatch(getOrderListings(currentCart.id));
     }
   }, [dispatch, orders]);
-
-
-
-  const [showPaymentForm, setShowPaymentForm] = useState(false); // State to manage payment form visibility
-
-  const handleCompleteCheckout = async () => {
-    if (!stripe || !elements) {
-      // Stripe.js has not loaded yet
-      return;
-    }
   
-    const cardElement = elements.getElement(CardElement);
+    const handleSubmit = async (event) => {
+      // We don't want to let default form submission happen here,
+      // which would refresh the page.
+      event.preventDefault();
   
-    const { paymentMethod, error } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
-      billing_details: {
-        address: {
-          line1: "123 Main St", 
-          city: "City", 
-          state: "State", 
-          postal_code: "12345", 
-          country: "US", 
+      if (!stripe || !elements) {
+        // Stripe.js hasn't yet loaded.
+        // Make sure to disable form submission until Stripe.js has loaded.
+        return;
+      }
+  
+      const result = await stripe.confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        confirmParams: {
+          return_url: "http://localhost:8080/home",
         },
-      },
-    });
-  
-    if (error) {
-      console.error(error);
-      // Handle payment error
-    } else {
-      const cartTotal = orderListings.reduce(
-        (total, orderListing) =>
-          total + orderListing.listing.price * orderListing.quantity,
-        0
-      );
-  
-      const response = await fetch("/process-payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          paymentMethodId: paymentMethod.id,
-          cartTotal,
-        }),
       });
   
-      const paymentResult = await response.json();
   
-      if (paymentResult.success) {
-        dispatch(deleteAllCart(orders[0].id));
-        setShowPaymentForm(false); // Hide the payment form after successful payment
-      } else {
-        console.error("Payment failed");
+      if (result.error) {
+        // Show error to your customer (for example, payment details incomplete)
+        console.log(result.error.message);
       }
-    }
-  };
+    };
 
   if (!userId || orders.length === 0 || !orderListings) {
     return null;
@@ -131,6 +99,7 @@ const Checkout = () => {
               <p>Your cart is empty!</p>
             )}
             <h2 className="cart-total">
+            <script src="https://js.stripe.com/v3/" async></script>
               Your total is $
               {orderListings.reduce(
                 (total, orderListing) =>
@@ -141,15 +110,17 @@ const Checkout = () => {
           </div>
         ))}
         <div className="payment-form">
+          <form onSubmit={handleSubmit}>
           <h2>Enter Payment Information</h2>
+          <script src="https://js.stripe.com/v3/" async></script>
           <div className="input-group">
             <label>Card Number</label>
-            <CardElement
-            />
+            <PaymentElement/>
           </div>
+          </form>
           <button
             className="complete-checkout-button"
-            onClick={() => handleCompleteCheckout()}
+            // onClick={() => handleCompleteCheckout()}
           >
             Complete Payment
           </button>

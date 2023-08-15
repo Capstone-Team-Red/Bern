@@ -4,6 +4,7 @@ const Renter = require("./models/Renter")
 const Listings = require("./models/Listings");
 const Orders = require("./models/Orders");
 const OrderListings = require("./models/OrderListings");
+const Reviews = require('./models/Reviews');
 
 Users.hasMany(Orders);
 Orders.belongsTo(Users);
@@ -19,6 +20,9 @@ OrderListings.belongsTo(Listings);
 
 Listings.hasMany(OrderListings);
 OrderListings.belongsTo(Orders);
+
+Reviews.belongsTo(Users, { as: 'reviewer', foreignKey: 'reviewer_user_id' });
+Reviews.belongsTo(Listings, { foreignKey: 'reviewed_entity_id' });
 
 Users.addHook('afterCreate', async (user) => {
   try {
@@ -36,5 +40,6 @@ module.exports = {
   Renter,
   Listings,
   Orders,
-  OrderListings
+  OrderListings,
+  Reviews
 }
