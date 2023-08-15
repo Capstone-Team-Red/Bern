@@ -157,7 +157,7 @@ export default function Maps() {
 
   return (
     //map takes up the entire screen with w/h settings
-    <div style={{ width: '100vw', height: '70vh' }}>
+    <div className="googleMapBox" style={{ width: '100vw', height: '70vh' }}>
       {/* loads higher component "withScripts(withGoogleMap)" */}
       <WrappedMap
         googleMapURL={`http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${mapsSecret}`}
