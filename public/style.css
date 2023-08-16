@@ -1,3 +1,13 @@
+:root {
+  min-height: 100%;
+  background: rgb(34, 193, 195);
+  background: linear-gradient(rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 68%);
+}
+
+header {
+  max-height: 200px;
+}
+
 body {
   font-family: sans-serif;
 }
@@ -59,7 +69,6 @@ button:hover {
 }
 
 .main-logo {
-  width: 200px;
   height: 200px;
   margin-left: auto;
   margin-right: auto;
@@ -107,7 +116,9 @@ button:hover {
 
 .cart-container {
   max-width: 600px;
-  margin: 0 auto;
+  margin-left: 348px;
+  margin-right: 348px;
+  margin-bottom: 400px;
   padding: 20px;
 }
 
