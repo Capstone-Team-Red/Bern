@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleListing } from "../../store/singleListingSlice";
 import { useParams } from "react-router-dom";
-import { addToCart } from "../../store/orderListingsSlice";
+import { selectReviews, getAllReviews } from "../../store/allReviewsSlice";
 import { getSingleRenter } from "../../store/singleRenterSlice";
+import { addToCart } from "../../store/orderListingsSlice";
 
 const SingleListing = () => {
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.auth.me.id);
+  const orders = useSelector((state) => state.orders.orders);
+  const reviews = useSelector(selectReviews);
   const { id } = useParams();
 
   useEffect(() => {
@@ -15,7 +19,43 @@ const SingleListing = () => {
     }
   }, [dispatch, id]);
 
+  // USE EFFECT FOR ALL REViews
+  useEffect(() => {
+    dispatch(getAllReviews());
+  }, [dispatch]);
+
   const listing = useSelector((state) => state.singleListing.singleListing);
+
+  const handleAddToCart = (listingId, listingPrice) => {
+    if (userId && orders.length > 0) {
+      const orderId = orders[0].id;
+      dispatch(
+        addToCart({
+          userId,
+          listingId,
+          price: listingPrice,
+          orderId,
+          quantity: 1,
+        })
+      );
+    } else {
+      const storedListings = JSON.parse(localStorage.getItem("listings")) || [];
+      const existingListing = storedListings.find((l) => l.id === listingId);
+
+      if (existingListing) {
+        existingListing.quantity++;
+      } else {
+        storedListings.push({
+          id: listingId,
+          name: listing.name,
+          price: listingPrice,
+          quantity: 1,
+        });
+      }
+
+      localStorage.setItem("listings", JSON.stringify(storedListings));
+    }
+  };
 
   useEffect(() => {
     if (listing) {
@@ -34,10 +74,12 @@ const SingleListing = () => {
       rating: reviewRating,
       review_text: reviewText,
       listingId: listing.id,
+      reviewer_user_id:userId, 
+      reviewed_entity_id:listing.id
     };
   
     try {
-      const response = await fetch('/listings/:id', {
+      const response = await fetch('/api/reviews', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,18 +88,12 @@ const SingleListing = () => {
       });
   
       if (response.ok) {
-        const addedReview = await response.json();
-  
-        // Update listing's reviews in Redux store
-        dispatch({
-          type: 'ADD_REVIEW',
-          payload: addedReview,
-        });
+        dispatch(getSingleListing(id));
   
         // Clear the review form after submission
         setReviewRating(5);
         setReviewText("");
-        setSubmittedReview(true); 
+        setSubmittedReview(true);
       } else {
         // Handle error cases
         console.error('Failed to add review');
@@ -65,8 +101,7 @@ const SingleListing = () => {
     } catch (error) {
       console.error('Error submitting review:', error);
     }
-  };
-  
+  };  
 
   const formatDate = (date) => {
     const formattedDate = new Date(date).toLocaleDateString("en-US", {
@@ -149,21 +184,24 @@ const SingleListing = () => {
 
           <div className="reviews-list">
             <h4>Reviews</h4>
-            {listing.reviews && listing.reviews.length > 0 ? (
-              listing.reviews.map((review) => (
-                <div key={review.id} className="review">
-                  <p>Rating: {review.rating}</p>
-                  <p>{review.review_text}</p>
-                </div>
+            <ul>
+            {reviews && reviews.length > 0 ? (
+              reviews.map((review) => (
+                <li key={review.id}>
+                <p>Rating: {review.rating}</p>
+                <p>Review: {review.review_text}</p>
+              </li>
               ))
             ) : (
               <p>No reviews available.</p>
             )}
+            </ul>
           </div>
         </>
       ) : (
         <p className="loading-text">Loading listing...</p>
       )}
+      
     </div>
   );
 };

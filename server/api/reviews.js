@@ -27,6 +27,21 @@ router.get('/', async (req, res, next) => {
       next(error);
     }
   });
+
+  // Route to add a new review
+router.post('/', async (req, res, next) => {
+  try {
+    const { rating, review_text, reviewer_user_id, reviewed_entity_id } = req.body;
+    const newReview = await Reviews.create({
+      rating,
+      review_text, reviewer_user_id, 
+      reviewed_entity_id
+    });
+    res.status(201).json(newReview);
+  } catch (error) {
+    next(error);
+  }
+});
   
   // Route to delete a review by its ID
   router.delete('/:id', async (req, res, next) => {

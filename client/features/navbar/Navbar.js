@@ -32,7 +32,6 @@ const Navbar = () => {
               <React.Fragment>
                 <Link to="/home">Home</Link>
                 <Link to={`/listings/${id}/renterListings`}>My Listings</Link>
-                <Link to="/cart">Cart</Link>
                 <Link to={`/renters/${id}/edit`}>Edit Profile</Link>
                 <Link to={`/listings/${id}/add`}>Add Listing</Link>
               </React.Fragment>
