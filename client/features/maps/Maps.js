@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from "react-google-maps";
 import mapStyles from "./mapStyles";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Map() {
   const [selectedListing, setSelectedListing] = useState(null);
@@ -65,6 +66,11 @@ function Map() {
 
     setFilteredListings(filteredListings);
   };
+
+  const navigate = useNavigate();
+  const handleNavigateListing = () => {
+    navigate(`/listings/${selectedListing.id}`)
+  }
 
   return (
     <GoogleMap
@@ -131,7 +137,7 @@ function Map() {
             <p>Date & Time: {selectedListing.date} @ {selectedListing.time}</p>
             <p>Spots Available: {selectedListing.stock}</p>
             <p>Price: ${selectedListing.price}</p>
-            <p>Interested? <a href={`http://localhost:8080/listings/${selectedListing.id}`}>CLICK HERE TO BOOK A CLASS!</a></p>
+            <button onClick={handleNavigateListing}>Click Here to Book a Class!</button>
           </div>
         </InfoWindow>
       )}
