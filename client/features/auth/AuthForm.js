@@ -27,6 +27,15 @@ const AuthForm = ({ name, displayName }) => {
       const lastname = evt.target.lastname.value;
       const zipcode = evt.target.zipcode.value;
 
+      if (!zipcode || !lastname) {
+        console.error('Error with signup. Please double check your information.');
+        return;
+    }
+    if (zipcode.length !== 5) {
+      console.error('Zipcode must have exactly 5 digits.');
+      return;
+    }
+
       if (role === 'User') {
         dispatch( authenticateSignUp({ username, password, firstname, lastname, email, role, zipcode, method: formName }));
       } else if (role === 'Renter') {
