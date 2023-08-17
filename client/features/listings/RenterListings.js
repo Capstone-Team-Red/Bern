@@ -38,7 +38,7 @@ export function RenterListings() {
                 <p><span className="listing-details">Date & Time: </span>{formatDate(listing.date)} @ {listing.time}</p>
                 <p><span className="listing-details">Spots Available: </span>{listing.stock}</p>
                 <p><span className="listing-details">Price: </span>${listing.price}</p>
-                <NavLink to={`/listings/${listing.id}/edit`}>Edit Listing</NavLink>
+                <NavLink to={`/listings/${listing.id}/edit`}> <button>Edit Listing</button></NavLink>
             </div>
           ))
         ) : (

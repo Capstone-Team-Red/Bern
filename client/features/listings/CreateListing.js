@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { addListing } from '../../store/allListingsSlice';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
     const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const CreateListing = () => {
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
     const [mapsSecret, setMapsSecret] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchMapsSecret = async () => {
@@ -60,7 +63,10 @@ const CreateListing = () => {
                 setTime('');
                 setPrice('');
                 setStock('');
+
+                navigate(`/listings/${renterId}/renterListings`);
             }
+
         } catch (error) {
             console.error('Error geocoding:', error);
         }

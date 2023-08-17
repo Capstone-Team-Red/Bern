@@ -4,6 +4,7 @@ import { getSingleListing } from "../../store/singleListingSlice";
 import { useParams } from "react-router-dom";
 import { selectReviews, getAllReviews } from "../../store/allReviewsSlice";
 import { addToCart } from "../../store/orderListingsSlice";
+import { useNavigate } from "react-router-dom";
 
 const SingleListing = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const SingleListing = () => {
   }, [dispatch]);
 
   const listing = useSelector((state) => state.singleListing.singleListing);
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
 
   const handleAddToCart = (listingId, listingPrice) => {
     if (userId && orders.length > 0) {
@@ -63,9 +65,12 @@ const SingleListing = () => {
   const [reviewText, setReviewText] = useState("");
   const [submittedReview, setSubmittedReview] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
-  
+    navigate(`/listings/${id}`)
+    window.location.reload();
     const newReview = {
       rating: reviewRating,
       review_text: reviewText,
@@ -85,7 +90,7 @@ const SingleListing = () => {
   
       if (response.ok) {
         dispatch(getSingleListing(id));
-  
+
         // Clear the review form after submission
         setReviewRating(5);
         setReviewText("");
@@ -111,7 +116,7 @@ const SingleListing = () => {
   return (
     <>
       <div className="listing-details-container">
-        {listing ? (
+        {listing && isLoggedIn ? (
             <div>
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
@@ -145,8 +150,32 @@ const SingleListing = () => {
                 </button>
               </p>
             </div>
-            ) : (
-          <p className="loading-text">Loading listing...</p>
+            ) : ( listing &&
+          <div>
+              <h3>{listing.name}</h3>
+              <img src={listing.image} alt={listing.name} />
+              <p>
+                <span className="single-listing-details">Class Type: </span>
+                {listing.classtype}
+              </p>
+              <p>
+                <span className="single-listing-details">Address: </span>
+                {listing.address}, {listing.city}, {listing.state},{" "}
+                {listing.zipcode}
+              </p>
+              <p>
+                <span className="single-listing-details">Date & Time: </span>
+                {formatDate(listing.date)} @ {listing.time}
+              </p>
+              <p>
+                <span className="single-listing-details">Spots Available: </span>
+                {listing.stock}
+              </p>
+              <p>
+                <span className="single-listing-details">Price: </span>$
+                {listing.price}
+              </p>
+            </div>
         )}
 
             <div className="review-form">
@@ -160,6 +189,7 @@ const SingleListing = () => {
                     value={reviewRating}
                     onChange={(e) => setReviewRating(parseInt(e.target.value))}
                   >
+                    
                     <option value="5">5 - Excellent</option>
                     <option value="4">4 - Very Good</option>
                     <option value="3">3 - Good</option>
