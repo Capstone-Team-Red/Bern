@@ -4,6 +4,7 @@ import { getSingleListing } from "../../store/singleListingSlice";
 import { useParams } from "react-router-dom";
 import { selectReviews, getAllReviews } from "../../store/allReviewsSlice";
 import { addToCart } from "../../store/orderListingsSlice";
+import { useNavigate } from "react-router-dom";
 
 const SingleListing = () => {
   const dispatch = useDispatch();
@@ -64,9 +65,12 @@ const SingleListing = () => {
   const [reviewText, setReviewText] = useState("");
   const [submittedReview, setSubmittedReview] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
-  
+    navigate(`/listings/${id}`)
+    window.location.reload();
     const newReview = {
       rating: reviewRating,
       review_text: reviewText,
@@ -86,7 +90,7 @@ const SingleListing = () => {
   
       if (response.ok) {
         dispatch(getSingleListing(id));
-  
+
         // Clear the review form after submission
         setReviewRating(5);
         setReviewText("");
@@ -185,6 +189,7 @@ const SingleListing = () => {
                     value={reviewRating}
                     onChange={(e) => setReviewRating(parseInt(e.target.value))}
                   >
+                    
                     <option value="5">5 - Excellent</option>
                     <option value="4">4 - Very Good</option>
                     <option value="3">3 - Good</option>
