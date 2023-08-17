@@ -9,7 +9,7 @@ import allUsersReducer from "./allUsersSlice";
 import allRentersReducer from "./allRentersSlice";
 import singleUserReducer from "./userSlice"
 import singleRenterReducer from "./singleRenterSlice"
-
+import allReviewsReducer from "./allReviewsSlice"
 
 const store = configureStore({
   reducer: {
@@ -21,7 +21,8 @@ const store = configureStore({
     allUsers: allUsersReducer,
     allRenters: allRentersReducer,
     singleUser: singleUserReducer,
-    singleRenter: singleRenterReducer
+    singleRenter: singleRenterReducer,
+    allReviews: allReviewsReducer
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
