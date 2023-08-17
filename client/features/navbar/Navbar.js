@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../store/store";
 
 const Navbar = () => {
@@ -22,10 +22,10 @@ const Navbar = () => {
             {/* The navbar will show these links after you log in as a User or Renter */}{" "}
             {role === "User" ? (
               <React.Fragment>
-                <Link to="/home">Home</Link>
+                <Link to="/home">Home 🏠</Link>
                 <Link to={`/users/${id}/edit`}>Edit Profile</Link>
                 <Link to="/renters">Renters</Link>
-                <Link to="/listings">Listings</Link>
+                <Link to="/listings">Listings 📝</Link>
                 <Link to="/maps">Find Your Fit 🗺️</Link>
                 <Link to="/cart">Cart</Link>
               </React.Fragment>
@@ -42,13 +42,13 @@ const Navbar = () => {
             </button>
           </div>
         ) : (
-          <div>
+          <div className="navlinks-container">
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/cart">Cart</Link>
-            <Link to="/listings">Listings</Link>
-            <Link to="/maps">Find Your Fit 🗺️</Link>
+            <NavLink className="navlinks" to="/login">Login ⌨️</NavLink>
+            <NavLink className="navlinks" to="/signup">Sign Up ✍🏽</NavLink>
+            <NavLink className="navlinks" to="/listings">Listings 📝</NavLink>
+            <NavLink className="navlinks" to="/maps">Find Your Fit 🗺️</NavLink>
+            <NavLink className="navlinks" id="cartlink" to="/cart">Cart 🛒</NavLink>
           </div>
         )}
       </nav>
