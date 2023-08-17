@@ -39,8 +39,6 @@ const CreateListing = () => {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        navigate(`/listings/${renterId}/renterListings`)
-        window.location.reload();
 
         try {
             const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -65,7 +63,10 @@ const CreateListing = () => {
                 setTime('');
                 setPrice('');
                 setStock('');
+
+                navigate(`/listings/${renterId}/renterListings`);
             }
+
         } catch (error) {
             console.error('Error geocoding:', error);
         }

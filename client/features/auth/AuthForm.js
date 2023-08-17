@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { authenticateRenterLogin, authenticateLogin, authenticateRenterSignUp, authenticateSignUp } from "../../store/store"; 
 
 const AuthForm = ({ name, displayName }) => {
+  const [submitted, setSubmitted] = useState(false);
   const { error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    setSubmitted(true);
     const formName = evt.target.name;
     const username = evt.target.username.value;
     const password = evt.target.password.value;
@@ -74,7 +76,7 @@ const AuthForm = ({ name, displayName }) => {
           <div>
             <button type="submit">{displayName}</button>
           </div>
-          {error ? (
+          {submitted && error ? (
             <div>Error with Login. Please double check your role.</div>
           ) : null}
         </form>
@@ -129,7 +131,7 @@ const AuthForm = ({ name, displayName }) => {
           <div>
             <button type="submit">{displayName}</button>
           </div>
-          {error ? (
+          {submitted && error ? (
             <div>Error with signup. Please double check your information.</div>
           ) : null}
         </form>
