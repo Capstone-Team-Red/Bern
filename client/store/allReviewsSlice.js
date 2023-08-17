@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Async thunk to fetch all reviews
-export const getAllReviews = createAsyncThunk('getAllReviews', async () => {
+export const getAllReviews = createAsyncThunk('reviews/getAllReviews', async () => {
   try {
     const { data } = await axios.get(`/api/reviews`);
     return data;
@@ -42,6 +42,8 @@ const allReviewsSlice = createSlice({
   }
 });
 
-export const selectReviews = state => state.reviews;
+export const selectReviews = state => {
+  return state.allReviews.reviews;
+}
 
 export default allReviewsSlice.reducer;

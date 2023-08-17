@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleListing } from "../../store/singleListingSlice";
 import { useParams } from "react-router-dom";
 import { selectReviews, getAllReviews } from "../../store/allReviewsSlice";
-import { getSingleRenter } from "../../store/singleRenterSlice";
 import { addToCart } from "../../store/orderListingsSlice";
 
 const SingleListing = () => {
@@ -12,6 +11,9 @@ const SingleListing = () => {
   const orders = useSelector((state) => state.orders.orders);
   const reviews = useSelector(selectReviews);
   const { id } = useParams();
+  const filteredReviews = reviews.filter((review) => 
+    review.reviewed_entity_id == id
+  );
 
   useEffect(() => {
     if (id) {
@@ -56,12 +58,6 @@ const SingleListing = () => {
       localStorage.setItem("listings", JSON.stringify(storedListings));
     }
   };
-
-  useEffect(() => {
-    if (listing) {
-      dispatch(getSingleRenter(listing.renterId));
-    }
-  }, [dispatch, listing]);
 
   const [reviewRating, setReviewRating] = useState(5); 
   const [reviewText, setReviewText] = useState("");
@@ -113,96 +109,93 @@ const SingleListing = () => {
   };
 
   return (
-    <div className="listing-details-container">
-      {listing ? (
-        <>
-          <div>
-            <h3>{listing.name}</h3>
-            <img src={listing.image} alt={listing.name} />
-            <p>
-              <span className="single-listing-details">Class Type: </span>
-              {listing.classtype}
-            </p>
-            <p>
-              <span className="single-listing-details">Address: </span>
-              {listing.address}, {listing.city}, {listing.state},{" "}
-              {listing.zipcode}
-            </p>
-            <p>
-              <span className="single-listing-details">Date & Time: </span>
-              {formatDate(listing.date)} @ {listing.time}
-            </p>
-            <p>
-              <span className="single-listing-details">Spots Available: </span>
-              {listing.stock}
-            </p>
-            <p>
-              <span className="single-listing-details">Price: </span>$
-              {listing.price}
-            </p>
-            <p>
-              <button
-                className="add-to-cart-button"
-                onClick={() => handleAddToCart(listing.id, listing.price)}
-              >
-                Add to Cart
-              </button>
-            </p>
-          </div>
-
-          <div className="review-form">
-            <h4>Add a Review</h4>
-            <form onSubmit={handleReviewSubmit}>
-              <div className="review-form-group">
-                <label htmlFor="reviewRating">Rating:</label>
-                <select
-                  id="reviewRating"
-                  name="reviewRating"
-                  value={reviewRating}
-                  onChange={(e) => setReviewRating(parseInt(e.target.value))}
+    <>
+      <div className="listing-details-container">
+        {listing ? (
+            <div>
+              <h3>{listing.name}</h3>
+              <img src={listing.image} alt={listing.name} />
+              <p>
+                <span className="single-listing-details">Class Type: </span>
+                {listing.classtype}
+              </p>
+              <p>
+                <span className="single-listing-details">Address: </span>
+                {listing.address}, {listing.city}, {listing.state},{" "}
+                {listing.zipcode}
+              </p>
+              <p>
+                <span className="single-listing-details">Date & Time: </span>
+                {formatDate(listing.date)} @ {listing.time}
+              </p>
+              <p>
+                <span className="single-listing-details">Spots Available: </span>
+                {listing.stock}
+              </p>
+              <p>
+                <span className="single-listing-details">Price: </span>$
+                {listing.price}
+              </p>
+              <p>
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => handleAddToCart(listing.id, listing.price)}
                 >
-                  <option value="5">5 - Excellent</option>
-                  <option value="4">4 - Very Good</option>
-                  <option value="3">3 - Good</option>
-                  <option value="2">2 - Fair</option>
-                  <option value="1">1 - Poor</option>
-                </select>
-              </div>
-              <div className="review-form-group">
-                <label htmlFor="reviewText">Review:</label>
-                <textarea
-                  id="reviewText"
-                  name="reviewText"
-                  value={reviewText}
-                  onChange={(e) => setReviewText(e.target.value)}
-                  rows="4"
-                ></textarea>
-              </div>
-              <button type="submit">Submit Review</button>
-            </form>
-          </div>
-
-          <div className="reviews-list">
-            <h4>Reviews</h4>
-            <ul>
-            {reviews && reviews.length > 0 ? (
-              reviews.map((review) => (
-                <li key={review.id}>
-                <p>Rating: {review.rating}</p>
-                <p>Review: {review.review_text}</p>
-              </li>
-              ))
+                  Add to Cart
+                </button>
+              </p>
+            </div>
             ) : (
-              <p>No reviews available.</p>
-            )}
-            </ul>
-          </div>
-        </>
-      ) : (
-        <p className="loading-text">Loading listing...</p>
-      )}
-      
-    </div>
+          <p className="loading-text">Loading listing...</p>
+        )}
+
+            <div className="review-form">
+              <h4>Add a Review</h4>
+              <form onSubmit={handleReviewSubmit}>
+                <div className="review-form-group">
+                  <label htmlFor="reviewRating">Rating:</label>
+                  <select
+                    id="reviewRating"
+                    name="reviewRating"
+                    value={reviewRating}
+                    onChange={(e) => setReviewRating(parseInt(e.target.value))}
+                  >
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                  </select>
+                </div>
+                <div className="review-form-group">
+                  <label htmlFor="reviewText">Review:</label>
+                  <textarea
+                    id="reviewText"
+                    name="reviewText"
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                    rows="4"
+                  ></textarea>
+                </div>
+                <button type="submit">Submit Review</button>
+              </form>
+            </div>
+
+            <div className="reviews-list">
+              <h4>Reviews</h4>
+              {filteredReviews && filteredReviews.length > 0 ? (
+                filteredReviews.map((review) => (
+                  <div key={review.id}>
+                    <p>Rating: {review.rating}</p>
+                    <p>Review: {review.review_text}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No reviews available.</p>
+              )}
+            </div>
+      </div>
+    </>
   );
 };
 
