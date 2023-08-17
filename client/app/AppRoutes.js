@@ -10,6 +10,7 @@ import { AllRenters } from "../features/renters/AllRenters";
 import SingleRenter from "../features/renters/SingleRenter";
 import { Cart } from "../features/cart/cart";
 import Checkout from "../features/checkout/checkout";
+import Confirmation from "../features/checkout/confirmation";
 import Landing from "../features/home/Landing";
 import EditRenter from "../features/renter/EditRenter";
 import CreateListing from "../features/listings/CreateListing";
@@ -17,6 +18,7 @@ import RenterListings from "../features/listings/RenterListings";
 import EditListing from "../features/listings/EditListing";
 import SingleRentee from "../features/rentee/SingleRentee";
 import EditRentee from "../features/rentee/EditRentee";
+import Maps from "../features/maps/Maps";
 
 /**
  * COMPONENT
@@ -36,13 +38,15 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/*" element={<Home />} />
           <Route path="/home" element={<Landing />} />
+          <Route path="/maps" element={<Maps />} />
           <Route path="/listings" element={<AllListings />} />
           <Route path="/listings/:id" element={<SingleListing />} />
           <Route path="/renters" element={<AllRenters />} />
           <Route path="/renters/:id" element={<SingleRenter />} />
           <Route path="/users/:id" element={<SingleRentee />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/:id" element={<Checkout />} />
+          <Route path="/confirmation" element={<Confirmation/> } />
           <Route path="/renters/:id/edit" element={<EditRenter />} />
           <Route path="/listings/:id/add" element={<CreateListing />} />
           <Route
@@ -68,6 +72,7 @@ const AppRoutes = () => {
           />
           <Route path="/listings" element={<AllListings />} />
           <Route path="/listings/:id" element={<SingleListing />} />
+          <Route path="/maps" element={<Maps />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
       )}

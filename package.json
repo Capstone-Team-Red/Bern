@@ -36,6 +36,8 @@
     "path-browserify": "^1.0.1",
     "pg": "^8.8.0",
     "prop-types": "^15.8.1",
+    "react-google-maps": "^9.4.5",
+    "react-scripts": "^5.0.1",
     "sequelize": "^6.25.3",
     "stream-browserify": "^3.0.0",
     "stripe": "^12.16.0"

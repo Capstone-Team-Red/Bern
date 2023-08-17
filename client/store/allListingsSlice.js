@@ -19,10 +19,10 @@ export const getRenterListings = createAsyncThunk('getRenterListings', async (re
   }
 });
 
-export const addListing = createAsyncThunk("listings/addListing", async ({ name, classtype, address, city, state, zipcode, date, time, price, stock, renterId }) => {
+export const addListing = createAsyncThunk("listings/addListing", async ({ name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng, renterId }) => {
   try {
       const { data } = await axios.post(`/api/listings/${renterId}/add`, {
-        name, classtype, address, city, state, zipcode, date, time, price, stock
+        name, classtype, address, city, state, zipcode, date, time, price, stock, lat, lng
       });
       return data;
   } catch (err) {

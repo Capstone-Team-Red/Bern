@@ -11,10 +11,11 @@ export const getOrders = createAsyncThunk("getOrders", async (id) => {
   }
 });
 
-export const createNewOrder = createAsyncThunk("createNewOrder", async ({userId}) => {
+export const createNewOrder = createAsyncThunk("createNewOrder", async ({userId, completed}) => {
   try {
     const { data } = await axios.post(`/api/orders`, {
-      userId
+      userId,
+      completed
     });
     return data;
   } catch (err) {

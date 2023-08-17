@@ -63,17 +63,25 @@ router.put('/:id/increase', async (req, res, next) => {
     }
   })
 
-  router.post('/process-payment', async (req, res, next) => {
+  router.post('/checkout/:id', async (req, res, next) => {
     try {
-      const { paymentMethodId, cartTotal } = req.body;
+      const { currentOrderId, paymentMethodId, cartTotal } = req.body;
+      const userId = req.params.id
+
+      const stripeAmount = Math.max(cartTotal * 100);
   
       // Create a payment intent with Stripe using the cart total amount
       const paymentIntent = await stripe.paymentIntents.create({
-        amount: cartTotal, // Use the provided cart total amount
+        amount: stripeAmount, // Use the provided cart total amount
         currency: 'usd',
         payment_method: paymentMethodId,
         confirm: true,
       });
+
+    // Mark the user's current cart as completed in the backend and create a new cart
+    await Orders.update({ completed: true }, {
+      where: { id: currentOrderId, userId }
+    });
   
       // Handle successful payment
       res.json({ success: true });

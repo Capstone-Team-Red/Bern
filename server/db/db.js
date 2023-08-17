@@ -2,14 +2,14 @@ require("dotenv").config();
 const Sequelize = require("sequelize");
 const pkg = require("../../package.json");
 
-const capstone =
+const bern =
   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
 
 const config = {
   logging: false,
-  // host: process.env.DB_HOST,
-  // username: process.env.DB_USER,
-  // password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
 };
 
 if (process.env.LOGGING === "true") {
@@ -26,7 +26,7 @@ if (process.env.DATABASE_URL) {
 }
 
 const db = new Sequelize(
-  process.env.DATABASE_URL || `postgres://localhost:5432/${capstone}`,
+  process.env.DATABASE_URL || `postgres://localhost:5432/${bern}`,
   config
 );
 module.exports = db;

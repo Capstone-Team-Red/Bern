@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
   entry: ['./client/index.js'],
   output: {
@@ -28,3 +30,4 @@ module.exports = {
     },
   }
 };
+

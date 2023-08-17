@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getIncompleteOrders } from "../../store/ordersSlice";
+import { getIncompleteOrders, createNewOrder } from "../../store/ordersSlice";
+import { useNavigate } from "react-router-dom";
 import { me } from "../auth/authSlice";
+
 import {
   getOrderListings,
   deleteAllCart,
 } from "../../store/orderListingsSlice";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+
+
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -19,6 +22,7 @@ const Checkout = () => {
   const orderListings = useSelector(
     (state) => state.orderListings.orderListings
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(me());
@@ -41,7 +45,7 @@ const Checkout = () => {
       // We don't want to let default form submission happen here,
       // which would refresh the page.
       event.preventDefault();
-  
+ 
       if (!stripe || !elements) {
         // Stripe.js hasn't yet loaded.
         // Make sure to disable form submission until Stripe.js has loaded.
@@ -55,7 +59,6 @@ const Checkout = () => {
           return_url: "http://localhost:8080/home",
         },
       });
-  
   
       if (result.error) {
         // Show error to your customer (for example, payment details incomplete)
