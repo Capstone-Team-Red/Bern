@@ -27,6 +27,7 @@ const SingleListing = () => {
   }, [dispatch]);
 
   const listing = useSelector((state) => state.singleListing.singleListing);
+  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
 
   const handleAddToCart = (listingId, listingPrice) => {
     if (userId && orders.length > 0) {
@@ -111,7 +112,7 @@ const SingleListing = () => {
   return (
     <>
       <div className="listing-details-container">
-        {listing ? (
+        {listing && isLoggedIn ? (
             <div>
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
@@ -145,8 +146,32 @@ const SingleListing = () => {
                 </button>
               </p>
             </div>
-            ) : (
-          <p className="loading-text">Loading listing...</p>
+            ) : ( listing &&
+          <div>
+              <h3>{listing.name}</h3>
+              <img src={listing.image} alt={listing.name} />
+              <p>
+                <span className="single-listing-details">Class Type: </span>
+                {listing.classtype}
+              </p>
+              <p>
+                <span className="single-listing-details">Address: </span>
+                {listing.address}, {listing.city}, {listing.state},{" "}
+                {listing.zipcode}
+              </p>
+              <p>
+                <span className="single-listing-details">Date & Time: </span>
+                {formatDate(listing.date)} @ {listing.time}
+              </p>
+              <p>
+                <span className="single-listing-details">Spots Available: </span>
+                {listing.stock}
+              </p>
+              <p>
+                <span className="single-listing-details">Price: </span>$
+                {listing.price}
+              </p>
+            </div>
         )}
 
             <div className="review-form">
