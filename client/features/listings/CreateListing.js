@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { addListing } from '../../store/allListingsSlice';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
     const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const CreateListing = () => {
     const [stock, setStock] = useState('');
     const [mapsSecret, setMapsSecret] = useState(null);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchMapsSecret = async () => {
             try {
@@ -36,6 +39,8 @@ const CreateListing = () => {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
+        navigate(`/listings/${renterId}/renterListings`)
+        window.location.reload();
 
         try {
             const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
