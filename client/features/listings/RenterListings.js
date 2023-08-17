@@ -4,15 +4,15 @@ import {
   getRenterListings,
   selectListings,
 } from "../../store/allListingsSlice";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function RenterListings() {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const userId = useSelector((state) => state.auth.me.id);
 
   useEffect(() => {
-    dispatch(getRenterListings(id));
-  }, [dispatch, id]);
+    dispatch(getRenterListings(userId));
+  }, [dispatch, userId]);
 
   const listings = useSelector(selectListings);
 
