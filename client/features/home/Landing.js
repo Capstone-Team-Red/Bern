@@ -12,7 +12,6 @@ const Landing = (props) => {
   return (
     <div>
       <h3 className="welcome">Welcome, {username}!</h3>
-      <h3>Recommended for you</h3>
       <div className="all-listings-container">
         {listings ? (
           listings.slice(12, 15).map((listing) => (
