@@ -71,8 +71,8 @@ const orderListingsSlice = createSlice({
   },
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(getOrderListings.fulfilled, (state, {payload}) => {
-      state.orderListings = payload
+    builder.addCase(getOrderListings.fulfilled, (state, action) => {
+      state.orderListings = action.payload;
     })
     .addCase(incrementListing.fulfilled, (state, { payload }) => { // Now payload is the updated orderListing
         const updatedOrderListing = state.orderListings.find(item => item.id === payload.id);
