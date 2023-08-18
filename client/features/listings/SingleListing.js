@@ -117,67 +117,68 @@ const SingleListing = () => {
     <>
       <div className="listing-details-container">
         {listing && isLoggedIn ? (
-            <div>
-              <h3>{listing.name}</h3>
-              <img src={listing.image} alt={listing.name} />
-              <p>
-                <span className="single-listing-details">Class Type: </span>
-                {listing.classtype}
-              </p>
-              <p>
-                <span className="single-listing-details">Address: </span>
-                {listing.address}, {listing.city}, {listing.state},{" "}
-                {listing.zipcode}
-              </p>
-              <p>
-                <span className="single-listing-details">Date & Time: </span>
-                {formatDate(listing.date)} @ {listing.time}
-              </p>
-              <p>
-                <span className="single-listing-details">Spots Available: </span>
-                {listing.stock}
-              </p>
-              <p>
-                <span className="single-listing-details">Price: </span>$
-                {listing.price}
-              </p>
-              <p>
-                <button
-                  className="add-to-cart-button"
-                  onClick={() => handleAddToCart(listing.id, listing.price)}
-                >
-                  Add to Cart
-                </button>
-              </p>
-            </div>
-            ) : ( listing &&
           <div>
-              <h3>{listing.name}</h3>
-              <img src={listing.image} alt={listing.name} />
-              <p>
-                <span className="single-listing-details">Class Type: </span>
-                {listing.classtype}
-              </p>
-              <p>
-                <span className="single-listing-details">Address: </span>
-                {listing.address}, {listing.city}, {listing.state},{" "}
-                {listing.zipcode}
-              </p>
-              <p>
-                <span className="single-listing-details">Date & Time: </span>
-                {formatDate(listing.date)} @ {listing.time}
-              </p>
-              <p>
-                <span className="single-listing-details">Spots Available: </span>
-                {listing.stock}
-              </p>
-              <p>
-                <span className="single-listing-details">Price: </span>$
-                {listing.price}
-              </p>
-            </div>
+            <h3>{listing.name}</h3>
+            <img src={listing.image} alt={listing.name} />
+            <p>
+              <span className="single-listing-details">Class Type: </span>
+              {listing.classtype}
+            </p>
+            <p>
+              <span className="single-listing-details">Address: </span>
+              {listing.address}, {listing.city}, {listing.state},{" "}
+              {listing.zipcode}
+            </p>
+            <p>
+              <span className="single-listing-details">Date & Time: </span>
+              {formatDate(listing.date)} @ {listing.time}
+            </p>
+            <p>
+              <span className="single-listing-details">Spots Available: </span>
+              {listing.stock}
+            </p>
+            <p>
+              <span className="single-listing-details">Price: </span>$
+              {listing.price}
+            </p>
+            <p>
+              <button
+                className="add-to-cart-button"
+                onClick={() => handleAddToCart(listing.id, listing.price)}
+              >
+                Book a Class
+              </button>
+            </p>
+          </div>
+        ) : (listing &&
+          <div>
+            <h3>{listing.name}</h3>
+            <img src={listing.image} alt={listing.name} />
+            <p>
+              <span className="single-listing-details">Class Type: </span>
+              {listing.classtype}
+            </p>
+            <p>
+              <span className="single-listing-details">Address: </span>
+              {listing.address}, {listing.city}, {listing.state},{" "}
+              {listing.zipcode}
+            </p>
+            <p>
+              <span className="single-listing-details">Date & Time: </span>
+              {formatDate(listing.date)} @ {listing.time}
+            </p>
+            <p>
+              <span className="single-listing-details">Spots Available: </span>
+              {listing.stock}
+            </p>
+            <p>
+              <span className="single-listing-details">Price: </span>$
+              {listing.price}
+            </p>
+          </div>
         )}
-
+        {isLoggedIn ? (
+          <>
             <div className="review-form">
               <h4>Add a Review</h4>
               <form onSubmit={handleReviewSubmit}>
@@ -189,7 +190,6 @@ const SingleListing = () => {
                     value={reviewRating}
                     onChange={(e) => setReviewRating(parseInt(e.target.value))}
                   >
-                    
                     <option value="5">5 - Excellent</option>
                     <option value="4">4 - Very Good</option>
                     <option value="3">3 - Good</option>
@@ -210,7 +210,6 @@ const SingleListing = () => {
                 <button type="submit">Submit Review</button>
               </form>
             </div>
-
             <div className="reviews-list">
               <h4>Reviews</h4>
               {filteredReviews && filteredReviews.length > 0 ? (
@@ -224,6 +223,22 @@ const SingleListing = () => {
                 <p>No reviews available.</p>
               )}
             </div>
+          </>
+        ) : (
+          <div className="reviews-list">
+            <h4>Reviews</h4>
+            {filteredReviews && filteredReviews.length > 0 ? (
+              filteredReviews.map((review) => (
+                <div key={review.id}>
+                  <p>Rating: {review.rating}</p>
+                  <p>Review: {review.review_text}</p>
+                </div>
+              ))
+            ) : (
+              <p>No reviews available.</p>
+            )}
+          </div>
+        )}
       </div>
     </>
   );

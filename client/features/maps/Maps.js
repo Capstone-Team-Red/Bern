@@ -113,7 +113,7 @@ function Map() {
             setSelectedListing(listing);
           }}
           icon={{
-            url: "/images/logo.png",
+            url: "/images/logoYellow.png",
             scaledSize: new window.google.maps.Size(40, 40),
           }}
         />

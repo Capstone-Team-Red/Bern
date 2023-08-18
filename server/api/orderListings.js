@@ -2,7 +2,8 @@ const router = require('express').Router()
 const Listings = require('../db/models/Listings');
 const OrderListings = require('../db/models/OrderListings');
 const Orders = require('../db/models/Orders');
-const stripe = require('stripe')('sk_test_51Nb4nULGhuSP9aYSsR8YCQU92pVYdc8FmGzSFctmavVBr73QX42oXNDLgAdDR0qu1ZIDl1JKOil2xV974XXcq3Y500AneSsRKN'); 
+require('dotenv').config();
+const stripe = require('stripe')(process.env.CLIENT_SECRET); 
 
 module.exports = router
 

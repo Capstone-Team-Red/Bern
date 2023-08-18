@@ -46,8 +46,8 @@ const ordersSlice = createSlice({
       .addCase(getOrders.fulfilled, (state, { payload }) => {
         state.orders = payload;
       })
-      .addCase(getIncompleteOrders.fulfilled, (state, { payload }) => {
-        state.orders = payload;
+      .addCase(getIncompleteOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
       })
       .addCase(createNewOrder.fulfilled, (state, { payload }) => {
         state.orders = payload;
