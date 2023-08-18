@@ -42,28 +42,11 @@ const SingleListing = () => {
           quantity: 1,
         })
       );
-    } else {
-      const storedListings = JSON.parse(localStorage.getItem("listings")) || [];
-      const existingListing = storedListings.find((l) => l.id === listingId);
-
-      if (existingListing) {
-        existingListing.quantity++;
-      } else {
-        storedListings.push({
-          id: listingId,
-          name: listing.name,
-          price: listingPrice,
-          quantity: 1,
-        });
-      }
-
-      localStorage.setItem("listings", JSON.stringify(storedListings));
-    }
+    };
   };
 
   const [reviewRating, setReviewRating] = useState(5); 
   const [reviewText, setReviewText] = useState("");
-  const [submittedReview, setSubmittedReview] = useState(false);
 
   const navigate = useNavigate();
 
@@ -94,7 +77,6 @@ const SingleListing = () => {
         // Clear the review form after submission
         setReviewRating(5);
         setReviewText("");
-        setSubmittedReview(true);
       } else {
         // Handle error cases
         console.error('Failed to add review');
