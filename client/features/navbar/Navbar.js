@@ -22,19 +22,19 @@ const Navbar = () => {
             {/* The navbar will show these links after you log in as a User or Renter */}{" "}
             {role === "User" ? (
               <React.Fragment>
-                <Link to="/home">Home 🏠</Link>
-                <Link to={`/users/${id}/edit`}>Edit Profile</Link>
-                <Link to="/renters">Renters</Link>
-                <Link to="/listings">Listings 📝</Link>
-                <Link to="/maps">Find Your Fit 🗺️</Link>
-                <Link to="/cart">Cart</Link>
+                <NavLink className="navlinks" to="/home">Home 🏠</NavLink>
+                <NavLink className="navlinks" to={`/users/${id}/edit`}>Edit Profile ✍🏼</NavLink>
+                <NavLink className="navlinks" to="/renters">Instructors 🏃🏻‍♀️🏃🏻‍♂️</NavLink>
+                <NavLink className="navlinks" to="/listings">Listings 📝</NavLink>
+                <NavLink className="navlinks" to="/maps">Find Your Fit 🗺️</NavLink>
+                <NavLink className="navlinks" id="cartlink" to="/cart">Cart 🛒</NavLink>
               </React.Fragment>
             ) : role === "Renter" ? (
               <React.Fragment>
-                <Link to="/home">Home</Link>
-                <Link to={`/listings/${id}/renterListings`}>My Listings</Link>
-                <Link to={`/renters/${id}/edit`}>Edit Profile</Link>
-                <Link to={`/listings/${id}/add`}>Add Listing</Link>
+                <NavLink className="navlinks" to="/home">Home</NavLink>
+                <NavLink className="navlinks" to={`/listings/${id}/renterListings`}>My Listings 📝</NavLink>
+                <NavLink className="navlinks" to={`/renters/${id}/edit`}>Edit Profile ✍🏼</NavLink>
+                <NavLink className="navlinks" to={`/listings/${id}/add`}>Add Listing +📝</NavLink>
               </React.Fragment>
             ) : null}
             <button type="button" onClick={logoutAndRedirectHome}>

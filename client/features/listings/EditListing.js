@@ -33,10 +33,10 @@ const EditListing = () => {
 
   return (
     <>
-      <div>
-        <h1>Edit Listing Details</h1>
+      <div className='edit-listing-container'>
+        <h1 className='edit-listing-title'>Edit Listing Details</h1>
         <div key={listing.id}>
-          <div className='edit-listing-container'>
+          <div>
             <p className='edit-listing-text'>Name: 
               <input type="text" name="name" value={updatedListing.name} onChange={handleInputChange} style={{ width: "200px" }} />
             </p>

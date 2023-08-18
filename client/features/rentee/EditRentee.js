@@ -29,10 +29,10 @@ const EditRentee = () => {
 
   return (
     <>
-      <div>
+      <div className="edit-user-container">
         <h1>Edit User Profile Details</h1>
         <div key={user.id}>
-          <div className="edit-user-container">
+          <div className="edit-details-button">
             <p className="edit-user-text">
               Firstname:
               <input
@@ -73,7 +73,7 @@ const EditRentee = () => {
                 style={{ width: "200px" }}
               />
             </p>
-            <button onClick={handleEditUser}>Save</button>
+            <button className="save-changes-button" onClick={handleEditUser}>Save</button>
           </div>
         </div>
       </div>
