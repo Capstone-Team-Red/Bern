@@ -4,6 +4,17 @@
   background: linear-gradient(rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 68%);
 }
 
+hr {
+  border-color: black;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+/* #routes {
+  display: flex;
+  flex-direction: center;
+} */
+
 header {
   max-height: 200px;
 }
@@ -75,17 +86,62 @@ button:hover {
   display: block;
 }
 
+.edit-listing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-listing-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.single-listing-container {
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  padding: 10px;
+  width: 250px;
+  margin: 10px;
+  text-align: center;
+}
+
+.listing-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
 .listing-details {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-weight: bold;
+  flex-wrap: wrap;
 }
 
 .single-listing-details {
   display: flex;
   flex-direction: column;
   font-weight: bold;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-list {
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  padding: 10px;
+  width: 250px;
+  margin: 10px;
+  text-align: center;
 }
 
 .listing-img {
@@ -357,13 +413,49 @@ button:hover {
   align-items: center;
 }
 
+/* save changes to edited user info button */
+
+.edit-details-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.save-changes-button {
+  border-radius: 2px black;
+}
+
 label {
   display: block;
 }
 
+
+nav {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 nav a {
-  display: inline-block;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 5px;
   margin: 1em;
+}
+
+.navlinks {
+  /* height: 100%; */
+  margin: 20px;
+}
+
+#cartlink {
+  position: absolute;
+  right: 20px;
+  top: 201px;
 }
 
 form div {
@@ -393,7 +485,7 @@ tr {
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 590px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -410,4 +502,31 @@ tr {
 .googleMapBox {
   margin-top: 0;
   position: absolute;
+  right: .5px;
+}
+
+@media only screen and (max-width: 760px) {
+  .searchBarContainer {
+    top: 60px;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  nav {
+    height: auto;
+  }
+
+  nav a {
+    margin-top: 50px;
+  }
+
+  .googleMapBox {
+    top: 300px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  #cartlink {
+    top: 250px;
+  }
 }

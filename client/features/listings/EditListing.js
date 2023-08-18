@@ -33,8 +33,8 @@ const EditListing = () => {
 
   return (
     <>
-      <div>
-        <h1>Edit Listing Details</h1>
+      <div className='edit-listing-container'>
+        <h1 className='edit-listing-title'>Edit Listing Details</h1>
         <div key={listing.id}>
           <div className='edit-listing-container'>
           <label htmlFor='name'>Title: </label>
