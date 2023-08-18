@@ -32,7 +32,7 @@ export const Cart = () => {
       setstoredListings(orderListings);
     }
   }, [dispatch, userId, orderListings]);
-
+ 
   useEffect(() => {
     if (orders?.length > 0) {
       const currentCart = orders[0];
