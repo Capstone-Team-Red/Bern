@@ -79,6 +79,7 @@ const CreateListing = () => {
                 <label htmlFor='name'>Title: </label>
                 <input
                     name="name"
+                    placeholder="Title for your listing"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
@@ -86,6 +87,7 @@ const CreateListing = () => {
                 <label htmlFor='classtype'>Class Type: </label>
                 <input
                     name="classtype"
+                    placeholder="i.e. Yoga, Boxing, Open Gym, etc..."
                     value={classtype}
                     onChange={(e) => setClasstype(e.target.value)}
                 />
@@ -138,6 +140,7 @@ const CreateListing = () => {
                 <input
                     name="price"
                     type="number"
+                    min="0"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                 />
@@ -145,7 +148,9 @@ const CreateListing = () => {
                 <label htmlFor='stock'>Spots Available: </label>
                 <input
                     name="stock"
+                    placeholder="Max amount of attendees" 
                     type="number"
+                    min="1"
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}
                 />
