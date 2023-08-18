@@ -146,7 +146,7 @@ const SingleListing = () => {
                 className="add-to-cart-button"
                 onClick={() => handleAddToCart(listing.id, listing.price)}
               >
-                Add to Cart
+                Book a Class
               </button>
             </p>
           </div>
