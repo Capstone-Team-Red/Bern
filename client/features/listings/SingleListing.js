@@ -99,28 +99,28 @@ const SingleListing = () => {
     <>
       <div className="listing-details-container">
         {listing && isLoggedIn ? (
-            <div>
+            <div className="single-listing-container">
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
-                <span className="single-listing-details">Class Type: </span>
+                <div className="single-listing-details">Class Type: </div>
                 {listing.classtype}
               </p>
               <p>
-                <span className="single-listing-details">Address: </span>
+                <div className="single-listing-details">Address: </div>
                 {listing.address}, {listing.city}, {listing.state},{" "}
                 {listing.zipcode}
               </p>
               <p>
-                <span className="single-listing-details">Date & Time: </span>
+                <div className="single-listing-details">Date & Time: </div>
                 {formatDate(listing.date)} @ {listing.time}
               </p>
               <p>
-                <span className="single-listing-details">Spots Available: </span>
+                <div className="single-listing-details">Spots Available: </div>
                 {listing.stock}
               </p>
               <p>
-                <span className="single-listing-details">Price: </span>$
+                <div className="single-listing-details">Price: </div>$
                 {listing.price}
               </p>
               <p>
@@ -159,10 +159,22 @@ const SingleListing = () => {
               </p>
             </div>
         )}
-
+<div className="reviews-list">
+              <h4>Reviews</h4>
+              {filteredReviews && filteredReviews.length > 0 ? (
+                filteredReviews.map((review) => (
+                  <div key={review.id}>
+                    <p>Rating: {review.rating}</p>
+                    <p>Review: {review.review_text}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No reviews available.</p>
+              )}
+            </div>
             <div className="review-form">
-              <h4>Add a Review</h4>
               <form onSubmit={handleReviewSubmit}>
+              <h4>Add a Review</h4>
                 <div className="review-form-group">
                   <label htmlFor="reviewRating">Rating:</label>
                   <select
@@ -191,20 +203,6 @@ const SingleListing = () => {
                 </div>
                 <button type="submit">Submit Review</button>
               </form>
-            </div>
-
-            <div className="reviews-list">
-              <h4>Reviews</h4>
-              {filteredReviews && filteredReviews.length > 0 ? (
-                filteredReviews.map((review) => (
-                  <div key={review.id}>
-                    <p>Rating: {review.rating}</p>
-                    <p>Review: {review.review_text}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No reviews available.</p>
-              )}
             </div>
       </div>
     </>

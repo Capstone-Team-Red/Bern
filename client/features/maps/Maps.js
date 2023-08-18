@@ -73,22 +73,22 @@ function Map() {
   }
 
   return (
+    <>
+    {/* Search Bar */}
+    <div className="searchBarContainer">
+    <input
+      type="text"
+      placeholder="Search for a listing by city, state, or zipcode!"
+      value={searchQuery}
+      onChange={(e) => handleSearch(e.target.value)}
+      className="searchBarField"
+    />
+  </div>
     <GoogleMap
       defaultZoom={10}
       center={userLocation || { lat: 40.71427, lng: -74.00597 }}
       defaultOptions={{ styles: mapStyles }}
     >
-
-      {/* Search Bar */}
-      <div className="searchBarContainer">
-        <input
-          type="text"
-          placeholder="Search for a listing by city, state, or zipcode!"
-          value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
-          className="searchBarField"
-        />
-      </div>
 
       {userMarker && (
         <Marker
@@ -113,7 +113,7 @@ function Map() {
             setSelectedListing(listing);
           }}
           icon={{
-            url: "/images/logo.png",
+            url: "/images/logoYellow.png",
             scaledSize: new window.google.maps.Size(40, 40),
           }}
         />
@@ -142,6 +142,7 @@ function Map() {
         </InfoWindow>
       )}
     </GoogleMap>
+    </>
   );
 }
 
@@ -163,7 +164,7 @@ export default function Maps() {
 
   return (
     //map takes up the entire screen with w/h settings
-    <div className="googleMapBox" style={{ width: '100vw', height: '70vh' }}>
+    <div className="googleMapBox" style={{ width: '99vw', height: '72vh' }}>
       {/* loads higher component "withScripts(withGoogleMap)" */}
       <WrappedMap
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${mapsSecret}`}
