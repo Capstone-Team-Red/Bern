@@ -10,10 +10,10 @@ hr {
   margin-bottom: 4px;
 }
 
-#routes {
+/* #routes {
   display: flex;
   flex-direction: center;
-}
+} */
 
 header {
   max-height: 200px;
@@ -372,9 +372,9 @@ label {
   display: block;
 }
 
-.navlinks-container {
+/* .navlinks-container {
   height: 100px;
-}
+} */
 
 nav {
   margin-top: 20px;
@@ -394,14 +394,14 @@ nav a {
 }
 
 .navlinks {
-  height: 100%;
+  /* height: 100%; */
   margin: 20px;
 }
 
 #cartlink {
   position: absolute;
   right: 20px;
-  top: 204px;
+  top: 201px;
 }
 
 form div {
