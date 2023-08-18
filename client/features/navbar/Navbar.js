@@ -11,7 +11,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/landing");
   };
 
   return (
@@ -22,7 +22,7 @@ const Navbar = () => {
             {/* The navbar will show these links after you log in as a User or Renter */}{" "}
             {role === "User" ? (
               <React.Fragment>
-                <Link to="/home">Home</Link>
+            <Link to="/">About Bern</Link>
                 <Link to={`/users/${id}/edit`}>Edit Profile</Link>
                 <Link to="/renters">Renters</Link>
                 <Link to="/listings">Listings</Link>
@@ -31,7 +31,7 @@ const Navbar = () => {
               </React.Fragment>
             ) : role === "Renter" ? (
               <React.Fragment>
-                <Link to="/home">Home</Link>
+            <Link to="/">About Bern</Link>
                 <Link to={`/listings/${id}/renterListings`}>My Listings</Link>
                 <Link to={`/renters/${id}/edit`}>Edit Profile</Link>
                 <Link to={`/listings/${id}/add`}>Add Listing</Link>
@@ -44,6 +44,7 @@ const Navbar = () => {
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
+            <Link to="/">About Bern</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/listings">Listings</Link>
