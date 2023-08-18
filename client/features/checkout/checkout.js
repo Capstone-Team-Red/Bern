@@ -3,14 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIncompleteOrders, createNewOrder } from "../../store/ordersSlice";
 import { useNavigate } from "react-router-dom";
 import { me } from "../auth/authSlice";
-
-import {
-  getOrderListings,
-  deleteAllCart,
-} from "../../store/orderListingsSlice";
-import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
-
-
+import { getOrderListings,deleteAllCart } from "../../store/orderListingsSlice";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -19,9 +13,7 @@ const Checkout = () => {
 
   const userId = useSelector((state) => state.auth.me.id);
   const orders = useSelector((state) => state.orders.orders);
-  const orderListings = useSelector(
-    (state) => state.orderListings.orderListings
-  );
+  const orderListings = useSelector((state) => state.orderListings.orderListings);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,30 +33,53 @@ const Checkout = () => {
     }
   }, [dispatch, orders]);
   
-    const handleSubmit = async (event) => {
-      // We don't want to let default form submission happen here,
-      // which would refresh the page.
-      event.preventDefault();
- 
-      if (!stripe || !elements) {
-        // Stripe.js hasn't yet loaded.
-        // Make sure to disable form submission until Stripe.js has loaded.
-        return;
-      }
+  const handleCompleteCheckout = async () => {
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet
+      return;
+    }
   
-      const result = await stripe.confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        confirmParams: {
-          return_url: "http://localhost:8080/home",
+    const cardElement = elements.getElement(CardElement);
+  
+    const { paymentMethod, error } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement,
+    });
+  
+    if (error) {
+      console.error(error);
+      // Handle payment error
+    } else {
+      const cartTotal = orderListings.reduce(
+        (total, orderListing) =>
+          total + orderListing.listing.price * orderListing.quantity,
+        0
+      );
+
+      const response = await fetch(`/api/orderListings/checkout/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          paymentMethodId: paymentMethod.id,
+          cartTotal,
+          userId,
+          currentOrderId: orders[0].id
+        }),
       });
-  
-      if (result.error) {
-        // Show error to your customer (for example, payment details incomplete)
-        console.log(result.error.message);
+
+      const paymentResult = await response.json();
+
+      if (paymentResult.success) {
+        dispatch(deleteAllCart(orders[0].id));
+        dispatch(createNewOrder({ userId }));
+        navigate("/confirmation");
+      } else {
+        console.error("Payment failed");
       }
-    };
+    }
+  };
 
   if (!userId || orders.length === 0 || !orderListings) {
     return null;
@@ -102,7 +117,6 @@ const Checkout = () => {
               <p>Your cart is empty!</p>
             )}
             <h2 className="cart-total">
-            <script src="https://js.stripe.com/v3/" async></script>
               Your total is $
               {orderListings.reduce(
                 (total, orderListing) =>
@@ -113,17 +127,15 @@ const Checkout = () => {
           </div>
         ))}
         <div className="payment-form">
-          <form onSubmit={handleSubmit}>
           <h2>Enter Payment Information</h2>
-          <script src="https://js.stripe.com/v3/" async></script>
           <div className="input-group">
             <label>Card Number</label>
-            <PaymentElement/>
+            <CardElement
+            />
           </div>
-          </form>
           <button
             className="complete-checkout-button"
-            // onClick={() => handleCompleteCheckout()}
+            onClick={() => handleCompleteCheckout()}
           >
             Complete Payment
           </button>
