@@ -5,6 +5,7 @@ const Listings = require('../server/db/models/Listings');
 const OrderListings = require('../server/db/models/OrderListings');
 const Orders = require('../server/db/models/Orders');
 const Renter = require('../server/db/models/Renter');
+const Reviews = require('../server/db/models/Reviews');
 module.exports = router;
 
 async function seed() {

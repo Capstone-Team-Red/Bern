@@ -68,4 +68,4 @@ const Listings = db.define('listings', {
   },
 })
 
-module.exports = Listings
+module.exports = Listings;
