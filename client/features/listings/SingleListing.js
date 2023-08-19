@@ -103,24 +103,24 @@ const SingleListing = () => {
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
-                <div className="single-listing-details">Class Type: </div>
+                <span className="single-listing-details">Class Type: </span>
                 {listing.classtype}
               </p>
               <p>
-                <div className="single-listing-details">Address: </div>
+                <span className="single-listing-details">Address: </span>
                 {listing.address}, {listing.city}, {listing.state},{" "}
                 {listing.zipcode}
               </p>
               <p>
-                <div className="single-listing-details">Date & Time: </div>
+                <span className="single-listing-details">Date & Time: </span>
                 {formatDate(listing.date)} @ {listing.time}
               </p>
               <p>
-                <div className="single-listing-details">Spots Available: </div>
+                <span className="single-listing-details">Spots Available: </span>
                 {listing.stock}
               </p>
               <p>
-                <div className="single-listing-details">Price: </div>$
+                <span className="single-listing-details">Price: </span>$
                 {listing.price}
               </p>
               <p>
@@ -159,7 +159,9 @@ const SingleListing = () => {
               </p>
             </div>
         )}
-<div className="reviews-list">
+        {isLoggedIn ? (
+          <div>
+            <div className="reviews-list">
               <h4>Reviews</h4>
               {filteredReviews && filteredReviews.length > 0 ? (
                 filteredReviews.map((review) => (
@@ -204,6 +206,22 @@ const SingleListing = () => {
                 <button type="submit">Submit Review</button>
               </form>
             </div>
+          </div>
+        ) : (
+          <div className="reviews-list">
+            <h4>Reviews</h4>
+            {filteredReviews && filteredReviews.length > 0 ? (
+              filteredReviews.map((review) => (
+                <div key={review.id}>
+                  <p>Rating: {review.rating}</p>
+                  <p>Review: {review.review_text}</p>
+                </div>
+              ))
+            ) : (
+              <p>No reviews available.</p>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
