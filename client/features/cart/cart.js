@@ -10,24 +10,19 @@ export const Cart = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.me.id);
   const orders = useSelector((state) => state.orders.orders);
-  const orderListings = useSelector((state) => state.orderListings.orderListings || []);
+  const orderListings = useSelector((state) => state.orderListings.orderListings);
 
   useEffect(() => {
     dispatch(me());
   }, [dispatch]);
 
   useEffect(() => {
-    if (userId) {
-      dispatch(getIncompleteOrders(userId));
-    }
-  }, [dispatch, userId, orderListings]);
- 
-  useEffect(() => {
     if (orders?.length > 0) {
       const currentCart = orders[0];
       dispatch(getOrderListings(currentCart.id));
     }
   }, [dispatch]);
+  
 
   const handleIncrement = (orderListingId) => {
     dispatch(incrementListing(orderListingId));
@@ -40,6 +35,12 @@ export const Cart = () => {
   const handleRemove = (orderListingId) => {
     dispatch(removeFromCart(orderListingId));
   };
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(getIncompleteOrders(userId));
+    }
+  }, [dispatch, userId, orderListings]);
 
 // Return form for Users that are logged in
 return (

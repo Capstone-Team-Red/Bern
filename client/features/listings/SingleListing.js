@@ -42,28 +42,11 @@ const SingleListing = () => {
           quantity: 1,
         })
       );
-    } else {
-      const storedListings = JSON.parse(localStorage.getItem("listings")) || [];
-      const existingListing = storedListings.find((l) => l.id === listingId);
-
-      if (existingListing) {
-        existingListing.quantity++;
-      } else {
-        storedListings.push({
-          id: listingId,
-          name: listing.name,
-          price: listingPrice,
-          quantity: 1,
-        });
-      }
-
-      localStorage.setItem("listings", JSON.stringify(storedListings));
-    }
+    };
   };
 
   const [reviewRating, setReviewRating] = useState(5); 
   const [reviewText, setReviewText] = useState("");
-  const [submittedReview, setSubmittedReview] = useState(false);
 
   const navigate = useNavigate();
 
@@ -94,7 +77,6 @@ const SingleListing = () => {
         // Clear the review form after submission
         setReviewRating(5);
         setReviewText("");
-        setSubmittedReview(true);
       } else {
         // Handle error cases
         console.error('Failed to add review');
@@ -121,24 +103,24 @@ const SingleListing = () => {
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
-                <div className="single-listing-details">Class Type: </div>
+                <span className="single-listing-details">Class Type: </span>
                 {listing.classtype}
               </p>
               <p>
-                <div className="single-listing-details">Address: </div>
+                <span className="single-listing-details">Address: </span>
                 {listing.address}, {listing.city}, {listing.state},{" "}
                 {listing.zipcode}
               </p>
               <p>
-                <div className="single-listing-details">Date & Time: </div>
+                <span className="single-listing-details">Date & Time: </span>
                 {formatDate(listing.date)} @ {listing.time}
               </p>
               <p>
-                <div className="single-listing-details">Spots Available: </div>
+                <span className="single-listing-details">Spots Available: </span>
                 {listing.stock}
               </p>
               <p>
-                <div className="single-listing-details">Price: </div>$
+                <span className="single-listing-details">Price: </span>$
                 {listing.price}
               </p>
               <p>
@@ -177,7 +159,9 @@ const SingleListing = () => {
               </p>
             </div>
         )}
-<div className="reviews-list">
+        {isLoggedIn ? (
+          <div>
+            <div className="reviews-list">
               <h4>Reviews</h4>
               {filteredReviews && filteredReviews.length > 0 ? (
                 filteredReviews.map((review) => (
@@ -222,6 +206,22 @@ const SingleListing = () => {
                 <button type="submit">Submit Review</button>
               </form>
             </div>
+          </div>
+        ) : (
+          <div className="reviews-list">
+            <h4>Reviews</h4>
+            {filteredReviews && filteredReviews.length > 0 ? (
+              filteredReviews.map((review) => (
+                <div key={review.id}>
+                  <p>Rating: {review.rating}</p>
+                  <p>Review: {review.review_text}</p>
+                </div>
+              ))
+            ) : (
+              <p>No reviews available.</p>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
