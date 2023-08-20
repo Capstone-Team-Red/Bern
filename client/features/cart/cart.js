@@ -17,6 +17,12 @@ export const Cart = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (userId) {
+      dispatch(getIncompleteOrders(userId));
+    }
+  }, [dispatch, userId, orderListings]);
+
+  useEffect(() => {
     if (orders?.length > 0) {
       const currentCart = orders[0];
       dispatch(getOrderListings(currentCart.id));
@@ -35,12 +41,6 @@ export const Cart = () => {
   const handleRemove = (orderListingId) => {
     dispatch(removeFromCart(orderListingId));
   };
-
-  useEffect(() => {
-    if (userId) {
-      dispatch(getIncompleteOrders(userId));
-    }
-  }, [dispatch, userId, orderListings]);
 
 // Return form for Users that are logged in
 return (

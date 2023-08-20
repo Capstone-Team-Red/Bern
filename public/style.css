@@ -1,7 +1,6 @@
 :root {
   min-height: 100%;
-  background: rgb(34, 193, 195);
-  background: linear-gradient(rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 68%);
+  background: rgb(248 248 65 / 77%);
 }
 
 hr {
@@ -16,6 +15,10 @@ header {
 
 body {
   font-family: sans-serif;
+  display: grid;
+  gap: 20px;
+  place-content: center;
+  align-items: center;
 }
 
 a {
@@ -433,22 +436,51 @@ label {
   display: block;
 }
 
-
-nav {
-  margin-top: 20px;
+.navlinks-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
+  gap: 5px;
 }
 
-nav a {
-  padding: 5px 10px;
-  text-transform: uppercase;
-  text-align: center;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 1em;
+.link {
+  --c: #000000;
+  --b: .13em;
+  --d: 10px;
+  --_s: calc(var(--d) + var(--b));
+  color: #ffffff;
+  border: solid #0000;
+  border-width: var(--b) var(--b) var(--_s) var(--_s);
+  background: conic-gradient(at left var(--d) bottom var(--d), #0000 90deg, rgb(255 255 255 /0.3) 0 225deg,rgb(255 255 255 /0.6) 0) border-box, conic-gradient(at left var(--_s) bottom var(--_s), #0000 90deg,var(--c) 0) 0 100%/calc(100% - var(--b)) calc(100% - var(--b)) border-box;
+  transform: translate(calc(var(--d)/-1),var(--d));
+  clip-path: polygon( var(--d) 0%, var(--d) 0%, 100% 0%, 100% calc(100% - var(--d)), 100% calc(100% - var(--d)), var(--d) calc(100% - var(--d)) );
+  transition: 0.5s;
+  font-family: system-ui, sans-serif;
+  font-size: 1.5rem;
+  margin: 0;
+  cursor: pointer;
+  padding: 0 0.1em;
+  background-color: #f53ce2;
+}
+
+.link:hover {
+  transform: translate(0,0);
+  clip-path: 
+    polygon(
+     0% var(--d), 
+     var(--d) 0%, 
+     100% 0%, 
+     100% calc(100% - var(--d)), 
+     calc(100% - var(--d)) 100%, 
+     0% 100%
+   );
+}
+
+h3 {
+  font-family: system-ui, sans-serif;
+  font-size: 1.2rem;
+  margin:0;
+  cursor: pointer;
+  padding: 0 .1em;
 }
 
 form div {
