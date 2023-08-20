@@ -133,7 +133,7 @@ const SingleListing = () => {
               </p>
             </div>
             ) : ( listing &&
-          <div>
+          <div className="single-listing-container">
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
