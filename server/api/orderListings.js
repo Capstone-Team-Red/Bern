@@ -64,7 +64,7 @@ router.put('/:id/increase', async (req, res, next) => {
     }
   })
 
-  router.post('/checkout/:id', async (req, res) => {
+  router.post('/checkout/:id', async (req, res, next) => {
     try {
       const { currentOrderId, paymentMethodId, cartTotal } = req.body;
       const userId = req.params.id

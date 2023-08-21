@@ -3,7 +3,7 @@ const Renter = require('../db/models/Renter');
 module.exports = router
 
 // Route to get all renters
-router.get('/', async (res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const renters = await Renter.findAll()
     res.json(renters)

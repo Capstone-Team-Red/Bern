@@ -3,8 +3,8 @@ const Reviews = require('../db/models/Reviews');
 module.exports = router;
 
 // Route to get all reviews
-router.get('/', async (res, next) => {
-    try {
+router.get('/', async (req, res, next) => {
+  try {
       const allReviews = await Reviews.findAll();
       res.json(allReviews);
     } catch (error) {

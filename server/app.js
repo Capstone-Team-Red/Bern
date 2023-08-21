@@ -5,7 +5,7 @@ const app = express();
 module.exports = app;
 require('dotenv').config();
 
-app.get("/get-maps-secret", async (res) => {
+app.get("/get-maps-secret", async (req, res) => {
   const mapsSecret = process.env.REACT_APP_API_KEY;
   res.json({ mapsSecret });
 });
@@ -28,7 +28,7 @@ app.get("/", (req, res) =>
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 // any remaining requests with an extension (.js, .css, etc.) send 404
-app.use((req, next) => {
+app.use((req, res, next) => {
   if (path.extname(req.path).length) {
     const err = new Error("Not found");
     err.status = 404;
