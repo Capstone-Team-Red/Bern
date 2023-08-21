@@ -21,7 +21,7 @@ const Navbar = () => {
             {/* The navbar will show these links after you log in as a User or Renter */}{" "}
             {role === "User" ? (
               <React.Fragment>
-            <Link to="/">About Bern</Link>
+            <NavLink to="/"><h3 className="link">About Bern 🔥</h3></NavLink>
 
                 <NavLink to="/home"><h3 className="link">Home 🏠</h3></NavLink>
                 <NavLink to={`/users/${id}/edit`}><h3 className="link">Edit Profile ✍🏼</h3></NavLink>
@@ -32,7 +32,7 @@ const Navbar = () => {
               </React.Fragment>
             ) : role === "Renter" ? (
               <React.Fragment>
-                          <Link to="/">About Bern</Link>
+                          <NavLink to="/"><h3 className="link">About Bern 🔥</h3></NavLink>
                 <NavLink to="/home"><h3 className="link">Home 🏠</h3></NavLink>
                 <NavLink to={`/listings/${id}/renterListings`}><h3 className="link">My Listings 📝</h3></NavLink>
                 <NavLink to={`/renters/${id}/edit`}><h3 className="link">Edit Profile ✍🏼</h3></NavLink>
@@ -40,14 +40,14 @@ const Navbar = () => {
 
               </React.Fragment>
             ) : null}
-            <button type="button" onClick={logoutAndRedirectHome}>
-              Logout
+            <button className="link" type="button" onClick={logoutAndRedirectHome}>
+              Logout 🚪
             </button>
           </div>
         ) : (
           <div className="navlinks-container">
             {/* The navbar will show these links before you log in */}
-            <Link to="/">About Bern</Link>
+            <NavLink to="/"><h3 className="link">About Bern 🔥</h3></NavLink>
              <NavLink to="/login"><h3 className="link">Login ⌨️</h3></NavLink>
             <NavLink to="/signup"><h3 className="link">Sign Up ✍🏽</h3></NavLink>
             <NavLink to="/listings"><h3 className="link">Listings 📝</h3></NavLink>

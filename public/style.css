@@ -59,6 +59,7 @@ textarea {
 }
 
 button {
+  font-weight: bold;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #007bfff3;
@@ -555,6 +556,32 @@ tr {
   position: absolute;
   right: .5px;
 }
+
+.creators {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  grid-gap: 20px;
+}
+
+.creator {
+  width: 40%;
+}
+
+.features {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  grid-gap: 20px;
+}
+
+/* .bio {
+  padding-left: 20px;
+}
+
+.creator-name {
+  padding-left: 10px;
+} */
 
 @media only screen and (max-width: 760px) {
   .searchBarContainer {

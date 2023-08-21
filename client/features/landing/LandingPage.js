@@ -30,52 +30,50 @@ const LandingPage = () => {
             world through our unique and interactive booking system.
           </div>
         </p>
+        <hr></hr>
       </section>
-
+      <h2>Features That Matter</h2>
       <section className="features">
-        <h2>Features That Matter</h2>
-        <ul>
-          <li>
+          <p>
             Fast & Secure Payments: We provide users with fast and secure
             payments through Stripe
-          </li>
-          <li>
+          </p>
+          <p>
             Search & Book: Users can search for fitness spaces or classes using
             Google Maps directly on our site
-          </li>
-          <li>
+          </p>
+          <p>
+            Accessibility: Find fitness spaces or classes anywhere near you whether at home or while traveling!
+          </p>
+          <p>
             Security & Privacy: We provide all users with Secure Sign-On and
             check out capabilities
-          </li>
-          <li>
+          </p>
+          <p>
             Integrity & Honesty: At Bern we implemented Rating and Reviews
             functionality for transparency on listings
-          </li>
-          <li>
-            Mobile-Friendly Design: Our application is available and functional
-            on any device
-          </li>
-          <li>
+          </p>
+          <p>
             User Friendly Interface: We provide easy sign up, log in, booking,
             listing management and checkout functionality
-          </li>
-        </ul>
+          </p>
       </section>
-
+      <hr></hr>
+      <h2>The Team Behind The Scene</h2>
       <section className="creators">
-        <h2>The Team Behind The Scene</h2>
-        <div className="creator">
+        <span className="creator">
           <img src="/images/Leo.jpg" alt="Leo Harada" />
-          <p> Leo Harada </p>
-          <p>
+          <h2 className="creator-name"> Leo Harada </h2>
+          <p className="bio">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
             euismod...
           </p>
-        </div>
-        <div className="creator">
+          
+        </span>
+        <span className="creator">
           <img src="/images/Dianna.jpg" alt="Dianna Chen" />
-          <p> Dianna Chen </p>
-          <p>
+          <h2 className="creator-name"> Dianna Chen </h2>
+          <p className="bio">
             My name is Dianna and I am a Full Stack Software Engineer. Solving
             interconnected problems through coding has always intrigued me.
             Coding has allowed me to use my critical thinking skills to tackle
@@ -84,28 +82,32 @@ const LandingPage = () => {
             looking for ways to digital detox as much as possible. You can find
             me training for half marathon runs, catching ferry rides to beaches
             and chasing sunsets.
-          </p>
-        </div>
-        <div className="creator">
+          </p>          
+        </span>
+        <span className="creator">
           <img src="/images/Jesse.jpg" alt="Jesse Hernandez" />
-          <p> Jesse Hernandez </p>
-          <p>
-            Hello, I'm Jesse Hernandez III, a full stack software engineer with
+          <h2 className="creator-name"> Jesse Hernandez </h2>
+          <p className="bio">
+            Hello, I'm Jesse Hernandez III, a Full Stack Software Engineer with
             a focus on front-end development. I'm dedicated to crafting seamless
             interfaces that bring ideas to life. Beyond coding, you'll find me
             hiking, gaming, and joyfully streaming on Twitch.tv. Get ready to
             embark on an exciting journey with our app, where you can experience
             the Bern wherever you live.
           </p>
-        </div>
-        <div className="creator">
+          
+          
+        </span>
+        <span className="creator">
           <img src="/images/Ivan.jpg" alt="Ivan Garcia" />
-          <p> Ivan Garcia </p>
-          <p>
+          <h2 className="creator-name"> Ivan Garcia </h2>
+          <p className="bio">
             Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
             commodo consequat...
           </p>
-        </div>
+          
+          
+        </span>
       </section>
     </div>
   );
