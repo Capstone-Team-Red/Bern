@@ -1,18 +1,15 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 /**
  * COMPONENT
  */
-const Home = (props) => {
+const Home = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const username = useSelector((state)=> state.auth.me.username);
   const role = useSelector((state) => state.auth.me.role);
   const id = useSelector((state) => state.auth.me.id);
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const welcomePaths = ["/home", "/signup", "/login"];
+
 
   return (
     <div>
