@@ -131,10 +131,16 @@ To clone this repo, you'll need to take the following steps:
 - **CLIENT_SECRET**=(*your own secret key from stripe*)
 - **REACT_APP_API_KEY**=(*your own Google Maps JavaScript API key*)
 
+** **in the client/index.js file, update the stripePromise const variable with your stripe public API key** **
+![image](https://github.com/Capstone-Team-Red/Bern/assets/86167421/843f0ed2-0b71-41b5-a4e9-0966faac725b)
+
 ```
 git clone git@github.com:Capstone-Team-Red/Bern.git
 cd Bern
 npm install
+npm install react-google-maps --legacy-peer-deps
+npm install redux-persist --force
+npm install stripe
 npm run seed
 npm run build
 npm run start
