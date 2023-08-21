@@ -33,38 +33,33 @@ const EditListing = () => {
 
   return (
     <>
-      <div>
-        <h1>Edit Listing Details</h1>
+      <div className='edit-listing-container'>
+        <h1 className='edit-listing-title'>Edit Listing Details</h1>
         <div key={listing.id}>
           <div className='edit-listing-container'>
-            <p className='edit-listing-text'>Name: 
-              <input type="text" name="name" value={updatedListing.name} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
-            <p className='edit-listing-text'>Class Type: 
-              <input type="text" name="classtype" value={updatedListing.classtype} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
-            <p className='edit-listing-text'>Address: 
+          <label htmlFor='name'>Title: </label>
+              <input type="text" name="name"                     placeholder="Title for your listing" value={updatedListing.name} onChange={handleInputChange} style={{ width: "200px" }} />
+              <label htmlFor='classtype'>Class Type: </label>
+              <input type="text" name="classtype" placeholder="i.e. Yoga, Boxing, Open Gym, etc..." value={updatedListing.classtype} onChange={handleInputChange} style={{ width: "200px" }} />
+              <label htmlFor='address'>Address: </label>
               <input type="text" name="address" value={updatedListing.address} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
-            <p className='edit-listing-text'>City: 
+              <label htmlFor='city'>City: </label>
               <input type="text" name="city" value={updatedListing.city} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
-            <p className='edit-listing-text'>State: 
+              <label htmlFor='state'>State: </label>
               <input type="text" name="state" value={updatedListing.state} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
-            <p className='edit-listing-text'>Date: 
+              <label htmlFor='zipcode'>Zipcode: </label>
+              <input type="text" name="zipcode" value={updatedListing.zipcode} onChange={handleInputChange} style={{ width: "200px" }} />
+              <label htmlFor='date'>Date: </label>
               <input type="date" name="date" value={updatedListing.date} onChange={handleInputChange} style={{ width: "200px" }} />       
-            </p>
-            <p className='edit-listing-text'>Time: 
+              <label htmlFor='time'>Time: </label>
               <input type="time" name="time" value={updatedListing.time} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
-            <p className='edit-listing-text'>Price: 
-              <input type="number" name="price" value={updatedListing.price} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
-            <p className='edit-listing-text'>Spots Available: 
-              <input type="number" name="stock" value={updatedListing.stock} onChange={handleInputChange} style={{ width: "200px" }} />
-            </p>
+              <label htmlFor='price'>Price: </label>
+              <input type="number" min="0" name="price" value={updatedListing.price} onChange={handleInputChange} style={{ width: "200px" }} />
+              <label htmlFor='stock'>Spots Available: </label>
+            <input type="number" min="1" name="stock" placeholder="Max amount of attendees" value={updatedListing.stock} onChange={handleInputChange} style={{ width: "200px" }} />
+            <br></br>
             <button onClick={handleEditListing}>Save</button>
+            <br></br>
           </div>
         </div>
       </div>

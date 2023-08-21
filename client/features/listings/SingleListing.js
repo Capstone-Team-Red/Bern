@@ -42,28 +42,11 @@ const SingleListing = () => {
           quantity: 1,
         })
       );
-    } else {
-      const storedListings = JSON.parse(localStorage.getItem("listings")) || [];
-      const existingListing = storedListings.find((l) => l.id === listingId);
-
-      if (existingListing) {
-        existingListing.quantity++;
-      } else {
-        storedListings.push({
-          id: listingId,
-          name: listing.name,
-          price: listingPrice,
-          quantity: 1,
-        });
-      }
-
-      localStorage.setItem("listings", JSON.stringify(storedListings));
-    }
+    };
   };
 
   const [reviewRating, setReviewRating] = useState(5); 
   const [reviewText, setReviewText] = useState("");
-  const [submittedReview, setSubmittedReview] = useState(false);
 
   const navigate = useNavigate();
 
@@ -94,7 +77,6 @@ const SingleListing = () => {
         // Clear the review form after submission
         setReviewRating(5);
         setReviewText("");
-        setSubmittedReview(true);
       } else {
         // Handle error cases
         console.error('Failed to add review');
@@ -117,7 +99,7 @@ const SingleListing = () => {
     <>
       <div className="listing-details-container">
         {listing && isLoggedIn ? (
-            <div>
+            <div className="single-listing-container">
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
@@ -151,7 +133,7 @@ const SingleListing = () => {
               </p>
             </div>
             ) : ( listing &&
-          <div>
+          <div className="single-listing-container">
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
@@ -177,10 +159,24 @@ const SingleListing = () => {
               </p>
             </div>
         )}
-
+        {isLoggedIn ? (
+          <div>
+            <div className="reviews-list">
+              <h4>Reviews</h4>
+              {filteredReviews && filteredReviews.length > 0 ? (
+                filteredReviews.map((review) => (
+                  <div key={review.id}>
+                    <p>Rating: {review.rating}</p>
+                    <p>Review: {review.review_text}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No reviews available.</p>
+              )}
+            </div>
             <div className="review-form">
-              <h4>Add a Review</h4>
               <form onSubmit={handleReviewSubmit}>
+              <h4>Add a Review</h4>
                 <div className="review-form-group">
                   <label htmlFor="reviewRating">Rating:</label>
                   <select
@@ -210,20 +206,22 @@ const SingleListing = () => {
                 <button type="submit">Submit Review</button>
               </form>
             </div>
-
-            <div className="reviews-list">
-              <h4>Reviews</h4>
-              {filteredReviews && filteredReviews.length > 0 ? (
-                filteredReviews.map((review) => (
-                  <div key={review.id}>
-                    <p>Rating: {review.rating}</p>
-                    <p>Review: {review.review_text}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No reviews available.</p>
-              )}
-            </div>
+          </div>
+        ) : (
+          <div className="reviews-list">
+            <h4>Reviews</h4>
+            {filteredReviews && filteredReviews.length > 0 ? (
+              filteredReviews.map((review) => (
+                <div key={review.id}>
+                  <p>Rating: {review.rating}</p>
+                  <p>Review: {review.review_text}</p>
+                </div>
+              ))
+            ) : (
+              <p>No reviews available.</p>
+            )}
+          </div>
+        )}
       </div>
     </>
   );

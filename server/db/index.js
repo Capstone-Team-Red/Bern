@@ -7,7 +7,7 @@ const OrderListings = require("./models/OrderListings");
 const Reviews = require('./models/Reviews');
 
 Users.hasMany(Orders);
-// Orders.hasMany(Users);
+Orders.hasMany(Users);
 
 Renter.hasMany(Listings)
 Listings.belongsTo(Renter);

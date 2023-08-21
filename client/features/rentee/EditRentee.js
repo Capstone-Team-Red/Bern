@@ -29,10 +29,10 @@ const EditRentee = () => {
 
   return (
     <>
-      <div>
+      <div className="edit-user-container">
         <h1>Edit User Profile Details</h1>
         <div key={user.id}>
-          <div className="edit-user-container">
+          <div>
             <p className="edit-user-text">
               Firstname:
               <input
