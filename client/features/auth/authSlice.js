@@ -110,7 +110,7 @@ export const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    logout(state, action) {
+    logout(state) {
       window.localStorage.removeItem(TOKEN);
       state.me = {};
       state.error = null;

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { selectReviews, getAllReviews } from "../../store/allReviewsSlice";
 import { addToCart } from "../../store/orderListingsSlice";
 import { useNavigate } from "react-router-dom";
+import { incrementListing } from '../../store/orderListingsSlice';
 
 const SingleListing = () => {
   const dispatch = useDispatch();
@@ -22,27 +23,34 @@ const SingleListing = () => {
     }
   }, [dispatch, id]);
 
-  // USE EFFECT FOR ALL REViews
+  // USE EFFECT FOR ALL REVIEWS
   useEffect(() => {
     dispatch(getAllReviews());
   }, [dispatch]);
 
+  const orderListings = useSelector((state) => state.orderListings.orderListings);
   const listing = useSelector((state) => state.singleListing.singleListing);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
 
   const handleAddToCart = (listingId, listingPrice) => {
     if (userId && orders.length > 0) {
       const orderId = orders[0].id;
-      dispatch(
-        addToCart({
+      const existingCartItem = orderListings.find(orderListing => orderListing.orderId === orderId && orderListing.listingId === listingId);
+  
+      if (existingCartItem) {
+        // Item is already in the cart, increase its quantity
+        dispatch(incrementListing(existingCartItem.id));
+      } else {
+        // Item is not in the cart, add it as a new item
+        dispatch(addToCart({
           userId,
           listingId,
           price: listingPrice,
           orderId,
           quantity: 1,
-        })
-      );
-    };
+        }));
+      }
+    }
   };
 
   const [reviewRating, setReviewRating] = useState(5); 
@@ -128,7 +136,7 @@ const SingleListing = () => {
                   className="add-to-cart-button"
                   onClick={() => handleAddToCart(listing.id, listing.price)}
                 >
-                  Add to Cart
+                  Book a Class
                 </button>
               </p>
             </div>

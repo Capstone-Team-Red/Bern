@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIncompleteOrders } from '../../store/ordersSlice';
 import { me } from '../auth/authSlice';
@@ -62,8 +62,8 @@ return (
                         {orderListing.listing.price * orderListing.quantity}
                       </p>
                       <div className="listing-quantity">
-                        Quantity: {orderListing.quantity}{" "}
-                        <button
+                        Reservations: {orderListing.quantity}{" "}
+                        <button max="1" 
                           onClick={() => handleIncrement(orderListing.id)}
                         >
                           +
