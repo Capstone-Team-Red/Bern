@@ -4,7 +4,7 @@ module.exports = router;
 
 // Route to get all reviews
 router.get('/', async (req, res, next) => {
-    try {
+  try {
       const allReviews = await Reviews.findAll();
       res.json(allReviews);
     } catch (error) {
