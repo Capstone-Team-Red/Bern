@@ -18,7 +18,7 @@ const SingleRenter = () => {
 
   return (
       <div>
-      <h1>Renter Contact Info</h1>
+      <h1>Instructor Contact Info</h1>
       {renter ? (
         <>
           <div className="listing-container">
@@ -27,7 +27,7 @@ const SingleRenter = () => {
           </div>
         </>
       ) : (
-        <p className="loading-text">Loading Renter...</p>
+        <p className="loading-text">Loading Instructor...</p>
       )}
     </div>
   );
