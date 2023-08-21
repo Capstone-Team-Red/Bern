@@ -129,7 +129,7 @@ To clone this repo, you'll need to take the following steps:
 - **JWT**= (*your own*)
 - **DB_HOST**=postgres://bern_user:6raSh41UFlu7cbfXRT63GkTJIkd6evxB@dpg-cjdte52nip6c73c06qo0-a.oregon-postgres.render.com/bern
 - **CLIENT_SECRET**=(*your own secret key from stripe*)
-- **REACT_APP_API_KEY**=(*your own Google Maps API key*)
+- **REACT_APP_API_KEY**=(*your own Google Maps JavaScript API key*)
 
 ```
 git clone git@github.com:Capstone-Team-Red/Bern.git
