@@ -23,7 +23,7 @@ const SingleListing = () => {
     }
   }, [dispatch, id]);
 
-  // USE EFFECT FOR ALL REViews
+  // USE EFFECT FOR ALL REVIEWS
   useEffect(() => {
     dispatch(getAllReviews());
   }, [dispatch]);

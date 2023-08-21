@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Renters = ({ renter, onDeleteProducts }) => {
+const Renters = ({ renter }) => {
   return (
     <section>
       <Link to={`/renters/${renter.id}`}>

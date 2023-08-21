@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Listings = ({ listing, onDeleteListings }) => {
+const Listings = ({ listing }) => {
   return (
     <section>
       <Link to={`/listings/${listing.id}`}>

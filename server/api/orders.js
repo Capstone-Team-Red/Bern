@@ -5,7 +5,7 @@ const OrderListings = require('../db/models/OrderListings');
 const Orders = require('../db/models/Orders');
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (res) => {
     try {
       const orders = await Orders.findAll({
         include: [Users],

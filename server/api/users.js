@@ -3,7 +3,7 @@ const Users = require("../db/models/Users");
 module.exports = router;
 
 // Route to get all users
-router.get("/", async (req, res, next) => {
+router.get("/", async (res, next) => {
   try {
     const users = await Users.findAll();
     res.json(users);
