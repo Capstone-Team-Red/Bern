@@ -36,13 +36,18 @@ form {
   width: 300px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #cecece;
-  border-radius: 5px;
+}
+
+select {
+  border: 4px solid black;
+  border-radius: 15px;
 }
 
 label {
+  display: block;
   font-size: 14px;
   font-weight: bold;
+
 }
 
 small {
@@ -54,8 +59,8 @@ input,
 textarea {
   width: 100%;
   padding: 8px;
-  border: 1px solid #cecece;
-  border-radius: 5px;
+  border: 4px solid black;
+  border-radius: 50px;
 }
 
 button {
@@ -120,6 +125,8 @@ button:hover {
   align-items: center;
   font-weight: bold;
   flex-wrap: wrap;
+  color: white;
+  font-size: 20px;
 }
 
 .single-listing-details {
@@ -364,12 +371,14 @@ button:hover {
 }
 
 .listing-container {
-  border: 1px solid #cfcfcf;
-  border-radius: 5px;
+  border: 7px solid #000000;
+  border-radius: 20px;
   padding: 10px;
   width: 250px;
   margin: 10px;
   text-align: center;
+  background-color: #a8deff;
+  font-weight: bold;
 }
 
 .listing-container img {
@@ -461,10 +470,6 @@ button:hover {
   border-radius: 2px black;
 }
 
-label {
-  display: block;
-}
-
 .navlinks-container {
   display: flex;
   justify-content: center;
@@ -504,10 +509,12 @@ label {
 
 h3 {
   font-family: system-ui, sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   margin: 0;
   cursor: pointer;
   padding: 0 .1em;
+  color: white;
+  margin-bottom: 10px;
 }
 
 form div {
