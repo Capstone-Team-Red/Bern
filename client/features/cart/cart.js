@@ -61,8 +61,8 @@ return (
                         {orderListing.listing.price * orderListing.quantity}
                       </p>
                       <div className="listing-quantity">
-                        Quantity: {orderListing.quantity}{" "}
-                        <button
+                        Reservations: {orderListing.quantity}{" "}
+                        <button max="1" 
                           onClick={() => handleIncrement(orderListing.id)}
                         >
                           +
