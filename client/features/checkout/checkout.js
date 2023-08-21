@@ -88,7 +88,7 @@ const Checkout = () => {
   return (
     <>
       <div className="cart-container">
-        <h1>Order Details</h1>
+        <h1 id="order-details-title">Order Details</h1>
         {orders.map((order) => (
           <div className="cart-item" key={order.id}>
             {orderListings.length > 0 ? (

@@ -17,7 +17,7 @@ export function AllRenters() {
 
   return (
     <>
-      <h1>Renters Contact Info</h1>
+      <h1>Instructor's Contact Info</h1>
       <div className="all-listings-container">
         {renters ? (
           renters.map((renter) => (

@@ -30,7 +30,7 @@ const EditRenter = () => {
   return (
     <>
         <div>
-          <h1>Edit Renter Profile Details</h1>
+          <h1>Edit Instructor Profile Details</h1>
           <div key={renter.id}>
               <div className='edit-renter-container'>
                 <p className='edit-renter-text'>Firstname: 
