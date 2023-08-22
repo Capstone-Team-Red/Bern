@@ -115,8 +115,15 @@ const LandingPage = () => {
           <img src="images/ivangarcia.png" className="landing-letter-images" alt="ivangarcialogo"/>
           <img src="/images/Ivan.jpg" alt="Ivan Garcia" />
           <p className="bio">
-            Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat...
+            Hello! I'm Ivan Garcia, a passionate Software Engineer specializing
+            in crafting Full-Stack Applications using JavaScript. With a degree
+            in Mechanical & Aerospace Engineering and a background in Technology
+            Consulting, I have developed strong probelm solving skills and a
+            deep understanding of the software implementation process. When I am
+            not working on improving my skills, I am extremely committed towards
+            driving Inclusion & Diversity initiatives through volunteer work,
+            particularly focusing on mentorship and transition programs. I am
+            also a huge Premier League fan and an avid traveler of the world.
           </p>
           
           
