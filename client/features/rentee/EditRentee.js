@@ -20,6 +20,7 @@ const EditRentee = () => {
     } catch (error) {
       console.error("Failed to update user:", error);
     }
+    window.location.reload();
   };
 
   const handleInputChange = (e) => {

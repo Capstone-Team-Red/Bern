@@ -45,34 +45,34 @@ export const Cart = () => {
 // Return form for Users that are logged in
 return (
   <div className="cart-container">
-    <h1 id='cart-title'></h1>
-      <img src="/images/your-cart.png" alt="yourcart" id='cart-title' />
+    <h1 id='cart-title'>Your Cart</h1>
     {orderListings.length > 0 ? (
       <>
         {orders.map((order) => (
-          <div className="listing-item" key={order.id}>
+          <div className="cart-listing-item" key={order.id}>
             {orderListings.map((orderListing) => (
-              <div key={orderListing.id}>
+              <div key={orderListing.id} className="cart-listing-single">
                 {orderListing.listing ? (
                     <>
-                      <p className="listing-name">Listing: {orderListing.listing.name}</p>
-                      <p className="listing-price">
-                        Price: {orderListing.listing.price}(
-                        {orderListing.quantity}) = $
-                        {orderListing.listing.price * orderListing.quantity}
+                      <p className="cart-listing-name">{orderListing.listing.name}</p>
+                      <p className="cart-listing-price">
+                        ${orderListing.listing.price * orderListing.quantity}
                       </p>
-                      <div className="listing-quantity">
-                        Reservations: {orderListing.quantity}{" "}
-                        <button max="1" 
-                          onClick={() => handleIncrement(orderListing.id)}
-                        >
-                          +
-                        </button>
-                        <button
-                          onClick={() => handleDecrement(orderListing.id)}
-                        >
-                          -
-                        </button>
+                      <div className="cart-listing-quantity">
+                        <p>Reservations: {orderListing.quantity}</p>
+                        <div>
+                          <button max="1" 
+                            onClick={() => handleIncrement(orderListing.id)}
+                          >
+                            +
+                          </button>
+                          <span> </span>
+                          <button
+                            onClick={() => handleDecrement(orderListing.id)}
+                          >
+                            -
+                          </button>
+                        </div>
                       </div>
                       <p>
                         <button onClick={() => handleRemove(orderListing.id)}>

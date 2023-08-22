@@ -67,8 +67,8 @@ const LandingPage = () => {
       <h2 id="creators-title">The Team Behind The Scene</h2>
       <section className="creators">
         <span className="creator">
+          <img src="/images/leoharada.png" className="landing-letter-images" alt="leoharadalogo" />
           <img src="/images/Leo.jpg" alt="Leo Harada" />
-          <h2 className="creator-name"> Leo Harada </h2>
           <p className="bio">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
             euismod...
@@ -76,8 +76,8 @@ const LandingPage = () => {
           
         </span>
         <span className="creator">
+          <img src="images/diannachen.png" className="landing-letter-images" alt="diannachenlogo"/>
           <img src="/images/Dianna.jpg" alt="Dianna Chen" />
-          <h2 className="creator-name"> Dianna Chen </h2>
           <p className="bio">
             My name is Dianna and I am a Full Stack Software Engineer. Solving
             interconnected problems through coding has always intrigued me.
@@ -90,8 +90,8 @@ const LandingPage = () => {
           </p>          
         </span>
         <span className="creator">
+          <img src="images/jessehernandez.png" className="landing-letter-images" alt="jessehernandezlogo"/>
           <img src="/images/Jesse.jpg" alt="Jesse Hernandez" />
-          <h2 className="creator-name"> Jesse Hernandez </h2>
           <p className="bio">
             Hello, I'm Jesse Hernandez III, a Full Stack Software Engineer with
             a focus on front-end development. I'm dedicated to crafting seamless
@@ -104,8 +104,8 @@ const LandingPage = () => {
           
         </span>
         <span className="creator">
+          <img src="images/ivangarcia.png" className="landing-letter-images" alt="ivangarcialogo"/>
           <img src="/images/Ivan.jpg" alt="Ivan Garcia" />
-          <h2 className="creator-name"> Ivan Garcia </h2>
           <p className="bio">
             Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
             commodo consequat...
