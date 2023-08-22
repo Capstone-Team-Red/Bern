@@ -34,34 +34,42 @@ const LandingPage = () => {
       <h2>Features That Matter</h2>
       </div>
       <section className="features">
-        <p className="features-text">
+        <div className="features-text">
         <img className="features-img" src="/images/20-202327_icon-fast-safe-secure-fast-and-secure-icon.png" ></img>
-            Fast & Secure Payments: We provide users with fast and secure
-            payments through Stripe
-          </p>
-          <p className="features-text">
+            <p className="features-sentence">
+              Fast & Secure Payments: We provide users with fast and secure payments through Stripe
+            </p>
+        </div>
+          <div className="features-text">
           <img className="features-img" src="/images/search-bar-design-element-navigation-and-search-concept-icon-cartoon-minimal-style-free-vector.jpg"></img>
-            Search & Book: Users can search for fitness spaces or classes using
-            Google Maps directly on our site
-          </p>
-          <p className="features-text">
-            Accessibility: Find fitness spaces or classes anywhere near you whether at home or while traveling!
-          </p>
-          <p className="features-text">
+            <p className="features-sentence">
+              Search & Book: Users can search for fitness spaces or classes using Google Maps directly on our site
+            </p>
+          </div>
+          <div className="features-text">
+          <img className="features-img" src="/images/runpic.jpg"></img>
+            <p className="features-sentence">
+              Competitive Edge: Users have the ability to book fitness spaces or classes beyond the typical gym, fitness and yoga studios because at Bern, we offer a comprehensive range of options tailored to individual preferences.
+            </p>
+          </div>
+          <div className="features-text">
           <img className="features-img" src="/images/1200x630wa.png"></img>
-            Security & Privacy: We provide all users with Secure Sign-On and
-            check out capabilities
-          </p>
-          <p className="features-text">
+            <p className="features-sentence">
+              Security & Privacy: We provide all users with Secure Sign-On and check out capabilities
+            </p>
+          </div>
+          <div className="features-text">
           <img className="features-img" src="/images/Mixed-Race-Hands.jpg"></img>
-            Integrity & Honesty: At Bern we implemented Rating and Reviews
-            functionality for transparency on listings
-          </p>
-          <p className="features-text">
+            <p className="features-sentence">
+              Integrity & Honesty: At Bern we implemented Rating and Reviewsfunctionality for transparency on listings
+            </p>
+          </div>
+          <div className="features-text">
           <img className="features-img" src="/images/main.jpg"></img>
-            User Friendly Interface: We provide easy sign up, log in, booking,
-            listing management and checkout functionality
-          </p>
+            <p className="features-sentence">
+              User Friendly Interface: We provide easy sign up, log in, booking, listing management and checkout functionality
+            </p>
+          </div>
       </section>
       <hr></hr>
       <h2 id="creators-title">The Team Behind The Scene</h2>

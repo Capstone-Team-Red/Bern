@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleRenter, updateRenter } from '../../store/singleRenterSlice';
+import { useNavigate } from 'react-router-dom';
 
 const EditRenter = () => {
   const dispatch = useDispatch();
   const renter = useSelector((state) => state.auth.me);
   const id = renter.id
   const [updatedRenter, setUpdatedRenter] = useState({ ...renter });
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(getSingleRenter(id));
@@ -16,6 +19,7 @@ const EditRenter = () => {
     try {
       const token = localStorage.getItem('token');
       await dispatch(updateRenter({ token, id, renterData: updatedRenter }));
+      navigate(`/home`);
       window.location.reload();
     } catch (error) {
       console.error('Failed to update renter:', error);

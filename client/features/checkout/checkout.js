@@ -96,16 +96,14 @@ const Checkout = () => {
                 <div key={orderListing.id}>
                   {orderListing.listing ? (
                     <>
-                      <p className="listing-name">
+                      <p className="cart-listing-name">
                         Listing: {orderListing.listing.name}
                       </p>
                       <p>
-                        Price: {orderListing.listing.price}(
-                        {orderListing.quantity}) = $
-                        {orderListing.listing.price * orderListing.quantity}
+                        ${orderListing.listing.price * orderListing.quantity}
                       </p>
-                      <p className="listing-quantity">
-                        Quantity: {orderListing.quantity}{" "}
+                      <p className="cart-listing-quantity">
+                        Reservations: {orderListing.quantity}{" "}
                       </p>
                     </>
                   ) : (
