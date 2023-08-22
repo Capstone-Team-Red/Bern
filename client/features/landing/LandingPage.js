@@ -4,62 +4,67 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <section className="slogan">
-        <h1>Are you ready to feel the BERN?</h1>
-        <p>
-          <div>
+        <h1 id="bern-slogan">Are you ready to feel the BERN?</h1>
+          <p className="slogan-text">
             Welcome to Bern, our innovative application that will transform the
             way you stay away!
-          </div>
+          </p>
           <br/>
-          <div>Do you travel often for work? </div>
+          <p className="slogan-text">Do you travel often for work? </p>
 
-          <div> Are you a dedicated globetrotter? </div>
+          <p className="slogan-text"> Are you a dedicated globetrotter? </p>
 
-          <div> An innovative digital nomad? </div>
+          <p className="slogan-text"> An innovative digital nomad? </p>
           <br/>
-          <div>
+          <p className="slogan-text">
             {" "}
             If you spend more time away from home than actually at home, then we
             are perfect for you.{" "}
-          </div>
+          </p>
           <br/>
-          <div>
+          <p className="slogan-text">
             {" "}
             At Bern, we are dedicated to helping the fellow traveling community
             stay fit by providing users with access to fitness spaces across the
             world through our unique and interactive booking system.
-          </div>
-        </p>
-        <hr></hr>
+          </p>
       </section>
+      <hr></hr>
+      <div id="features-title">
       <h2>Features That Matter</h2>
+      </div>
       <section className="features">
-          <p>
+        <p className="features-text">
+        <img className="features-img" src="/images/20-202327_icon-fast-safe-secure-fast-and-secure-icon.png" ></img>
             Fast & Secure Payments: We provide users with fast and secure
             payments through Stripe
           </p>
-          <p>
+          <p className="features-text">
+          <img className="features-img" src="/images/search-bar-design-element-navigation-and-search-concept-icon-cartoon-minimal-style-free-vector.jpg"></img>
             Search & Book: Users can search for fitness spaces or classes using
             Google Maps directly on our site
           </p>
-          <p>
+          <p className="features-text">
             Accessibility: Find fitness spaces or classes anywhere near you whether at home or while traveling!
           </p>
-          <p>
+          <p className="features-text">
+          <img className="features-img" src="/images/1200x630wa.png"></img>
             Security & Privacy: We provide all users with Secure Sign-On and
             check out capabilities
           </p>
-          <p>
+          <p className="features-text">
+          <img className="features-img" src="/images/Mixed-Race-Hands.jpg"></img>
             Integrity & Honesty: At Bern we implemented Rating and Reviews
             functionality for transparency on listings
           </p>
-          <p>
+          <p className="features-text">
+          <img className="features-img" src="/images/main.jpg"></img>
             User Friendly Interface: We provide easy sign up, log in, booking,
             listing management and checkout functionality
           </p>
       </section>
       <hr></hr>
-      <h2>The Team Behind The Scene</h2>
+      <h2 id="creators-title">The Team Behind The Scene</h2>
       <section className="creators">
         <span className="creator">
           <img src="/images/Leo.jpg" alt="Leo Harada" />
