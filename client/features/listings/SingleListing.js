@@ -173,9 +173,9 @@ const SingleListing = () => {
               <h4>Reviews</h4>
               {filteredReviews && filteredReviews.length > 0 ? (
                 filteredReviews.map((review) => (
-                  <div key={review.id}>
-                    <p>Rating: {review.rating}</p>
-                    <p>Review: {review.review_text}</p>
+                  <div key={review.id} className="reviews-ratings-comments">
+                    <p>{review.rating}/5</p>
+                    <p>• {review.review_text}</p>
                   </div>
                 ))
               ) : (
@@ -220,10 +220,10 @@ const SingleListing = () => {
             <h4>Reviews</h4>
             {filteredReviews && filteredReviews.length > 0 ? (
               filteredReviews.map((review) => (
-                <div key={review.id}>
-                  <p>Rating: {review.rating}</p>
-                  <p>Review: {review.review_text}</p>
-                </div>
+                <div key={review.id} className="reviews-ratings-comments">
+                <p>{review.rating}/5</p>
+                <p>• {review.review_text}</p>
+              </div>
               ))
             ) : (
               <p>No reviews available.</p>
