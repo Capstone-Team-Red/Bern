@@ -438,7 +438,7 @@ button:hover {
 .edit-user-container {
   display: flex;
   position: relative;
-  left: 450px;
+  left: 550px;
   flex-direction: column;
   align-items: center;
   border: 1px solid #cfcfcf;
@@ -558,6 +558,7 @@ tr {
 }
 
 .creators {
+  padding-left: 230px;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 2fr);
@@ -568,11 +569,49 @@ tr {
   width: 40%;
 }
 
+#creators-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+}
+
 .features {
+  padding-left: 230px;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 3fr);
   grid-gap: 20px;
+}
+
+.features-img {
+  display: flex;
+  justify-content: flex-start;
+  width: 300px;
+  height: 200px;
+  padding-bottom: 10px;
+}
+
+.features-text {
+  font-weight: bold;
+  max-width: 300px;
+}
+
+#features-title {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
+}
+
+.slogan {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slogan-text {
+  font-weight: bold;
 }
 
 /* .bio {
