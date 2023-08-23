@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -77,15 +78,38 @@ const LandingPage = () => {
         <span className="creator">
           <img src="/images/leoharada.png" className="landing-letter-images" alt="leoharadalogo" />
           <img src="/images/Leo.jpg" alt="Leo Harada" />
+          <div className="middle-heading">  
+            <Link to="https://github.com/LeoHarada">
+              <img src="/images/github.png" alt="github" className="linked-photos"/>          
+            </Link>
+            <Link to="https://www.linkedin.com/in/leoharada/">
+              <img src="/images/linkedin.png" alt="linkedin" className="linked-photos"/>          
+            </Link>
+            <p className="emails">leotharada@gmail.com</p>
+         </div>
           <p className="bio">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            euismod...
+            Aloha! I'm Leo and I'm a Full Stack Software Engineer with a background in luxury customer-service
+            and Hospitality. I've taken the dive into the tech world to follow my dreams of building things for
+            a living. When I'm not problem-solving and bashing my head against my keyboard, I'm usually on Amazon
+            buying a new keyboard. Otherwise, I'm out enjoying the fresh air hiking or chilling at the beach. I 
+            recently took up boxing as a new hobby and have played soccer since I was 7 years old. Staying active 
+            is an essential part of my life in keeping me healthy, mentally and physically! Hence why this app 
+            was created...
           </p>
           
         </span>
         <span className="creator">
           <img src="images/diannachen.png" className="landing-letter-images" alt="diannachenlogo"/>
           <img src="/images/Dianna.jpg" alt="Dianna Chen" />
+          <div className="middle-heading">  
+            <Link to="https://github.com/diannachen10">
+              <img src="/images/github.png" alt="github" className="linked-photos"/>          
+            </Link>
+            <Link to="https://www.linkedin.com/in/dianna-chen/">
+              <img src="/images/linkedin.png" alt="linkedin" className="linked-photos"/>          
+            </Link>
+            <p className="emails">diannachen10@gmail.com</p>
+         </div>
           <p className="bio">
             My name is Dianna and I am a Full Stack Software Engineer. Solving
             interconnected problems through coding has always intrigued me.
@@ -100,6 +124,15 @@ const LandingPage = () => {
         <span className="creator">
           <img src="images/jessehernandez.png" className="landing-letter-images" alt="jessehernandezlogo"/>
           <img src="/images/Jesse.jpg" alt="Jesse Hernandez" />
+          <div className="middle-heading">  
+            <Link to="https://github.com/imaJackal">
+              <img src="/images/github.png" alt="github" className="linked-photos"/>          
+            </Link>
+            <Link to="https://www.linkedin.com/in/jessehernandeziii/">
+              <img src="/images/linkedin.png" alt="linkedin" className="linked-photos"/>          
+            </Link>
+            <p className="emails">jhernandez43075@gmail.com</p>
+         </div>
           <p className="bio">
             Hello, I'm Jesse Hernandez III, a Full Stack Software Engineer with
             a focus on front-end development. I'm dedicated to crafting seamless
@@ -114,6 +147,15 @@ const LandingPage = () => {
         <span className="creator">
           <img src="images/ivangarcia.png" className="landing-letter-images" alt="ivangarcialogo"/>
           <img src="/images/Ivan.jpg" alt="Ivan Garcia" />
+          <div className="middle-heading">  
+            <Link to="https://github.com/ig168">
+              <img src="/images/github.png" alt="github" className="linked-photos"/>          
+            </Link>
+            <Link to="https://www.linkedin.com/in/ivan-garcia1/">
+              <img src="/images/linkedin.png" alt="linkedin" className="linked-photos"/>          
+            </Link>
+            <p className="emails">Garcia.ivan1211@gmail.com</p>
+         </div>
           <p className="bio">
             Hello! I'm Ivan Garcia, a passionate Software Engineer specializing
             in crafting Full-Stack Applications using JavaScript. With a degree

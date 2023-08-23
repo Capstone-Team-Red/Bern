@@ -655,6 +655,7 @@ tr {
 
 .bio {
   width: 70%;
+  margin-top: 1px;
 }
 
 #creators-title {
@@ -709,6 +710,35 @@ tr {
 .slogan-text {
   font-weight: 100;
   font-size: 18px;
+}
+
+.middle-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.linked-photos {
+  height: 50px;
+  width: 50px;
+  border-radius: 100px;
+  --d: 10px;
+  transform: translate(calc(var(--d)/-1), var(--d));
+  transition: 0.5s;
+  cursor: pointer;
+  margin-bottom: 15px;
+  margin-right: -10px;
+}
+
+.linked-photos:hover {
+  transform: translate(0, 0);
+  clip-path:
+    polygon(0% var(--d),
+      var(--d) 0%,
+      100% 0%,
+      100% calc(100% - var(--d)),
+      calc(100% - var(--d)) 100%,
+      0% 100%);
 }
 
 @media only screen and (max-width: 760px) {
