@@ -169,22 +169,9 @@ const SingleListing = () => {
         )}
         {isLoggedIn ? (
           <div>
-            <div className="reviews-list">
-              <h4>Reviews</h4>
-              {filteredReviews && filteredReviews.length > 0 ? (
-                filteredReviews.map((review) => (
-                  <div key={review.id} className="reviews-ratings-comments">
-                    <p>{review.rating}/5</p>
-                    <p>• {review.review_text}</p>
-                  </div>
-                ))
-              ) : (
-                <p>No reviews available.</p>
-              )}
-            </div>
-            <div className="review-form">
+                        <div className="review-form">
               <form onSubmit={handleReviewSubmit}>
-              <h4>Add a Review</h4>
+              <h4 className="add-a-review-title">Add a Review</h4>
                 <div className="review-form-group">
                   <label htmlFor="reviewRating">Rating:</label>
                   <select
@@ -214,16 +201,29 @@ const SingleListing = () => {
                 <button type="submit">Submit Review</button>
               </form>
             </div>
+            <div className="reviews-list">
+              <h4 className="reviews-title-text">Reviews</h4>
+              {filteredReviews && filteredReviews.length > 0 ? (
+                filteredReviews.map((review) => (
+                  <div key={review.id} className="reviews-ratings-comments">
+                    <p className="reviews-rating">{review.rating}/5</p>
+                    <p>{review.review_text}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No reviews available.</p>
+              )}
+            </div>
           </div>
         ) : (
           <div className="reviews-list">
-            <h4>Reviews</h4>
+            <h4 className="reviews-title-text">Reviews</h4>
             {filteredReviews && filteredReviews.length > 0 ? (
               filteredReviews.map((review) => (
                 <div key={review.id} className="reviews-ratings-comments">
-                <p>{review.rating}/5</p>
-                <p>• {review.review_text}</p>
-              </div>
+                  <p className="reviews-rating">{review.rating}/5</p>
+                  <p>{review.review_text}</p>
+                </div>
               ))
             ) : (
               <p>No reviews available.</p>

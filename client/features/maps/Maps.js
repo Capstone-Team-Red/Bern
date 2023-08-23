@@ -78,7 +78,7 @@ function Map() {
     <div className="searchBarContainer">
     <input
       type="text"
-      placeholder="Search for a listing by city, state, or zipcode!"
+      placeholder="Filter for a listing by city, state, or zipcode!"
       value={searchQuery}
       onChange={(e) => handleSearch(e.target.value)}
       className="searchBarField"

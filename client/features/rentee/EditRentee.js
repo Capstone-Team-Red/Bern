@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleUser, updateUser } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const EditRentee = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.me);
   const id = user.id;
   const [updatedUser, setUpdatedUser] = useState({ ...user });
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSingleUser(id));
@@ -16,11 +18,11 @@ const EditRentee = () => {
     try {
       const token = localStorage.getItem("token");
       await dispatch(updateUser({ token, id, userData: updatedUser }));
+      navigate(`/home`);
       window.location.reload();
     } catch (error) {
       console.error("Failed to update user:", error);
     }
-    window.location.reload();
   };
 
   const handleInputChange = (e) => {

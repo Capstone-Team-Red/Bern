@@ -19,7 +19,7 @@ const Home = () => {
             {role === "User" ? (
               <div>
                 <h3 className="welcome">Welcome, {id ? username : "Guest"}!</h3>
-                <div>
+                <div className="welcome-message">
                   Thank you for signing up for Bern. Please read below for additional information on the features we offer:
                   <p>
                     To see a list of all instructors currently offering spaces or classes through Bern, select the Instructors tab. Here you will be able to access their contact information as well as be able to see any listings associated with them.
@@ -41,7 +41,7 @@ const Home = () => {
             ) : role === "Renter" ? (
               <div>
                 <h3 className="welcome">Welcome, {id ? username : "Guest"}!</h3>
-                <div>
+                <div className="welcome-message">
                   Thank you for signing up for Bern. Please read below for additional information on how to post and manage your listings:
                   <p>
                     To post a listing, maneuver over to our Add Listings tab to begin. Here you will be able to provide us with all of the necessary information to successfully post your listing up for our users to readily book.
