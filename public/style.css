@@ -7,8 +7,10 @@
 
 hr {
   border-color: black;
-  margin-top: 10px;
+  margin-top: 40px;
   margin-bottom: 4px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 header {
@@ -125,6 +127,13 @@ button:hover {
   margin: 10px;
   text-align: center;
   background-color: #a8deff;
+}
+
+.single-listing-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 .listing-details-container {
@@ -330,7 +339,7 @@ button:hover {
   flex-direction: column;
   align-items: center;
   color: white;
-  font-weight: inherit;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 #cart-title {
@@ -379,7 +388,10 @@ button:hover {
 .cart-total {
   margin-top: 20px;
   font-size: 20px;
-  font-weight: bold;
+}
+
+.enter-payment-information {
+  font-weight: 100;
 }
 
 .empty-cart {
@@ -429,6 +441,10 @@ button:hover {
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 20px 0;
+}
+
+.instructor-contact-info {
+  margin-left: 90px;
 }
 
 .renter-listings-container {

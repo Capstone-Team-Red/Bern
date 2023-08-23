@@ -111,24 +111,24 @@ const SingleListing = () => {
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
-                <span className="single-listing-details">Class Type: </span>
+                <span className="single-listing-details">Class Type</span>
                 {listing.classtype}
               </p>
               <p>
-                <span className="single-listing-details">Address: </span>
+                <span className="single-listing-details">Address</span>
                 {listing.address}, {listing.city}, {listing.state},{" "}
                 {listing.zipcode}
               </p>
               <p>
-                <span className="single-listing-details">Date & Time: </span>
+                <span className="single-listing-details">Date & Time</span>
                 {formatDate(listing.date)} @ {listing.time}
               </p>
               <p>
-                <span className="single-listing-details">Spots Available: </span>
+                <span className="single-listing-details">Spots Available</span>
                 {listing.stock}
               </p>
               <p>
-                <span className="single-listing-details">Price: </span>$
+                <span className="single-listing-details">Price</span>$
                 {listing.price}
               </p>
               <p>
@@ -145,31 +145,31 @@ const SingleListing = () => {
               <h3>{listing.name}</h3>
               <img src={listing.image} alt={listing.name} />
               <p>
-                <span className="single-listing-details">Class Type: </span>
+                <span className="single-listing-details">Class Type</span>
                 {listing.classtype}
               </p>
               <p>
-                <span className="single-listing-details">Address: </span>
+                <span className="single-listing-details">Address</span>
                 {listing.address}, {listing.city}, {listing.state},{" "}
                 {listing.zipcode}
               </p>
               <p>
-                <span className="single-listing-details">Date & Time: </span>
+                <span className="single-listing-details">Date & Time</span>
                 {formatDate(listing.date)} @ {listing.time}
               </p>
               <p>
-                <span className="single-listing-details">Spots Available: </span>
+                <span className="single-listing-details">Spots Available</span>
                 {listing.stock}
               </p>
               <p>
-                <span className="single-listing-details">Price: </span>$
+                <span className="single-listing-details">Price</span>$
                 {listing.price}
               </p>
             </div>
         )}
         {isLoggedIn ? (
           <div>
-                        <div className="review-form">
+            <div className="review-form">
               <form onSubmit={handleReviewSubmit}>
               <h4 className="add-a-review-title">Add a Review</h4>
                 <div className="review-form-group">
