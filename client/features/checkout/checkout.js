@@ -125,7 +125,7 @@ const Checkout = () => {
           </div>
         ))}
         <div className="payment-form">
-          <h2>Enter Payment Information</h2>
+          <h2 className="enter-payment-information">Enter Payment Information</h2>
           <div className="input-group">
             <label>Card Number</label>
             <CardElement
