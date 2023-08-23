@@ -12,6 +12,70 @@
 ## :goal_net: Objective
 To develop a comprehensive and user-friendly online platform that connects users with fitness instructors and empowers them to discover, book, and manage fitness sessions seamlessly. This platform aims to provide users with a diverse range of fitness options, allowing them to explore various classes and training sessions offered by different instructors. By creating a dynamic interface that showcases listings, facilitates bookings, and integrates secure payment processing through technologies like Stripe, the project intends to foster a convenient and engaging experience for both users and instructors. The project also emphasizes user authentication, ensuring secure access to personalized profiles and features based on their roles, whether they are regular users or fitness instructors. Through effective UI/UX design and careful integration of front-end and back-end technologies, the project aims to offer a comprehensive fitness solution that enhances the fitness journey for users while providing instructors with a streamlined platform to showcase their expertise and manage their offerings.
 
+## :camera: Preview
+<p align="center">
+  <b>New users are able to signup as either a User to book classes, or as a Renter to list fitness classes on the platform.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/2b8212bb-4d19-4347-8340-839104eb566c">
+</p>
+
+<p align="center">
+  <b>Log-in page to sign back in, either as a User or Renter. Seperate authentication for both roles. Users will not be able to sign-in as a Renter, and Renters aren't able to sign-in as a User.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/3a91ea40-1aaf-4797-9c8c-b16effb064bb">
+</p>
+
+<p align="center">
+  <b>Once logged-in, Users and Renters are able to update their own profile details.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/2dc65251-bc06-421f-9262-3527f86ae96a">
+</p>
+
+<p align="center">
+  <b>Renters are able to add new listings/fitness classes to the platform.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/d6b82368-c7f4-4459-b055-48f3886ff3f7">
+</p>
+
+<p align="center">
+  <b>Renters are able to edit their active listings.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/31967a7d-4765-41eb-90bc-06ef6e46016e">
+</p>
+
+<p align="center">
+  <b>Users are able to see all the active listings and the details associated with each class.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/288fe3bc-6530-4ad5-a372-539d28c81b76">
+</p>
+
+<p align="center">
+  <b>When a listing is clicked on, the single listing details will appear. This page will display any reviews left by previous Users and will allow the current User to leave a review to rate the class and provide any feedback or comments.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/59e1282a-9e90-44ea-b9eb-b9b8885a1dc5">
+</p>
+
+<p align="center">
+  <b>Users and non-Users are able to use the "Find Your Fit" tab to scroll through Google Maps and find any classes nearby their current location. Users are able to use the search bar and filter through zipcode, city, state, etc. Bern icons are displayed throughout Google Maps of active listings where Users are able to click on the icon and redirect to the specific listing.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/a7325213-04ff-4102-8a72-211c4a97fe58">
+</p>
+
+<p align="center">
+  <b>Stripe was implemented for secure, fast and easy payment collection.</b>
+</p>
+<p align="center">
+  <img src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/06046d05-ef4d-4da0-ad54-2eea56f25d16">
+</p>
+
 ## :footprints: Steps of Development
 ### 1. Project Planning and Setup
 - Defined the scope and requirements of the project.
@@ -160,7 +224,7 @@ npm run start
   https://github.com/LeoHarada
 </p>
 <p align="center">
-  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/51e4e01a-c5bf-4410-ae12-d15b4e6013a5">
+  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/26a346a7-ca49-4148-9ce4-dda284c3225e">
 </p>
 
 <p align="center">
@@ -176,7 +240,7 @@ npm run start
   https://github.com/diannachen10
 </p>
 <p align="center">
-  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/0c674949-4391-4928-ab0a-677a030039c6">
+  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/26805e4f-b7d6-4c52-a11a-c8c31885c73b">
 </p>
 
 <p align="center">
@@ -192,7 +256,7 @@ npm run start
   https://github.com/imaJackal
 </p>
 <p align="center">
-  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/f4c634c3-fdda-49c9-a593-15eaf9099c39">
+  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/9b144698-3a39-41aa-8f11-85ed2998b453">
 </p>
 
 <p align="center">
@@ -208,5 +272,5 @@ npm run start
   https://github.com/ig168
 </p>
 <p align="center">
-  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/76438e14-46cc-4c20-8f0b-1e85849c42b0">
+  <img width="202" height="202" src="https://github.com/Capstone-Team-Red/Bern/assets/86167421/0394eed3-348d-4dca-b4bf-b8e804be36cf">
 </p>
