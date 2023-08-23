@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleListing, selectSingleListing, updateListing } from '../../store/singleListingSlice';
 import { useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
 
 const EditListing = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,21 @@ const EditListing = () => {
   const { id } = useParams();
   const userId = useSelector((state) => state.auth.me.id);
   const [updatedListing, setUpdateListing] = useState({ ...listing });
+  const [mapsSecret, setMapsSecret] = useState(null);
+
+  useEffect(() => {
+    const fetchMapsSecret = async () => {
+        try {
+            const response = await fetch("/get-maps-secret");
+            const data = await response.json();
+            setMapsSecret(data.mapsSecret);
+        } catch (error) {
+            console.error("Error fetching maps secret:", error);
+        }
+    };
+
+    fetchMapsSecret();
+}, []);
 
   useEffect(() => {
     dispatch(getSingleListing(id));
@@ -18,14 +34,46 @@ const EditListing = () => {
   const handleEditListing = async () => {
     try {
       const token = localStorage.getItem('token');
-      await dispatch(updateListing({ token, id, listingData: updatedListing }));
-      navigate(`/listings/${userId}/renterListings`)
-      window.location.reload();
+      if (
+        updatedListing.address !== listing.address ||
+        updatedListing.city !== listing.city ||
+        updatedListing.state !== listing.state ||
+        updatedListing.zipcode !== listing.zipcode
+    ) {
+        const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+            params: {
+                address: `${updatedListing.address}, ${updatedListing.city}, ${updatedListing.state} ${updatedListing.zipcode}`,
+                key: mapsSecret
+            },
+        });
+
+        const { results } = response.data;
+        if (results && results.length > 0) {
+            const { lat, lng } = results[0].geometry.location;
+            const listingData = {
+                ...updatedListing,
+                lat: lat,
+                lng: lng,
+            };
+
+            await dispatch(updateListing({ token, id, listingData: listingData }));
+            navigate(`/listings/${userId}/renterListings`)
+            window.location.reload();
+        }
+    } else {
+        const listingData = {
+            ...updatedListing,
+        };
+
+        await dispatch(updateListing({ token, id, listingData: listingData }));
+        navigate(`/listings/${userId}/renterListings`)
+        window.location.reload();
+    }
     } catch (error) {
       console.error('Failed to update listing:', error);
     }
   };
-
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUpdateListing((prevListing) => ({ ...prevListing, [name]: value }));
