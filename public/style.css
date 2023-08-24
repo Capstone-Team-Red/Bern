@@ -18,6 +18,7 @@ header {
 }
 
 body {
+  letter-spacing: 0.5px;
   font-family: 'Bangers', cursive;
   display: grid;
   gap: 20px;
@@ -70,6 +71,14 @@ textarea {
   padding: 8px;
   border: 4px solid black;
   border-radius: 25px;
+}
+
+h1 {
+  letter-spacing: 1px;
+}
+
+h2 {
+  letter-spacing: 1px;
 }
 
 button {
@@ -171,9 +180,9 @@ button:hover {
 
 .reviews-title-text {
   font-size: 36px;
-    color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    margin-top: 5px;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  margin-top: 5px;
 }
 
 .reviews-list {
